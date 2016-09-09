@@ -1,4 +1,5 @@
-# DataBase2016
+# ICOM5016-Project: AssoRUM
 
-This is the github page of the ICOM5016 class project.\n
+This is the github page of the ICOM5016 class project.
+
 Team members are: Emmanuel Ramos, Osvaldo Ramirez, Feliz Gonzalez.
