@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'assorum.services' is found in services.js
 // 'assorum.controllers' is found in controllers.js
-angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services'])
+// 'jett.ionic.filter.bar' is for the ionic filter bar
+angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', 'jett.ionic.filter.bar'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -72,6 +73,17 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services'])
         }
       }
     })
+  
+  .state('tab.search', {
+    url: '/search',
+    views: { 
+       'tab-search': {
+      templateUrl: 'templates/tab-search.html',
+      controller: 'SearchCtrl'
+     }
+    }
+  })
+
 
   .state('tab.dash', {
     url: '/dash',

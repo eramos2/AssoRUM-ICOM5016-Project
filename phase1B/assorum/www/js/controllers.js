@@ -48,6 +48,13 @@ angular.module('assorum.controllers', [])
 
 })
 
+// TODO 
+.controller('SearchCtrl', function($scope, Events, $ionicFilterBar) {
+  $scope.searchQuery = "";
+  $scope.events = [];
+
+})
+
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
