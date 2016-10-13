@@ -103,7 +103,7 @@ app.get('/assorum-srv/events/:id', function(req, res){
         res.send("Event not found.");
       } else {
         var target = -1;
-        for(var 1=0; i<eventList.length; i++){
+        for(var i=0; i<eventList.length; i++){
           if(eventList[i].id == id){
               target = i;
               break;
@@ -114,7 +114,7 @@ app.get('/assorum-srv/events/:id', function(req, res){
           res.send("Event not fount.");
         } else{
           var response = {"event" : eventList[target]};
-          res.json{response};
+          res.json(response);
         }
       }
 });
@@ -137,7 +137,7 @@ app.put('/assorum-srv/events/:id', function(req, res){
                return res.send('Error: Missing fields for event.');
   } else {
      var target = -1;
-     for (var 1=0; i <eventList.length; i++){
+     for (var i=0; i <eventList.length; i++){
        if(eventList[i].id == id){
          target = i;
          break;
@@ -184,7 +184,7 @@ app.del('/assorum-srv/events/:id', function(req, res) {
       res.json(true);
     }
   }
-)};
+});
 
 // REST Operation - HTTP POST to add a new event
 app.post('/assorum-srv/events', function(req, res){
