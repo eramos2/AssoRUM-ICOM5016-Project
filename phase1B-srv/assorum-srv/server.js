@@ -239,6 +239,7 @@ app.post('/assorum-srv/events', function(req, res){
 
   newEvent.id = eventNextId++;
   console.log("New Event: " + JSON.stringify(newEvent));
+  eventList.push(newEvent);
   res.json(true);
 })
 /*
