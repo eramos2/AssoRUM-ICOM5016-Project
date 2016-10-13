@@ -63,11 +63,21 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     })
 
   .state('tab.rumFeed', {
-    url: '/rumfeed',
+    url: '/RUMFeed',
       views: {
         'tab-RUMFeed': {
           templateUrl: 'templates/tab-RUMFeed.html',
           controller: 'rumFCtrl'
+        }
+      }
+    })    
+
+    .state('tab.favorites', {
+    url: '/favorites',
+      views: {
+        'tab-favorites': {
+          templateUrl: 'templates/tab-favorites.html',
+          controller: 'favCtrl'
         }
       }
     })    
