@@ -49,9 +49,12 @@ angular.module('assorum.controllers', [])
 })
 
 // TODO 
-.controller('SearchCtrl', function($scope, Events, $ionicFilterBar) {
-  $scope.searchQuery = "";
-  $scope.events = [];
+.controller('SearchCtrl', function($scope, Events, $http) {
+  $scope.model = {term: ''};
+
+  $scope.search = function() {
+    $scope.results = Events.all();
+  };
 
 })
 

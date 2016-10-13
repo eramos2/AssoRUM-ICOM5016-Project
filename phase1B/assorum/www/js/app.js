@@ -39,6 +39,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     templateUrl: 'templates/tabs.html'
   })
 
+  // Each tab has its own nav history stack:
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
@@ -51,11 +52,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     controller: 'signupCtrl'
   })
 
-  // Each tab has its own nav history stack:
-
-
-    .state('tab.home', {
-      url: '/home',
+  .state('tab.home', {
+    url: '/home',
       views: {
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
@@ -76,12 +74,12 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   
   .state('tab.search', {
     url: '/search',
-    views: { 
-       'tab-search': {
-      templateUrl: 'templates/tab-search.html',
-      controller: 'SearchCtrl'
-     }
-    }
+    views: {
+        'tab-search': {
+          templateUrl: 'templates/tab-search.html',
+          controller: 'SearchCtrl'
+        }
+      }
   })
 
 
