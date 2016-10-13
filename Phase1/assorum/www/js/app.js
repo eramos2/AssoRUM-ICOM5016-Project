@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('AssoRum', ['ionic','AssoRum.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,3 +22,37 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+  
+  // Set up an abstract state for the tabs directive:
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'Views/tabs.html',
+    controller: 'TabsCtrl'
+  })
+
+  .state('tab.login',{
+    url: '/login',
+    views: {
+      'tab-login': {
+        templateUrl: 'Views/login.html',
+        controller: 'loginCtrl'
+      }
+    }
+  })
+
+  .state('tab.signup',{
+    url: '/signup',
+    views: {
+      'tab-signup': {
+        templateUrl: 'Views/signup.html',
+        controller: 'signupCtrl'
+      }
+    }
+    //  $urlRouterProvider.otherwise('/tab/login');
+  })
+})
+
