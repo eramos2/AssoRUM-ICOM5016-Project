@@ -39,14 +39,14 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     templateUrl: 'templates/tabs.html'
   })
 
-  // Each tab has its own nav history stack:
+  // Each tab has its own nav history stack
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
 
-  .state('signup',{
+  .state('signup', {
      url: '/signup',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'

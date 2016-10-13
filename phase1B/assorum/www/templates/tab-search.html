@@ -1,11 +1,18 @@
+<!-- Template for Search tab. Has a search bar that 
+    receives input and displays events that match it.
+  -->
+
 <ion-view view-title="Search">
-	<ion-content>
-		<div class="list">
-			<div class="item item-input-inset">
+    <ion-content>
+	    <div class="list">
+		    <div class="item item-input-inset">
                 <label class="item-input-wrapper">
-                    <input type="search" ng-model="model.term" placeholder= "Search for a location">
+                    <!-- Search Bar receives tags, keywords, etc. --> 
+                    <input type="search" ng-model="model.term" placeholder= "Search for an Event">
                 </label>
 				<button class="button button-small button-positive" ng-click="search()">Submit</button>
+                <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
+                <button class="button button-small button-positive" ng-click="search()">Suggest Me!</button>
 			</div>
 			<div class="item" ng-repeat="result in results">
                 {{result.name}}
