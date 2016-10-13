@@ -5,21 +5,18 @@ angular.module('assorum.services', [])
   // Some dummy data for testing
 
   var  user = {
-    name: "Peter",
-    img: 'img/ben.png',
-    favorites: [],
-    newFavorites: 0
+    favorites: []
   };
 
-  user.addToFavorites(function(event,eventId){
-
-    user.favorites.unshift(event);
-    newFavorites++;
-  })
-
-  user.get
-
-  return user;  
+  return{
+    addToFavorites: function(event){
+      user.favorites.unshift(event);
+    },
+    all: function(){
+      return user.favorites;
+    },
+    
+  }  
 })
 
 // TODO : hacer metodo para que busque entre los eventos el que desea
@@ -29,8 +26,9 @@ angular.module('assorum.services', [])
   var  user = {
     name: "Peter",
     img: 'img/ben.png'
-  };
 
+  };
+  
   user.get
 
   return user;  

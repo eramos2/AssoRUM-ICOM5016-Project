@@ -35,19 +35,24 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope, Events) {
+.controller('HomeCtrl', function($scope, User, Events) {
   $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
   };
+
+  $scope.addToFavorites = function(event){
+    User.addToFavorites(event);
+  }
 })
 
 .controller('rumFCtrl', function($scope){
 
 })
 
-.controller('favCtrl', function($scope){
-
+.controller('favCtrl', function($scope, User, Events){
+  
+  $scope.favorites = User.all();
 })
 
 .controller('ProfileCtrl', function($scope, User) {
