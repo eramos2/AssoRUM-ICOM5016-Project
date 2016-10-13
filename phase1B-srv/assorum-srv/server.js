@@ -42,8 +42,8 @@ app.use(logger('dev'));
 
 //app.use(express.bodyParser());
 
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -236,8 +236,10 @@ app.post('/assorum-srv/events', function(req, res){
   }
 
   var newEvent = new Event(req.body.name, req.body.description, req.body.location, req.body.date, req.body.association, req.body.img);
-  console.log("New Event: " + JSON.stringify(newEvent));
+
   newEvent.id = eventNextId++;
+  console.log("New Event: " + JSON.stringify(newEvent));
+  res.json(true);
 })
 /*
 // catch 404 and forward to error handler
