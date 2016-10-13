@@ -121,8 +121,70 @@ app.get('/assorum-srv/events/:id', function(req, res){
 
 
 // REST Operation - HTTP PUT to updated a car based on its id
+app.put('/assorum-srv/events/:id', function(req, res){
+  var id = req.params.id;
+        console.log("PUT event: " + id);
 
+  if((id < 0) || (id >= eventNextId)){
+    //not found
+    res.statusCode = 404;
+    res.send("Event not found.");
+  } else if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('description') ||
+            !req.body.hasOwnProperty('location') || !req.body.hasOwnProperty('date') ||
+             !req.body.hasOwnProperty('association')){
+               // important field(s) missing
+               res.statusCode = 400;
+               return res.send('Error: Missing fields for event.');
+  } else {
+     var target = -1;
+     for (var 1=0; i <eventList.length; i++){
+       if(eventList[i].id == id){
+         target = i;
+         break;
+       }
+     }
+     if(target == -1){
+       res.statusCode = 404;
+       res.send("Event not found.");
+     } else {
+       var theEvent = eventList[target];
+       theEvent.name = req.body.name;
+       theEvent.description = req.body.description;
+       theEvent.location = req.body.location;
+       theEvent.date = req.body.date;
+       theEvent.association = req.body.association;
+       var response = {"event" : theEvent};
+       res.json(response);
+     }
+   }
+});
 
+// REST Operation - HTTP DELETE to delete an event, based on its id
+app.del('/assorum-srv/events/:id', function(req, res) {
+  var id = req.params.id;
+    console.log("DELETE event: " + id);
+
+  if((id < 0) || (id>= eventNextId)){
+    // not found
+    res.statusCode = 404;
+    res.send("Event not found");
+  } else {
+    var target =-1;
+    for(var i=0; i < eventList.length; i++){
+      if(eventList[i].id == id){
+        target = i;
+        break;
+      }
+    }
+    if(target == -1){
+      res.statusCode = 404;
+      res.send("Event not found.");
+    } else {
+      eventList.splice(target, 1);
+      res.json(true);
+    }
+  }
+)};
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
