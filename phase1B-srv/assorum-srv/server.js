@@ -186,6 +186,22 @@ app.del('/assorum-srv/events/:id', function(req, res) {
   }
 )};
 
+// REST Operation - HTTP POST to add a new event
+app.post('/assorum-srv/events', function(req, res){
+  console.log("POST");
+
+  if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('description') ||
+     !req.body.hasOwnProperty('location') || !req.body.hasOwnProperty('date') ||
+     !req.body.hasOwnProperty('association')){
+       res.statusCode = 400;
+       return res.send('Error: Missing fields for event.');
+  }
+
+  var newEvent = new Event(req.body.name, req.body.description, req.body.location, req.body.date, req.body.association, req.body.img);
+  console.log("New Event: " + JSON.stringify(newEvent));
+  newEvent.id = eventNextId++;
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
