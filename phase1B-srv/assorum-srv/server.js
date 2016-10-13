@@ -1,3 +1,4 @@
+// Express is the web framework
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,6 +11,27 @@ var users = require('./routes/users');
 
 var app = express();
 
+var allowCrossDomain = function(req, res, next) {
+   res.header('Access-Control-Allow-Origin', '*');
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+   // intercept OPTIONS method
+   if ('OPTIONS'  == req.method) {
+     res.send(200);
+   }
+   else {
+     next();
+   }
+ };
+
+ app.configure(function () {
+   app.use(allowCrossDomain);
+ });
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -17,6 +39,9 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+
+app.use(express.bodyParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -24,6 +49,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+var event = require("./event.js");
+
+var Event = event.Event;
+
+var eventList = new Array(
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name", "description", "location", "date", "association", "img")
+);
+
+var eventNextId = 0;
+
+for (var i=0; 1< eventList.length; ++i){
+    eventList[i].id = eventNextId;
+}
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
