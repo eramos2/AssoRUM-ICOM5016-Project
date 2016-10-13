@@ -56,7 +56,9 @@ var event = require("./event.js");
 var Event = event.Event;
 
 var eventList = new Array(
-    new Event("name", "description", "location", "date", "association", "img"),
+    new Event("name",
+    "description",
+    "location", "date", "association", "img"),
     new Event("name", "description", "location", "date", "association", "img"),
     new Event("name", "description", "location", "date", "association", "img"),
     new Event("name", "description", "location", "date", "association", "img"),
@@ -73,6 +75,14 @@ for (var i=0; 1< eventList.length; ++i){
     eventList[i].id = eventNextId;
 }
 
+// REST Operations
+// Idea: Data is created, read, updated, or deleted through a URL that
+// Identifies the resource to be created, read, updated, or deleted.
+// The URL and any other input data is sent over standard HTTP requests.
+// Mapping of HTTP with requests
+// a) POST - Created a new object. (Database create operation)
+// b) GET - Read an individual object, collection of object, or simple valuse(Database read Operation)
+// c) PUT - Update an individual object, or collection (Database update operation)
 
 
 // catch 404 and forward to error handler
