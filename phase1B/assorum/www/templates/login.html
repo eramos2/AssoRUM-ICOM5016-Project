@@ -1,0 +1,21 @@
+  <ion-view view-title="LOG IN!">
+  <ion-content ng-controller="loginCtrl" class = "padding">
+    <!--<ion-headear>
+        <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
+      </ion-headear>-->
+      
+      <label class="item item-input">
+        <input ng-model="login.EorU" type = "text" placeholder = "Email or Username">
+      </label>
+       <label class="item item-input">
+        <input ng-model="login.password" type = "password" placeholder = "Password">
+      </label>
+        <button ng-click="saveLogin()" class="button button-balanced button-block">Submit</button>
+       <div style = "text-align : center;">
+          <p1>
+          Dont have an account?
+        </p1>
+       </div>
+        <button class="button button-balanced button-block">Sign Up!</button>
+  </ion-content>
+  </ion-view>

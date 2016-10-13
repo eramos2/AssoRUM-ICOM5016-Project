@@ -1,0 +1,28 @@
+<ion-view view-title="SIGN UP!">
+  <ion-content ng-controller="signupCtrl" class ="padding">
+    <ion-headear>
+        <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
+      </ion-headear>
+      <label class="item item-input">
+        <input ng-model="signup.firstName" type = "text" placeholder = "First Name">
+      </label>
+      <label class="item item-input">
+        <input ng-model="signup.lastName" type = "text" placeholder = "Last Name">
+      </label>
+      <label class="item item-input">
+        <input ng-model="signup.username" type = "text" placeholder = "Username">
+      </label>
+      <label class="item item-input">
+        <input ng-model="signup.email" type = "email" placeholder = "Email">
+      </label>
+       <label class="item item-input">
+        <input ng-model="signup.password" type = "password" placeholder = "Password">
+      </label>
+      <label class="item item-input">
+        <input ng-model="signup.confirm" type = "password" placeholder = "Confirm Password">
+      </label>
+        <button ng-click="saveSignup()" class="button button-balanced button-block">Create Account</button>
+       
+    
+  </ion-content>
+</ion-view>

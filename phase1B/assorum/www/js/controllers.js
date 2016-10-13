@@ -1,5 +1,21 @@
 angular.module('assorum.controllers', [])
 
+
+.controller('loginCtrl', function($scope,$state) {
+    $scope.login = {};
+
+    $scope.saveLogin = function() {
+        if($scope.login.EorU && $scope.login.password){
+            alert("form complete");
+            $state.go('tab.home');
+        }else{
+            alert("Please fill out all fields");
+        }
+
+    }
+  
+})
+
 .controller('HomeCtrl', function($scope, Events) {
   $scope.events = Events.all();
   $scope.remove = function(event) {
