@@ -68,6 +68,7 @@ var eventList = new Array(
 
 var eventNextId = 0;
 
+
 for (var i=0; 1< eventList.length; ++i){
     eventList[i].id = eventNextId;
 }
