@@ -13,7 +13,26 @@ angular.module('assorum.controllers', [])
         }
 
     }
+
+    $scope.createAccount = function(){
+      $state.go('signup');
+    }
   
+})
+
+.controller('signupCtrl', function($scope, $state) {
+    $scope.signup = {};
+
+    $scope.saveSignup = function() {
+        if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
+         && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
+             alert("Form complete");
+             $state.go('tab.home');
+         }else{
+             alert("Please fill out all fields");
+        }
+    }
+
 })
 
 .controller('HomeCtrl', function($scope, Events) {
