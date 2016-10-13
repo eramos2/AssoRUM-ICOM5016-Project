@@ -1,6 +1,18 @@
 angular.module('assorum.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('HomeCtrl', function($scope, Events) {
+  $scope.events = Events.all();
+  $scope.remove = function(event) {
+    Events.remove(event);
+  };
+})
+
+.controller('ProfileCtrl', function($scope, User) {
+  $scope.username = User.name;
+  $scope.userimg = User.img;
+
+})
+
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called

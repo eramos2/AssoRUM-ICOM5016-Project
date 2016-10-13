@@ -40,6 +40,27 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services'])
 
   // Each tab has its own nav history stack:
 
+
+    .state('tab.home', {
+      url: '/home',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/tab-home.html',
+          controller: 'HomeCtrl'
+        }
+      }
+    })
+
+    .state('tab.profile', {
+      url: '/profile',
+      views: {
+        'tab-profile': {
+          templateUrl: 'templates/tab-profile.html',
+          controller: 'ProfileCtrl'
+        }
+      }
+    })
+
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -80,6 +101,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });
