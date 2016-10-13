@@ -83,6 +83,45 @@ for (var i=0; 1< eventList.length; ++i){
 // a) POST - Created a new object. (Database create operation)
 // b) GET - Read an individual object, collection of object, or simple valuse(Database read Operation)
 // c) PUT - Update an individual object, or collection (Database update operation)
+// d) DELETE - Remove an individual object, or collection
+
+// REST Operation - HTTP GET to read all events
+app.get('/assorum-srv/events', function(req, res) {
+  console.log("GET");
+  var response = {"events" : eventList};
+  res.json(response);
+});
+
+// REST Operation - HTTP GET to read a event based on its id
+app.get('/assorum-srv/events/:id', function(req, res){
+  var id = req.params.id;
+      console.log("GET event: " + id);
+
+      if((id<0) || (id >= eventNextId)) {
+        // not found
+        res.statusCode = 404;
+        res.send("Event not found.");
+      } else {
+        var target = -1;
+        for(var 1=0; i<eventList.length; i++){
+          if(eventList[i].id == id){
+              target = i;
+              break;
+          }
+        }
+        if (target == -1){
+          res.statusCode = 404;
+          res.send("Event not fount.");
+        } else{
+          var response = {"event" : eventList[target]};
+          res.json{response};
+        }
+      }
+});
+
+
+// REST Operation - HTTP PUT to updated a car based on its id
+
 
 
 // catch 404 and forward to error handler
