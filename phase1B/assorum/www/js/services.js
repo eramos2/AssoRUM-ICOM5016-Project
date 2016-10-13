@@ -6,8 +6,16 @@ angular.module('assorum.services', [])
 
   var  user = {
     name: "Peter",
-    img: 'img/ben.png'
+    img: 'img/ben.png',
+    favorites: [],
+    newFavorites: 0
   };
+
+  user.addToFavorites(function(event,eventId){
+
+    user.favorites.unshift(event);
+    newFavorites++;
+  })
 
   user.get
 
