@@ -42,11 +42,21 @@ angular.module('assorum.controllers', [])
   };
 })
 
+.controller('rumFCtrl', function($scope){
+
+})
+
+.controller('favCtrl', function($scope){
+
+})
+
 .controller('ProfileCtrl', function($scope, User) {
   $scope.username = User.name;
   $scope.userimg = User.img;
 
 })
+
+
 
 // TODO 
 .controller('SearchCtrl', function($scope, Events, $http) {
