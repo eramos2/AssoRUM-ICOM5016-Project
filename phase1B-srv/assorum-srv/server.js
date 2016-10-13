@@ -25,9 +25,9 @@ var allowCrossDomain = function(req, res, next) {
    }
  };
 
- app.configure(function () {
-   app.use(allowCrossDomain);
- });
+
+app.use(allowCrossDomain);
+
 
 
 
@@ -40,10 +40,10 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -109,8 +109,8 @@ var eventList = new Array(
 var eventNextId = 0;
 
 
-for (var i=0; 1< eventList.length; ++i){
-    eventList[i].id = eventNextId;
+for (var i=0; i< eventList.length; ++i){
+    eventList[i].id = eventNextId++;
 }
 
 // REST Operations
@@ -198,7 +198,7 @@ app.put('/assorum-srv/events/:id', function(req, res){
 });
 
 // REST Operation - HTTP DELETE to delete an event, based on its id
-app.del('/assorum-srv/events/:id', function(req, res) {
+app.delete('/assorum-srv/events/:id', function(req, res) {
   var id = req.params.id;
     console.log("DELETE event: " + id);
 
@@ -239,7 +239,7 @@ app.post('/assorum-srv/events', function(req, res){
   console.log("New Event: " + JSON.stringify(newEvent));
   newEvent.id = eventNextId++;
 })
-
+/*
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -269,6 +269,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+*/
 
 module.exports = app;
