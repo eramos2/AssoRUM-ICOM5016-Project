@@ -3,7 +3,6 @@ angular.module('assorum.controllers', [])
 
 .controller('loginCtrl', function($scope,$state) {
     $scope.login = {};
-
     $scope.saveLogin = function() {
         if($scope.login.EorU && $scope.login.password){
             alert("form complete");
@@ -17,7 +16,7 @@ angular.module('assorum.controllers', [])
     $scope.createAccount = function(){
       $state.go('signup');
     }
-  
+
 })
 
 .controller('signupCtrl', function($scope, $state) {
@@ -63,7 +62,7 @@ angular.module('assorum.controllers', [])
 
 
 
-// TODO 
+// TODO
 .controller('SearchCtrl', function($scope, Events, $http) {
   $scope.model = {term: ''};
 
