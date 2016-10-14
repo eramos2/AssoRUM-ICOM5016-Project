@@ -70,7 +70,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
           controller: 'rumFCtrl'
         }
       }
-    })
+    })    
 
     .state('tab.favorites', {
     url: '/favorites',
@@ -80,7 +80,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
           controller: 'favCtrl'
         }
       }
-    })
+    })    
 
     .state('tab.profile', {
       url: '/profile',
@@ -91,7 +91,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
     })
-
+  
   .state('tab.search', {
     url: '/search',
     views: {
@@ -110,16 +110,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         controller: 'AccountCtrl'
       }
     }
-  })
-
-  .state('event',{
-    url:'/event',
-    views:{
-      'tab-event':{
-    templateUrl:'templates/event.html',
-    controller:'EventCtrl'
-  }
-  }
   });
 
   // if none of the above states are matched, use this as the fallback
