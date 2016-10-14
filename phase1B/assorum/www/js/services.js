@@ -116,6 +116,13 @@ angular.module('assorum.services', [])
         });
     },
 
+    deleteEvent: function(eventId){
+      $http.delete(SERVER.url + "/events/" + eventId)
+      .then(function(res){
+        console.log(res);
+      });
+    },
+
     getEvents: function(){
       
      $http({

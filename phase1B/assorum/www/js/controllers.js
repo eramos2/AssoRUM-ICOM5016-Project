@@ -32,7 +32,8 @@ angular.module('assorum.controllers', [])
 })
 
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
-  Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
+  //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
+  //Events.deleteEvent(21);
   Events.getEvents();
   $scope.server = SERVER;
   $scope.events = Events.all();
