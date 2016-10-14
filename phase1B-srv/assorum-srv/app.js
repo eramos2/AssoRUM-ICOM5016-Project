@@ -50,6 +50,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', routes);
 //app.use('/users', users);
 
+//to load files that are in the public directory
+app.use(express.static('public'));
+
+
+
+
 
 var event = require("./event.js");
 var assoc = require("./assoc.js");
@@ -61,22 +67,22 @@ var Assoc = assoc.Assoc;
 var assocList = new Array(
     new Assoc("Hackertrons",
     "There are 10 kinds of people in the world: the ones who understand binary and the one who don't",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
-    new Assoc("GamerUPRM",
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("GamersUPRM",
     "We are Gamerz YOLO !!!!",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("bebelatasUPRM",
     "C2H6O, nuestro pan de cada dia.",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Chemtist",
     "We think there is color, we think there is sweet, we think there is bitter, but in reality there are atoms and a void.",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Orquesta de Cuerdas UPRM",
     "Representando la cultura y tradicion musical del colegio",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("RumLit",
     "Lee porque el que no lee, no es bruce lee",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"])
+    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"])
 
 );
 
@@ -94,49 +100,49 @@ var eventList = new Array(
     "Anfiteatro Celis",
     "28/10/2016",
     "Hackertrons",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Event("Reunion Gamers UPRM",
     "Be part of the first meeting of our association. Talk to game developers, test games made by UPRM students and test your skills in competitive first person shooter games against other UPRM students and even professors. ",
     "3er piso centro de estudiantes",
     "15/10/2016",
-    "GamerUPRM",
-    ["./public/images/event/reunion_games_uprm_small.jpeg","./public/images/event/reunion_games_uprm_large.jpeg"]),
+    "GamersUPRM",
+    ["http://assorum.heroku.com/images/event/reunion_gamers_uprm_small.jpeg","http://assorum.heroku.com/images/event/reunion_gamers_uprm_large.jpeg"]),
     new Event("Pinta tu muro",
     "An event for showing your creativity and innovative skills to the UPRM community. Prices will be given to the most liked work of art. Be creative.",
     "Serpentinata",
     "1/11/2016",
     "ArtGeeksRUM",
-    ["./public/images/event/pinta_tu_muro_small.jpeg","./public/images/event/pinta_tu_muro_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/pinta_tu_muro_small.jpeg","http://assorum.heroku.com/images/event/pinta_tu_muro_large.jpeg"]),
     new Event("Meeting bebelatasUPRM",
     " Join us on november 27 and meet the bebelatas team. Our focus is to drink and get good grades. Be part of this amazing journey.",
     "Garabato",
     "27/11/2016",
     "bebelatasUPRM",
-    ["./public/images/event/meeting_bebelatasuprm_small.jpeg","./public/images/event/meeting_bebelatasuprm_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/meeting_bebelatasuprm_small.jpeg","http://assorum.heroku.com/images/event/meeting_bebelatasuprm_large.jpeg"]),
     new Event("Chemistry Showdown",
     "Join our annual Chemistry Showdown to test your knowledge in a fun way. Be sure to bring a team of 3 students and your periodic table. See you there. ",
     "Q-101",
     "19/10/2016",
     "Chemtist",
-    ["./public/images/event/chemistry_showdown_small.jpeg","./public/images/event/chemistry_showdown_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/chemistry_showdown_small.jpeg","http://assorum.heroku.com/images/event/chemistry_showdown_large.jpeg"]),
     new Event("Venta de libros",
     "Get started your reading or add to your collection of books by buying some used or new books in our event.",
     "Placita Chardon",
     "27/11/2016",
     "RumLit",
-    ["./public/images/event/venta_de_libros_small.jpeg","./public/images/event/venta_de_libros_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/venta_de_libros_small.jpeg","http://assorum.heroku.com/images/event/venta_de_libros_large.jpeg"]),
     new Event("Guerrilla 4v4",
     "Think you got basketball skills? Come to the annual basketball 4v4 games fundraiser for the UPRM basketball teams. ",
     "Gimnasio Rafael Espada",
     "4/12/2016",
     "BasketballTeam",
-    ["./public/images/event/guerrilla_4v4_small.jpeg","./public/images/event/guerrilla_4v4_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/guerrilla_4v4_small.jpeg","http://assorum.heroku.com/images/event/guerrilla_4v4_large.jpeg"]),
     new Event("Presencias Navidad Edition",
     "Come and join our christmas spirit. Truly a night to remember, with special guest surprises and a lot of Puerto Rican typical Christmas songs.",
     "Portico",
     "10/12/2016",
     "Banda de Cuerda UPRM",
-    ["./public/images/event/presencias_navidad_edition_small.jpeg","./public/images/event/presencias_navidad_edition_large.jpeg"])
+    ["http://assorum.heroku.com/images/event/presencias_navidad_edition_small.jpeg","http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg"])
 );
 
 var eventNextId = 0;
