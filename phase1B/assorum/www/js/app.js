@@ -115,13 +115,4 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 
-})
-
-.constant('SERVER', {
-  // Local server
-  //url: 'http://localhost:3000'
-
-  // Public Heroku server
-  url: 'https://assorum.herokuapp.com'
 });
-

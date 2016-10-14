@@ -60,10 +60,10 @@ angular.module('assorum.services', [])
 })
 
 // TODO : ....
-.factory('Events', function($http, SERVER){
+.factory('Events', function(){
   // Some dummy data for testing
 
-  /*var events = [{
+  var events = [{
     id:0,
     name: 'Venta de alcapurrias a PESO!!',
     desc: 'Grasa pa la dieta...',
@@ -78,8 +78,9 @@ angular.module('assorum.services', [])
     name: 'Jangueo En La Cueva',
     desc: 'Nope, nope...',
     img:  'img/perry.png'
-  }];*/
+  }];
 
+<<<<<<< HEAD
   var events;
 
   events.getEvents = function() {
@@ -93,11 +94,10 @@ angular.module('assorum.services', [])
         });
     };
    events.getEvents();
+=======
+>>>>>>> parent of 103a9b4... read from server
   return {
-    test: events.events,
     all: function() {
-      events.getEvents();
-      console.log(events);
       return events;
     },
     remove: function(event) {
