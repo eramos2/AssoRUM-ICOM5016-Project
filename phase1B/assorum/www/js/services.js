@@ -58,10 +58,10 @@ angular.module('assorum.services', [])
 })
 
 // TODO : ....
-.factory('Events', function($http, SERVER){
+.factory('Events', function(){
   // Some dummy data for testing
 
-  /*var events = [{
+  var events = [{
     id:0,
     name: 'Venta de alcapurrias a PESO!!',
     desc: 'Grasa pa la dieta...',
@@ -76,26 +76,10 @@ angular.module('assorum.services', [])
     name: 'Jangueo En La Cueva',
     desc: 'Nope, nope...',
     img:  'img/perry.png'
-  }];*/
+  }];
 
-  var events;
-
-  events.getEvents = function() {
-        return $http({
-            method: 'GET',
-            url: SERVER.url + '/events'
-        }).success(function(data){
-            // merge data into the queue
-            console.log("This is a test");
-            events = data.events;
-        });
-    };
-   events.getEvents(); 
   return {
-    test: events.events,
     all: function() {
-      events.getEvents();
-      console.log(events);
       return events;
     },
     remove: function(event) {
