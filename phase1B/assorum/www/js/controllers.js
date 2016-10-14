@@ -11,7 +11,6 @@ angular.module('assorum.controllers', [])
         }
 
     }
-
     $scope.createAccount = function(){
       $state.go('signup');
     }
@@ -32,7 +31,15 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope, User, Events) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
+
+
+
+  //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
+  //Events.deleteEvent(21);
+  Events.getEvents();
+
+  $scope.server = SERVER;
   $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
@@ -40,7 +47,12 @@ angular.module('assorum.controllers', [])
 
   $scope.addToFavorites = function(event){
     User.addToFavorites(event);
-  }
+  };
+
+  $scope.deleteEvent = function(event){
+    Events.deleteEvent(event.id);
+  };
+
 })
 
 .controller('rumFCtrl', function($scope){
@@ -50,6 +62,7 @@ angular.module('assorum.controllers', [])
 .controller('favCtrl', function($scope, User, Events){
 
   $scope.favorites = User.getFavorites();
+  console.log($scope.favorites);
 })
 
 .controller('ProfileCtrl', function($scope, User) {
@@ -91,5 +104,15 @@ angular.module('assorum.controllers', [])
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
-  };
+  }
+})
+
+.controller('AssociationCtrl', function(){
+})
+
+
+.controller('EventCtrl',function(SERVER,$scope,$state,Events){
+  $scope.goBackHome = function(){
+    $state.go('tab.home');
+  }
 });

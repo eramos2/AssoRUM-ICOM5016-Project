@@ -9,6 +9,7 @@ angular.module('assorum.services', [])
     lastname:'Gonzalez',
     img: 'img/feloespejuelo.png',
     email:'feliz.gonzalez3@upr.edu',
+    rank: 'Freshman',
     favorites: [],
     newFavorites: 0
   };
@@ -25,6 +26,7 @@ angular.module('assorum.services', [])
         ufirst: user.firstname,
         ulast: user.lastname,
         img : user.img,
+        urank: user.rank,
         email:user.email
       };
     }
@@ -58,10 +60,12 @@ angular.module('assorum.services', [])
 })
 
 // TODO : ....
-.factory('Events', function(){
+.factory('Events', function($http, SERVER,$state){
   // Some dummy data for testing
+  var events = [];
+  var currentEvent = {current: ""};
 
-  var events = [{
+  /*var events = [{
     id:0,
     name: 'Venta de alcapurrias a PESO!!',
     desc: 'Grasa pa la dieta...',
@@ -77,11 +81,12 @@ angular.module('assorum.services', [])
     desc: 'Nope, nope...',
     img:  'img/perry.png'
   }];
-
+*/
   return {
     all: function() {
       return events;
     },
+
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
     },
@@ -92,6 +97,43 @@ angular.module('assorum.services', [])
         }
       }
       return null;
+    },
+
+    o: function(){return eventsTest.favorites;},
+
+
+    addEvent: function(name, description, location, date, association){
+        var newEvent = {
+          "name": name,
+          "description": description,
+          "location": location,
+          "date": date,
+          "association": association
+        };
+
+        $http.post(SERVER.url + "/events", newEvent)
+        .then(function (res){
+        console.log(res);
+        });
+    },
+
+    deleteEvent: function(eventId){
+      $http.delete(SERVER.url + "/events/" + eventId)
+      .then(function(res){
+        console.log(res);
+      });
+    },
+
+
+    getEvents: function(){
+     $http({
+        method: 'GET',
+        url: SERVER.url + '/events'
+      }).then(function(response){
+        for(var i=0;i<response.data.events.length;i++){
+          events.unshift(response.data.events[i]);
+        }
+      })
     }
   };
 });
