@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding-left: 110px;
+  padding-top: 20px;
+}
