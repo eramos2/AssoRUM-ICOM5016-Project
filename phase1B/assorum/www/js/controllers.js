@@ -32,7 +32,7 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope, User, Events, SERVER) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
   Events.addEvents();
   $scope.server = SERVER;
   $scope.events = Events.all();
@@ -99,5 +99,9 @@ angular.module('assorum.controllers', [])
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
-  };
+  }
+})
+
+
+.controller('EventCtrl',function(){
 });
