@@ -101,7 +101,23 @@ angular.module('assorum.services', [])
 
     o: function(){return eventsTest.favorites;},
 
-    addEvents: function(){
+    addEvent: function(name, description, location, date, association){
+        var newEvent = {
+          "name": name,
+          "description": description,
+          "location": location,
+          "date": date,
+          "association": association
+        };
+
+        $http.post(SERVER.url + "/events", newEvent)
+        .then(function (res){
+        console.log(res);
+        });
+    },
+
+    getEvents: function(){
+      
      $http({
         method: 'GET',
         url: SERVER.url + '/events'
