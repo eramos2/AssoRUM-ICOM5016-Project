@@ -4,23 +4,31 @@ angular.module('assorum.services', [])
 .factory('User', function($http){
   // Some dummy data for testing
 
-  var  user = {
-    favorites: []
+  var user = {
+    name: "Peter",
+    img: 'img/FELO.png',
+    favorites: [],
+    newFavorites: 0
   };
 
   return{
     addToFavorites: function(event){
       user.favorites.unshift(event);
     },
-    all: function(){
+    getFavorites: function(){
       return user.favorites;
     },
-    
-  }  
+    getProfile: function(){
+      return {
+        name : user.name,
+        img : user.img
+      };
+    }
+  }
 })
 
 .factory('Association', function($http){
-  
+
   var association = [{
     id: 0,
     name: "AAA",
@@ -39,10 +47,10 @@ angular.module('assorum.services', [])
     img: 'img/ben.png'
 
   };
-  
+
   user.get
 
-  return user;  
+  return user;
 })
 
 // TODO : ....
@@ -81,6 +89,5 @@ angular.module('assorum.services', [])
       }
       return null;
     }
-  };   
+  };
 });
-

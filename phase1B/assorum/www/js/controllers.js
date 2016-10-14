@@ -48,14 +48,12 @@ angular.module('assorum.controllers', [])
 })
 
 .controller('favCtrl', function($scope, User, Events){
-  
-  $scope.favorites = User.all();
+
+  $scope.favorites = User.getFavorites();
 })
 
 .controller('ProfileCtrl', function($scope, User) {
-  $scope.username = User.name;
-  $scope.userimg = User.img;
-
+  $scope.user = User.getProfile();
 })
 
 

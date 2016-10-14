@@ -1,8 +1,41 @@
-<ion-view view-title= "Profile">
+<ion-view>
+
+  <ion-nav-title>
+    <div>
+   <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
+       Profile
+</div>
+   </ion-nav-title>
   <ion-content>
-    <a class="item item-avatar" href="#">
-      <img src="{{userimg}}">
-      <h2>{{username}}</h2>
-    </a>
-  </ion-content>
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img src="{{user.img}}">
+    <h2>{{user.name}}</h2>
+    <p></p>
+  </div>
+
+  <div class="item item-body">
+    <p>
+
+    </p>
+  </div>
+
+</div>
+</ion-content>
 </ion-view>
+
+<!--ion-view view-title= "Profile">
+  <ion-content>
+  <h1 class="item-avatar">
+    <img src="{{user.img}}">
+    <h2>{{user.name}}</h2>
+  </h1>
+</ion-content>
+</ion-view-->
+
+
+<!--body>
+  <img src="{{user.img}}">
+  <h2>{{user.name}}</h2>
+</body-->
