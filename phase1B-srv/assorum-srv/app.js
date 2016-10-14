@@ -52,8 +52,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 var event = require("./event.js");
+var assoc = require("./assoc.js");
 
 var Event = event.Event;
+var Assoc = assoc.Assoc;
+
+//name, description,img
+var assocList = new Array(
+    new Assoc("Hackertrons",
+    "There are 10 kinds of people in the world: the ones who understand binary and the one who don't",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("GamerUPRM",
+    "We are Gamerz YOLO !!!!",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("bebelatasUPRM",
+    "C2H6O, nuestro pan de cada dia.",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("Chemtist",
+    "We think there is color, we think there is sweet, we think there is bitter, but in reality there are atoms and a void.",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("Orquesta de Cuerdas UPRM",
+    "Representando la cultura y tradicion musical del colegio",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    new Assoc("RumLit",
+    "Lee porque el que no lee, no es bruce lee",
+    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"])
+
+);
+
+var assocNextId = 0;
+
+
+for (var i=0; i< eventList.length; ++i){
+    assocList[i].id = assocNextId++;
+}
+
 //name, description,location,date,association,img
 var eventList = new Array(
     new Event("Workshop Ionic Framework",
@@ -78,7 +111,7 @@ var eventList = new Array(
     " Join us on november 27 and meet the bebelatas team. Our focus is to drink and get good grades. Be part of this amazing journey.",
     "Garabato",
     "27/11/2016",
-    "association",
+    "bebelatasUPRM",
     ["./public/images/event/meeting_bebelatasuprm_small.jpeg","./public/images/event/meeting_bebelatasuprm_large.jpeg"]),
     new Event("Chemistry Showdown",
     "Join our annual Chemistry Showdown to test your knowledge in a fun way. Be sure to bring a team of 3 students and your periodic table. See you there. ",
@@ -124,14 +157,130 @@ for (var i=0; i< eventList.length; ++i){
 // d) DELETE - Remove an individual object, or collection
 
 // REST Operation - HTTP GET to read all events
-app.get('/assorum-srv/events', function(req, res) {
+app.get('/associations', function(req, res) {
+  console.log("GET");
+  var response = {"associations" : assocList};
+  res.json(response);
+});
+
+// REST Operation - HTTP GET to read a event based on its id
+app.get('/associations/:id', function(req, res){
+  var id = req.params.id;
+      console.log("GET association: " + id);
+
+      if((id<0) || (id >= assocNextId)) {
+        // not found
+        res.statusCode = 404;
+        res.send("Association not found.");
+      } else {
+        var target = -1;
+        for(var i=0; i<assocList.length; i++){
+          if(assocList[i].id == id){
+              target = i;
+              break;
+          }
+        }
+        if (target == -1){
+          res.statusCode = 404;
+          res.send("Association not fount.");
+        } else{
+          var response = {"association" : assocList[target]};
+          res.json(response);
+        }
+      }
+});
+
+
+// REST Operation - HTTP PUT to updated a car based on its id
+app.put('/associations/:id', function(req, res){
+  var id = req.params.id;
+        console.log("PUT Association: " + id);
+
+  if((id < 0) || (id >= assocNextId)){
+    //not found
+    res.statusCode = 404;
+    res.send("Association not found.");
+  } else if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('description')){
+               // important field(s) missing
+               res.statusCode = 400;
+               return res.send('Error: Missing fields for association.');
+  } else {
+     var target = -1;
+     for (var i=0; i <assocList.length; i++){
+       if(assocList[i].id == id){
+         target = i;
+         break;
+       }
+     }
+     if(target == -1){
+       res.statusCode = 404;
+       res.send("Association not found.");
+     } else {
+       var theAssoc = assocList[target];
+       theAssoc.name = req.body.name;
+       theAssoc.description = req.body.description;
+       var response = {"association" : theAssoc};
+       res.json(response);
+     }
+   }
+});
+
+// REST Operation - HTTP DELETE to delete an event, based on its id
+app.delete('/associations/:id', function(req, res) {
+  var id = req.params.id;
+    console.log("DELETE association: " + id);
+
+  if((id < 0) || (id>= assocNextId)){
+    // not found
+    res.statusCode = 404;
+    res.send("Association not found");
+  } else {
+    var target =-1;
+    for(var i=0; i < assocList.length; i++){
+      if(assocList[i].id == id){
+        target = i;
+        break;
+      }
+    }
+    if(target == -1){
+      res.statusCode = 404;
+      res.send("Association not found.");
+    } else {
+      assocList.splice(target, 1);
+      res.json(true);
+    }
+  }
+});
+
+// REST Operation - HTTP POST to add a new event
+app.post('/associations', function(req, res){
+  console.log("POST");
+
+  if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('description')){
+       res.statusCode = 400;
+       return res.send('Error: Missing fields for association.');
+  }
+
+  var newAssoc = new Assoc(req.body.name, req.body.description, req.body.img);
+
+  newAssoc.id = assocNextId++;
+  console.log("New Association: " + JSON.stringify(newAssoc));
+  assocList.push(newAssoc);
+  res.json(true);
+})
+
+
+
+
+// REST Operation - HTTP GET to read all events
+app.get('/events', function(req, res) {
   console.log("GET");
   var response = {"events" : eventList};
   res.json(response);
 });
 
 // REST Operation - HTTP GET to read a event based on its id
-app.get('/assorum-srv/events/:id', function(req, res){
+app.get('/events/:id', function(req, res){
   var id = req.params.id;
       console.log("GET event: " + id);
 
@@ -159,7 +308,7 @@ app.get('/assorum-srv/events/:id', function(req, res){
 
 
 // REST Operation - HTTP PUT to updated a car based on its id
-app.put('/assorum-srv/events/:id', function(req, res){
+app.put('/events/:id', function(req, res){
   var id = req.params.id;
         console.log("PUT event: " + id);
 
@@ -198,7 +347,7 @@ app.put('/assorum-srv/events/:id', function(req, res){
 });
 
 // REST Operation - HTTP DELETE to delete an event, based on its id
-app.delete('/assorum-srv/events/:id', function(req, res) {
+app.delete('/events/:id', function(req, res) {
   var id = req.params.id;
     console.log("DELETE event: " + id);
 
@@ -225,7 +374,7 @@ app.delete('/assorum-srv/events/:id', function(req, res) {
 });
 
 // REST Operation - HTTP POST to add a new event
-app.post('/assorum-srv/events', function(req, res){
+app.post('/events', function(req, res){
   console.log("POST");
 
   if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('description') ||
