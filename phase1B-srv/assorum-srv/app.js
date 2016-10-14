@@ -67,22 +67,22 @@ var Assoc = assoc.Assoc;
 var assocList = new Array(
     new Assoc("Hackertrons",
     "There are 10 kinds of people in the world: the ones who understand binary and the one who don't",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("GamerUPRM",
     "We are Gamerz YOLO !!!!",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("bebelatasUPRM",
     "C2H6O, nuestro pan de cada dia.",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Chemtist",
     "We think there is color, we think there is sweet, we think there is bitter, but in reality there are atoms and a void.",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Orquesta de Cuerdas UPRM",
     "Representando la cultura y tradicion musical del colegio",
-    ["/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("RumLit",
     "Lee porque el que no lee, no es bruce lee",
-    ["./public/images/event/workshop_ionic_framework_small.jpeg","./public/images/event/workshop_ionic_framework_large.jpeg"])
+    ["/images/event/workshop_ionic_framework_small.jpeg","/images/event/workshop_ionic_framework_large.jpeg"])
 
 );
 
