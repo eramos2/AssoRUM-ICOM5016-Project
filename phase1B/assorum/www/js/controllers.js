@@ -32,6 +32,7 @@ angular.module('assorum.controllers', [])
 })
 
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
+
   Events.addEvents();
   $scope.server = SERVER;
   $scope.events = Events.all();
@@ -96,6 +97,12 @@ angular.module('assorum.controllers', [])
   }
 })
 
+.controller('AssociationCtrl', function(){
+})
 
-.controller('EventCtrl',function(SERVER,$scope,Events){
+
+.controller('EventCtrl',function(SERVER,$scope,$state,Events){
+  $scope.goBackHome = function(){
+    $state.go('tab.home');
+  }
 });
