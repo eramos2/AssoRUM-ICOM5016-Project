@@ -54,7 +54,6 @@ angular.module('assorum.services', [])
 
   };
 
-  user.get
 
   return user;
 })
@@ -81,11 +80,17 @@ angular.module('assorum.services', [])
     desc: 'Nope, nope...',
     img:  'img/perry.png'
   }];
+
 */
+
+
+
   return {
     all: function() {
       return events;
     },
+
+
 
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
