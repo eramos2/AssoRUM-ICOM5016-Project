@@ -5,8 +5,10 @@ angular.module('assorum.services', [])
   // Some dummy data for testing
 
   var user = {
-    name: "Peter",
-    img: 'img/FELO.png',
+    firstname: 'Feliz',
+    lastname:'Gonzalez',
+    img: 'img/feloespejuelo.png',
+    email:'feliz.gonzalez3@upr.edu',
     favorites: [],
     newFavorites: 0
   };
@@ -20,8 +22,10 @@ angular.module('assorum.services', [])
     },
     getProfile: function(){
       return {
-        name : user.name,
-        img : user.img
+        ufirst: user.firstname,
+        ulast: user.lastname,
+        img : user.img,
+        email:user.email
       };
     }
   }
