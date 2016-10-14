@@ -9,7 +9,6 @@ angular.module('assorum.services', [])
     lastname:'Gonzalez',
     img: 'img/feloespejuelo.png',
     email:'feliz.gonzalez3@upr.edu',
-    rank: 'Freshman',
     favorites: [],
     newFavorites: 0
   };
@@ -26,8 +25,7 @@ angular.module('assorum.services', [])
         ufirst: user.firstname,
         ulast: user.lastname,
         img : user.img,
-        email:user.email,
-        urank: user.rank
+        email:user.email
       };
     }
   }
@@ -93,9 +91,13 @@ angular.module('assorum.services', [])
             events = data.events;
         });
     };
+<<<<<<< HEAD
    events.getEvents();
 =======
 >>>>>>> parent of 103a9b4... read from server
+=======
+   events.getEvents(); 
+>>>>>>> parent of 60af70e... error Tabs
   return {
     all: function() {
       return events;
