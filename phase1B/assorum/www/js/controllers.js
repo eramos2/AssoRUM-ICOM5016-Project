@@ -43,7 +43,12 @@ angular.module('assorum.controllers', [])
 
   $scope.addToFavorites = function(event){
     User.addToFavorites(event);
-  }
+  };
+
+  $scope.deleteEvent = function(event){
+    Events.deleteEvent(event.id);
+  };
+
 })
 
 .controller('rumFCtrl', function($scope){
