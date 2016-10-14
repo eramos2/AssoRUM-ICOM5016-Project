@@ -70,7 +70,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
           controller: 'rumFCtrl'
         }
       }
-    })    
+    })
 
     .state('tab.favorites', {
     url: '/favorites',
@@ -80,7 +80,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
           controller: 'favCtrl'
         }
       }
-    })    
+    })
 
     .state('tab.profile', {
       url: '/profile',
@@ -91,7 +91,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
     })
-  
+
   .state('tab.search', {
     url: '/search',
     views: {
@@ -116,7 +116,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     url:'/event',
     templateUrl:'templates/event-page.html',
     controller:'EventCtrl'
-
   });
 
   // if none of the above states are matched, use this as the fallback
@@ -131,5 +130,3 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   // Public Heroku server
   url: 'https://assorum.herokuapp.com'
 });
-
-

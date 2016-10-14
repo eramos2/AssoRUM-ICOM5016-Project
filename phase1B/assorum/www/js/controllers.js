@@ -11,7 +11,6 @@ angular.module('assorum.controllers', [])
         }
 
     }
-
     $scope.createAccount = function(){
       $state.go('signup');
     }
@@ -43,11 +42,6 @@ angular.module('assorum.controllers', [])
   $scope.addToFavorites = function(event){
     User.addToFavorites(event);
   }
-
-  $scope.eventClicked= function(){
-    $state.go('event-page');
-  }
-
 })
 
 .controller('rumFCtrl', function($scope){
@@ -103,5 +97,5 @@ angular.module('assorum.controllers', [])
 })
 
 
-.controller('EventCtrl',function(){
+.controller('EventCtrl',function(SERVER,$scope,Events){
 });
