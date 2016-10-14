@@ -1,4 +1,10 @@
-<ion-view view-title="Favorites">
+<ion-view>
+  <ion-nav-title>
+    <div>
+   <span class="header-logo"><img style="position:fixed; left:115px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
+       Favorites
+</div>
+   </ion-nav-title>
     <ion-content>
         <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in favorites" type="item-text-wrap" href="#/tab/favorites/{{event.id}}">
