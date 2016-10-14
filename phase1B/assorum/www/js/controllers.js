@@ -33,10 +33,14 @@ angular.module('assorum.controllers', [])
 
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
+<<<<<<< HEAD
   //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
   //Events.deleteEvent(21);
   Events.getEvents();
 
+=======
+  Events.getEvents();
+>>>>>>> working
   $scope.server = SERVER;
   $scope.events = Events.all();
   $scope.remove = function(event) {

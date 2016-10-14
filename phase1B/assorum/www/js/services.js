@@ -101,6 +101,7 @@ angular.module('assorum.services', [])
 
     o: function(){return eventsTest.favorites;},
 
+<<<<<<< HEAD
     addEvent: function(name, description, location, date, association){
         var newEvent = {
           "name": name,
@@ -125,6 +126,9 @@ angular.module('assorum.services', [])
 
     getEvents: function(){
       
+=======
+    getEvents: function(){
+>>>>>>> working
      $http({
         method: 'GET',
         url: SERVER.url + '/events'
