@@ -60,9 +60,10 @@ angular.module('assorum.services', [])
 })
 
 // TODO : ....
-.factory('Events', function($http, SERVER){
+.factory('Events', function($http, SERVER,$state){
   // Some dummy data for testing
   var events = [];
+  var currentEvent = {current: ""};
 
   /*var events = [{
     id:0,
@@ -85,6 +86,7 @@ angular.module('assorum.services', [])
     all: function() {
       return events;
     },
+
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
     },
@@ -97,7 +99,7 @@ angular.module('assorum.services', [])
       return null;
     },
 
-    o: function(){return eventsTest.favorites;}, 
+    o: function(){return eventsTest.favorites;},
 
     addEvents: function(){
      $http({
