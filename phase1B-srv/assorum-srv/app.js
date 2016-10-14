@@ -83,7 +83,7 @@ var assocList = new Array(
 var assocNextId = 0;
 
 
-for (var i=0; i< eventList.length; ++i){
+for (var i=0; i< assocList.length; ++i){
     assocList[i].id = assocNextId++;
 }
 
