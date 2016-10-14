@@ -32,7 +32,9 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope, User, Events) {
+.controller('HomeCtrl', function($scope, User, Events, SERVER) {
+  Events.addEvents();
+  $scope.server = SERVER;
   $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
@@ -50,6 +52,7 @@ angular.module('assorum.controllers', [])
 .controller('favCtrl', function($scope, User, Events){
 
   $scope.favorites = User.getFavorites();
+  console.log($scope.favorites);
 })
 
 .controller('ProfileCtrl', function($scope, User) {
