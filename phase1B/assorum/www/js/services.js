@@ -19,6 +19,17 @@ angular.module('assorum.services', [])
   }  
 })
 
+.factory('Association', function($http){
+  
+  var association = [{
+    id: 0,
+    name: "AAA",
+    img: 'img/AAA_Logo.png',
+    desc: "Asociacion atleticamente atletica"
+  }]
+
+})
+
 // TODO : hacer metodo para que busque entre los eventos el que desea
 .factory('Search', function($http){
   // Some dummy data for testing

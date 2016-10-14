@@ -6,7 +6,6 @@ angular.module('assorum.controllers', [])
 
     $scope.saveLogin = function() {
         if($scope.login.EorU && $scope.login.password){
-            alert("form complete");
             $state.go('tab.home');
         }else{
             alert("Please fill out all fields");
@@ -26,7 +25,6 @@ angular.module('assorum.controllers', [])
     $scope.saveSignup = function() {
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
-             alert("Form complete");
              $state.go('tab.home');
          }else{
              alert("Please fill out all fields");
