@@ -43,6 +43,12 @@ angular.module('assorum.controllers', [])
   $scope.addToFavorites = function(event){
     User.addToFavorites(event);
   }
+<<<<<<< HEAD
+=======
+  $scope.eventClicked= function(){
+    $state.go('event-page');
+  }
+>>>>>>> origin/working
 })
 
 .controller('rumFCtrl', function($scope){
