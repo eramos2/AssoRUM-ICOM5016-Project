@@ -114,12 +114,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
 
   .state('event',{
     url:'/event',
-    views:{
-      'tab-event':{
-    templateUrl:'templates/event.html',
+    templateUrl:'templates/event-page.html',
     controller:'EventCtrl'
-  }
-  }
   });
 
   // if none of the above states are matched, use this as the fallback

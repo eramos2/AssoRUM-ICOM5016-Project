@@ -40,7 +40,7 @@ angular.module('assorum.controllers', [])
     User.addToFavorites(event);
   }
   $scope.eventClicked= function(){
-    $state.go('event');
+    $state.go('event-page');
   }
 })
 
