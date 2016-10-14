@@ -9,7 +9,6 @@ angular.module('assorum.services', [])
     lastname:'Gonzalez',
     img: 'img/feloespejuelo.png',
     email:'feliz.gonzalez3@upr.edu',
-    rank: 'Freshman',
     favorites: [],
     newFavorites: 0
   };
@@ -26,8 +25,7 @@ angular.module('assorum.services', [])
         ufirst: user.firstname,
         ulast: user.lastname,
         img : user.img,
-        email:user.email,
-        urank: user.rank
+        email:user.email
       };
     }
   }
@@ -92,7 +90,7 @@ angular.module('assorum.services', [])
             events = data.events;
         });
     };
-   events.getEvents();
+   events.getEvents(); 
   return {
     test: events.events,
     all: function() {

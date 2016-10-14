@@ -21,15 +21,9 @@ angular.module('assorum.controllers', [])
 .controller('signupCtrl', function($scope, $state) {
     $scope.signup = {};
 
-    //take value from selection
-    //$scope.showSelectValue = function(mySelect) {
-     //console.log(mySelect);}
-
     $scope.saveSignup = function() {
-
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
-         && $scope.signup.email && $scope.signup.password && $scope.signup.confirm)
-         {
+         && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
              $state.go('tab.home');
          }else{
              alert("Please fill out all fields");
