@@ -40,6 +40,7 @@ angular.module('assorum.controllers', [])
 
 .controller('HomeCtrl', function($scope, User, Events) {
   $scope.events = Events.all();
+  //$scope.events = Events.test;
   $scope.remove = function(event) {
     Events.remove(event);
   };
