@@ -86,6 +86,7 @@ var assocList = new Array(
 
 );
 
+// counter for associations id
 var assocNextId = 0;
 
 

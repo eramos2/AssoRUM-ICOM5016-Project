@@ -107,7 +107,7 @@ angular.module('assorum.controllers', [])
   }
 })
 
-<<<<<<< HEAD
+
 .controller('AssociationCtrl', function($scope, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
@@ -125,10 +125,6 @@ angular.module('assorum.controllers', [])
   $scope.deleteAssociation = function(association){
     Associations.deleteAssociation(association.id);
   };
-
-=======
-.controller('AssociationCtrl', function(){
->>>>>>> working
 })
 
 

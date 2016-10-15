@@ -62,16 +62,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     })
 
-  .state('tab.rumFeed', {
-    url: '/RUMFeed',
-      views: {
-        'tab-RUMFeed': {
-          templateUrl: 'templates/tab-RUMFeed.html',
-          controller: 'rumFCtrl'
-        }
-      }
-    })
-
     .state('tab.favorites', {
     url: '/favorites',
       views: {
@@ -102,15 +92,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
   })
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
   .state('association-page',{
     url:'/association',
     templateUrl:'templates/association.html',
