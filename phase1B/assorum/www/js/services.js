@@ -11,6 +11,7 @@ angular.module('assorum.services', [])
     email:'feliz.gonzalez3@upr.edu',
     rank: 'Freshman',
     favorites: [],
+    memberships: [],
     newFavorites: 0
   };
 
@@ -20,6 +21,12 @@ angular.module('assorum.services', [])
     },
     getFavorites: function(){
       return user.favorites;
+    },
+    addToMemberships: function(association){
+      user.memberships.unshift(association);
+    },
+    getMemberships: function(association){
+      return user.memberships;
     },
     getProfile: function(){
       return {
