@@ -110,7 +110,6 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function(){
 })
 
-
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
   $scope.goBackHome = function(){
     $state.go('tab.home');

@@ -111,6 +111,16 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     }
   })
+
+  .state('tab.asso',{
+    url:'/asso',
+    views:{
+      'tab-asso':{
+        templateUrl:'templates/tab-asso.html',
+        controller: "AssociationCtrl"
+      }
+    }
+  })
   .state('association-page',{
     url:'/association',
     templateUrl:'templates/association.html',
