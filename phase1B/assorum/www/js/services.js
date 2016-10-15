@@ -35,13 +35,38 @@ angular.module('assorum.services', [])
 
 .factory('Association', function($http){
 
-  var association = [{
-    id: 0,
-    name: "AAA",
-    img: 'img/AAA_Logo.png',
-    desc: "Asociacion atleticamente atletica"
-  }]
+  // Some dummy data for testing
+  var associations = [];
+  var currentAssociation = {current: ""};
 
+  return {
+    all: function() {
+      return associatios;
+    },
+    remove: function(association) {
+      associations.splice(associations.indexOf(association), 1);
+    },
+    get: function(associationId) {
+      for (var i = 0; i < associations.length; i++) {
+        if (associations[i].id === parseInt(associationId)) {
+          return associations[i];
+        }
+      }
+      return null;
+    },
+
+    addAssociation: function(name, description){
+        var newAssociation = {
+          "name": name,
+          "description": description
+        };
+
+        $http.post(SERVER.url + "/associations", newAssociation)
+        .then(function (res){
+        console.log(res);
+        });
+    }
+  }
 })
 
 // TODO : hacer metodo para que busque entre los eventos el que desea

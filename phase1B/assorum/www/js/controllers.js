@@ -77,7 +77,7 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('AssociationCtrl', function($scope, SERVER, Associations){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   Associations.getAssociations();
@@ -86,21 +86,15 @@ angular.module('assorum.controllers', [])
   $scope.remove = function(association) {
     Associations.remove(association);
   };
-
-  $scope.addMembership = function(association){
-    User.addMembership(association);
-  };
-
-<<<<<<< HEAD
   $scope.deleteAssociation = function(association){
     Associations.deleteAssociation(association.id);
   };
-=======
-.controller('AssociationCtrl', function($scope,$state){
+  $scope.addMembership = function(association){
+    User.addMembership(association);
+  };
   $scope.goToAssociation = function(){
     $state.go('association-page');
-  }
->>>>>>> working
+  };
 })
 
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){

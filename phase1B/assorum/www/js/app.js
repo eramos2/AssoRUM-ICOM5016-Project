@@ -92,18 +92,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
   })
 
-<<<<<<< HEAD
-=======
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
-
   .state('tab.asso',{
     url:'/asso',
     views:{
@@ -113,7 +101,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     }
   })
->>>>>>> working
+
   .state('association-page',{
     url:'/association',
     templateUrl:'templates/association.html',
