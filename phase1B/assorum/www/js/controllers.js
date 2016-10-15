@@ -107,10 +107,10 @@ angular.module('assorum.controllers', [])
   }
 })
 
-.controller('AssociationCtrl', function($scope){
+.controller('AssociationCtrl', function($scope, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
-  Associations.getEvents();
+  Associations.getAssociations();
   $scope.events = Associations.all();
   $scope.server = SERVER;
   $scope.remove = function(association) {
