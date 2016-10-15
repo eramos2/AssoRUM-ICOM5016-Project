@@ -67,22 +67,22 @@ var Assoc = assoc.Assoc;
 var assocList = new Array(
     new Assoc("Hackertrons",
     "There are 10 kinds of people in the world: the ones who understand binary and the one who don't",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("GamersUPRM",
     "We are Gamerz YOLO !!!!",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("bebelatasUPRM",
     "C2H6O, nuestro pan de cada dia.",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Chemtist",
     "We think there is color, we think there is sweet, we think there is bitter, but in reality there are atoms and a void.",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("Orquesta de Cuerdas UPRM",
     "Representando la cultura y tradicion musical del colegio",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]),
     new Assoc("RumLit",
     "Lee porque el que no lee, no es bruce lee",
-    ["https://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","https://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"])
+    ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg","http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"])
 
 );
 
@@ -138,6 +138,7 @@ var eventList = new Array(
     "4/12/2016",
     "BasketballTeam",
     ["http://assorum.heroku.com/images/event/guerrilla_4v4_small.jpeg","http://assorum.heroku.com/images/event/guerrilla_4v4_large.jpeg"]),
+
     new Event("Presencias Navidad Edition",
     "Come and join our christmas spirit. Truly a night to remember, with special guest surprises and a lot of Puerto Rican typical Christmas songs.",
     "Portico",

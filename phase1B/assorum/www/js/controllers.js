@@ -59,6 +59,9 @@ angular.module('assorum.controllers', [])
 
   $scope.favorites = User.getFavorites();
   console.log($scope.favorites);
+  $scope.deleteEvent = function(event){
+    User.removeFavorite(event.id);
+  };
 })
 
 .controller('ProfileCtrl', function($scope, User) {
@@ -77,7 +80,7 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   Associations.getAssociations();
@@ -90,10 +93,7 @@ angular.module('assorum.controllers', [])
     Associations.deleteAssociation(association.id);
   };
   $scope.addMembership = function(association){
-    User.addMembership(association);
-  };
-  $scope.goToAssociation = function(){
-    $state.go('association-page');
+    User.addToMembership(association);
   };
 })
 

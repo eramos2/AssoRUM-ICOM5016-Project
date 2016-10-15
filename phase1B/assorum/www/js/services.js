@@ -11,15 +11,26 @@ angular.module('assorum.services', [])
     email:'feliz.gonzalez3@upr.edu',
     rank: 'Freshman',
     favorites: [],
+    membership: [],
     newFavorites: 0
   };
 
   return{
+
+    addToMemberships: function(association){
+      user.memberships.unshift(association);
+    },
+    getMemberships: function(association){
+      return user.memberships;
+    },
     addToFavorites: function(event){
       user.favorites.unshift(event);
     },
     getFavorites: function(){
       return user.favorites;
+    },
+    removeFavorite: function(event) {
+      favorites.splice(favorites.indexOf(event), 1);
     },
     getProfile: function(){
       return {
@@ -33,7 +44,7 @@ angular.module('assorum.services', [])
   }
 })
 
-.factory('Association', function($http){
+.factory('Associations', function($http, SERVER){
 
   // Some dummy data for testing
   var associations = [];
@@ -41,7 +52,7 @@ angular.module('assorum.services', [])
 
   return {
     all: function() {
-      return associatios;
+      return associations;
     },
     remove: function(association) {
       associations.splice(associations.indexOf(association), 1);
@@ -54,6 +65,18 @@ angular.module('assorum.services', [])
       }
       return null;
     },
+
+    getAssociations: function(){
+     $http({
+        method: 'GET',
+        url: SERVER.url + '/associations'
+      }).then(function(response){
+        for(var i=0;i<response.data.associations.length;i++){
+          associations.unshift(response.data.associations[i]);
+        }
+      })
+    },
+
 
     addAssociation: function(name, description){
         var newAssociation = {

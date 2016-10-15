@@ -7,18 +7,19 @@
    </ion-nav-title>
   <ion-content >
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap">
+      <!-- <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap">
         <img style=" padding-left: 0px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_small.jpeg">
         <a href= '#/association'><h2 style="padding-top: 10px;">Orquesta de Cuerda UPRM</h2</a>
       </ion-item>
-      <!--
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap" href= "#/event">
-        <img ng-src="{{event.img[0]}}">
-        <h2>{{event.name}}</h2>
-        <p>{{event.desc}}</p>
+      -->
+      
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" href= "#/association">
+        <img ng-src="{{ asso.img[0] }}">
+        <h2>{{asso.name}}</h2>
+        <p>{{asso.desc}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
-      -->
+      
     </ion-list>
   </ion-content>
 </ion-view>
