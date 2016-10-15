@@ -67,7 +67,6 @@ angular.module('assorum.controllers', [])
 
 .controller('ProfileCtrl', function($scope, User) {
   $scope.user = User.getProfile();
-  $scope.memberships = User.getMemberships();
 })
 
 
@@ -108,7 +107,7 @@ angular.module('assorum.controllers', [])
   }
 })
 
-.controller('AssociationsCtrl', function($scope, SERVER, Associations){
+.controller('AssociationCtrl', function($scope, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   Associations.getAssociations();

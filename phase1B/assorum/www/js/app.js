@@ -62,12 +62,12 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     })
 
-  .state('tab.associations', {
-    url: '/associations',
+  .state('tab.associations-all', {
+    url: '/Associations-all',
       views: {
-        'tab-associations': {
-          templateUrl: 'templates/tab-associations.html',
-          controller: 'AssociationsCtrl'
+        'tab-RUMFeed': {
+          templateUrl: 'templates/tab-Associations.html',
+          controller: 'Associations-allCtrl'
         }
       }
     })
@@ -111,7 +111,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     }
   })
-  .state('association',{
+  .state('association-page',{
     url:'/association',
     templateUrl:'templates/association.html',
     controller:"AssociationCtrl"
