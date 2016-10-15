@@ -91,9 +91,16 @@ angular.module('assorum.controllers', [])
     User.addMembership(association);
   };
 
+<<<<<<< HEAD
   $scope.deleteAssociation = function(association){
     Associations.deleteAssociation(association.id);
   };
+=======
+.controller('AssociationCtrl', function($scope,$state){
+  $scope.goToAssociation = function(){
+    $state.go('association-page');
+  }
+>>>>>>> working
 })
 
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
