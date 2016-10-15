@@ -55,10 +55,6 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('rumFCtrl', function($scope){
-
-})
-
 .controller('favCtrl', function($scope, User, Events){
 
   $scope.favorites = User.getFavorites();
@@ -81,38 +77,11 @@ angular.module('assorum.controllers', [])
 
 })
 
-
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  }
-})
-
-
 .controller('AssociationCtrl', function($scope, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   Associations.getAssociations();
-  $scope.events = Associations.all();
+  $scope.associations = Associations.all();
   $scope.server = SERVER;
   $scope.remove = function(association) {
     Associations.remove(association);
