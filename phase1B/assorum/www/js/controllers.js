@@ -31,7 +31,6 @@ angular.module('assorum.controllers', [])
 
 })
 
-
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
 
@@ -39,8 +38,9 @@ angular.module('assorum.controllers', [])
   //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
   //Events.deleteEvent(21);
   Events.getEvents();
-  $scope.events = Events.all();
+
   $scope.server = SERVER;
+  $scope.events = Events.all();
   $scope.remove = function(event) {
     Events.remove(event);
   };
@@ -107,6 +107,7 @@ angular.module('assorum.controllers', [])
   }
 })
 
+<<<<<<< HEAD
 .controller('AssociationCtrl', function($scope, SERVER, Associations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
@@ -125,6 +126,9 @@ angular.module('assorum.controllers', [])
     Associations.deleteAssociation(association.id);
   };
 
+=======
+.controller('AssociationCtrl', function(){
+>>>>>>> working
 })
 
 
