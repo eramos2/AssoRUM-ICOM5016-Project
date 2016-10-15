@@ -54,6 +54,11 @@ angular.module('assorum.controllers', [])
   };
 
 })
+
+.controller('rumFCtrl', function($scope){
+
+})
+
 .controller('favCtrl', function($scope, User, Events){
 
   $scope.favorites = User.getFavorites();
@@ -119,6 +124,7 @@ angular.module('assorum.controllers', [])
   $scope.deleteAssociation = function(association){
     Associations.deleteAssociation(association.id);
   };
+
 })
 
 

@@ -65,9 +65,9 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   .state('tab.associations-all', {
     url: '/Associations-all',
       views: {
-        'tab-associations-all': {
-          templateUrl:'templates/tab-associations.html',
-          controller: 'AssociationCtrl'
+        'tab-RUMFeed': {
+          templateUrl: 'templates/tab-Associations.html',
+          controller: 'Associations-allCtrl'
         }
       }
     })
