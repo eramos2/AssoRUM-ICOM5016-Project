@@ -11,6 +11,7 @@ angular.module('assorum.services', [])
     email:'feliz.gonzalez3@upr.edu',
     rank: 'Freshman',
     favorites: [],
+    memberships: [],
     newFavorites: 0
   };
 
@@ -20,6 +21,12 @@ angular.module('assorum.services', [])
     },
     getFavorites: function(){
       return user.favorites;
+    },
+    addToMemberships: function(association){
+      user.memberships.unshift(association);
+    },
+    getMemberships: function(association){
+      return user.memberships;
     },
     getProfile: function(){
       return {
@@ -34,14 +41,57 @@ angular.module('assorum.services', [])
 })
 
 .factory('Association', function($http){
+  // Some dummy data for testing
+  var associations = [];
+  var currentAssociation = {current: ""};
 
-  var association = [{
-    id: 0,
-    name: "AAA",
-    img: 'img/AAA_Logo.png',
-    desc: "Asociacion atleticamente atletica"
-  }]
+  return {
+    all: function() {
+      return associatios;
+    },
+    remove: function(association) {
+      associations.splice(associations.indexOf(association), 1);
+    },
+    get: function(associationId) {
+      for (var i = 0; i < associations.length; i++) {
+        if (associations[i].id === parseInt(associationId)) {
+          return associations[i];
+        }
+      }
+      return null;
+    },
 
+    addAssociation: function(name, description){
+        var newAssociation = {
+          "name": name,
+          "description": description
+        };
+
+        $http.post(SERVER.url + "/associations", newAssociation)
+        .then(function (res){
+        console.log(res);
+        });
+    },
+
+    deleteAssociation: function(associationId){
+      $http.delete(SERVER.url + "/associations/" + associationsId)
+      .then(function(res){
+        console.log(res);
+      });
+    },
+
+
+    getAssociations: function(){
+     $http({
+        method: 'GET',
+        url: SERVER.url + '/associations'
+      }).then(function(response){
+        for(var i=0;i<response.data.events.length;i++){
+          associations.unshift(response.data.associations[i]);
+        }
+      })
+    }
+  };
 })
 
 // TODO : hacer metodo para que busque entre los eventos el que desea
@@ -54,39 +104,20 @@ angular.module('assorum.services', [])
 
   };
 
-  user.get
 
   return user;
 })
 
-// TODO : ....
-.factory('Events', function($http, SERVER,$state){
+
+.factory('Events', function($http, SERVER, $state){
   // Some dummy data for testing
   var events = [];
   var currentEvent = {current: ""};
 
-  /*var events = [{
-    id:0,
-    name: 'Venta de alcapurrias a PESO!!',
-    desc: 'Grasa pa la dieta...',
-    img:  'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Seminario de Java',
-    desc: 'Que tu no sabes programar en Java?',
-    img:  'img/max.png'
-  }, {
-    id: 2,
-    name: 'Jangueo En La Cueva',
-    desc: 'Nope, nope...',
-    img:  'img/perry.png'
-  }];
-*/
   return {
     all: function() {
       return events;
     },
-
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
     },
@@ -98,9 +129,6 @@ angular.module('assorum.services', [])
       }
       return null;
     },
-
-    o: function(){return eventsTest.favorites;},
-
 
     addEvent: function(name, description, location, date, association){
         var newEvent = {
@@ -137,3 +165,5 @@ angular.module('assorum.services', [])
     }
   };
 });
+
+
