@@ -62,12 +62,12 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     })
 
-  .state('tab.rumFeed', {
-    url: '/RUMFeed',
+  .state('tab.associations-all', {
+    url: '/Associations-all',
       views: {
         'tab-RUMFeed': {
-          templateUrl: 'templates/tab-RUMFeed.html',
-          controller: 'rumFCtrl'
+          templateUrl: 'templates/tab-Associations.html',
+          controller: 'Associations-allCtrl'
         }
       }
     })
