@@ -107,7 +107,10 @@ angular.module('assorum.controllers', [])
   }
 })
 
-.controller('AssociationCtrl', function(){
+.controller('AssociationCtrl', function($scope,$state){
+  $scope.goToAssociation = function(){
+    $state.go('association-page');
+  }
 })
 
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
