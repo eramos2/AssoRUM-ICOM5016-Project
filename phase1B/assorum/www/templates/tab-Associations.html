@@ -1,4 +1,20 @@
-<ion-view view-title="RUM FEED">
-    <ion-content>
-    </ion-content>
+<ion-view>
+  <ion-nav-title>
+    <div>
+   <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
+   Associations
+</div>
+   </ion-nav-title>
+  <ion-content >
+    <ion-list>
+
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="association in associations" type="item-text-wrap" href= "#/associations">
+        <img ng-src="{{association.img[0]}}">
+
+        <h2>{{association.name}}</h2>
+        <p>{{association.desc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 </ion-view>
