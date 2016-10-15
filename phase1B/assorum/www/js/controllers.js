@@ -96,7 +96,6 @@ angular.module('assorum.controllers', [])
   };
 })
 
-
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
   $scope.goBackHome = function(){
     $state.go('tab.home');
