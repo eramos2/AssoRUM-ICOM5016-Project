@@ -1,1 +1,21 @@
 /* Empty. Add your own CSS if you like */
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding-left: 110px;
+  padding-top: 20px;
+}
+
+.my-nav {
+  list-style-type: disc;
+  padding-left: 40px;
+}
+.event-title{
+  text-decoration: underline;
+  padding-left: 40px
+}
