@@ -73,7 +73,7 @@ angular.module('assorum.controllers', [])
 // TODO
 .controller('SearchCtrl', function($scope, Events, $http) {
   $scope.model = {term: ''};
-
+  Events.getEvents();
   $scope.search = function() {
     $scope.results = Events.all();
   };
@@ -95,6 +95,10 @@ angular.module('assorum.controllers', [])
   $scope.addMembership = function(association){
     User.addToMembership(association);
   };
+})
+
+.controller('AssoCtrl', function($scope,$state){
+
 })
 
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
