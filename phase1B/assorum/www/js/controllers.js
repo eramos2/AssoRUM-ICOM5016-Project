@@ -39,7 +39,7 @@ angular.module('assorum.controllers', [])
   //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
   //Events.deleteEvent(21);
   Events.getEvents();
-
+  $scope.events = Events.all();
   $scope.server = SERVER;
   $scope.remove = function(event) {
     Events.remove(event);

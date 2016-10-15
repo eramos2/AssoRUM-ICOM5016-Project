@@ -59,39 +59,15 @@ angular.module('assorum.services', [])
 })
 
 // TODO : ....
-.factory('Events', function($http, SERVER,$state){
+.factory('Events', function($http, SERVER, $state){
   // Some dummy data for testing
   var events = [];
   var currentEvent = {current: ""};
-
-  /*var events = [{
-    id:0,
-    name: 'Venta de alcapurrias a PESO!!',
-    desc: 'Grasa pa la dieta...',
-    img:  'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Seminario de Java',
-    desc: 'Que tu no sabes programar en Java?',
-    img:  'img/max.png'
-  }, {
-    id: 2,
-    name: 'Jangueo En La Cueva',
-    desc: 'Nope, nope...',
-    img:  'img/perry.png'
-  }];
-
-*/
-
-
 
   return {
     all: function() {
       return events;
     },
-
-
-
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
     },
@@ -103,9 +79,6 @@ angular.module('assorum.services', [])
       }
       return null;
     },
-
-    o: function(){return eventsTest.favorites;},
-
 
     addEvent: function(name, description, location, date, association){
         var newEvent = {
