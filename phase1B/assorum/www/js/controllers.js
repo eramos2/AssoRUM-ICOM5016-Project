@@ -107,7 +107,9 @@ angular.module('assorum.controllers', [])
   }
 })
 
-.controller('AssociationCtrl', function(){
+.controller('AssociationCtrl', function($scope){
+  
+
 })
 
 
