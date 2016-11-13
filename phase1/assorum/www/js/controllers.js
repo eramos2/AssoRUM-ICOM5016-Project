@@ -24,14 +24,19 @@ angular.module('assorum.controllers', [])
 
 })
 
+//Signup page controller
 .controller('signupCtrl', function($scope, $state) {
     $scope.signup = {};
 
+    //submit signup information
     $scope.saveSignup = function() {
+        //verify if information was filled
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
+            //change state to home page
              $state.go('tab.home');
          }else{
+            //information not filled completely
              alert("Please fill out all fields");
         }
     }
