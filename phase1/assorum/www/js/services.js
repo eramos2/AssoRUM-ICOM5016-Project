@@ -30,7 +30,7 @@ angular.module('assorum.services', [])
       return user.favorites;
     },
     removeFavorite: function(event) {
-      favorites.splice(favorites.indexOf(event), 1);
+      user.favorites.splice(user.favorites.indexOf(event), 1);
     },
     getProfile: function(){
       return {

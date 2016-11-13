@@ -62,7 +62,7 @@ angular.module('assorum.controllers', [])
   $scope.favorites = User.getFavorites();
   console.log($scope.favorites);
   $scope.deleteEvent = function(event){
-    User.removeFavorite(event.id);
+    User.removeFavorite(event);
   };
 })
 
