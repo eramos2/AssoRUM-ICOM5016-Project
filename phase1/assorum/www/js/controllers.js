@@ -1,16 +1,23 @@
 angular.module('assorum.controllers', [])
 
-
+//login page controller
 .controller('loginCtrl', function($scope,$state) {
     $scope.login = {};
+    
+    //Submit function 
     $scope.saveLogin = function() {
+        //email or username/Password where filled
         if($scope.login.EorU && $scope.login.password){
+            //change of state
             $state.go('tab.home');
         }else{
+            //Missing information
             alert("Please fill out all fields");
         }
 
     }
+    //create account button function
+    //change state to signup
     $scope.createAccount = function(){
       $state.go('signup');
     }
