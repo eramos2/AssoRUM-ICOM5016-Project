@@ -123,6 +123,6 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   // Local server
   //url: 'http://localhost:3000'
 
-  // Public Heroku server
+  // assorum public Heroku server
   url: 'https://assorum.herokuapp.com'
 });
