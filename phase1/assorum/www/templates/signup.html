@@ -1,47 +1,57 @@
 <ion-view>
+  <!--Title-->
   <ion-nav-title>
     <div>
+      <!--Logo-->
    <span><img style="position:absolute; left:0px; bottom:-28px; padding:0px;" src="img/paw.png" width="100" alt="App logo"/></span>
+   <!--Sign up text-->
    <span style="padding-left: 0px">SIGN UP!</span>
     </div>
    </ion-nav-title>
-
+   <!--Setup controller-->
   <ion-content ng-controller="signupCtrl" class ="padding">
    <!-- <ion-headear>
         <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
       </ion-headear> -->
+      <!--Input first name-->
       <label class="item item-input">
         <input ng-model="signup.firstName" type = "text" placeholder = "First Name">
       </label>
+      <!--Input last name-->
       <label class="item item-input">
         <input ng-model="signup.lastName" type = "text" placeholder = "Last Name">
       </label>
+      <!--Input username-->
       <label class="item item-input">
         <input ng-model="signup.username" type = "text" placeholder = "Username">
       </label>
+      <!--Input email-->
       <label class="item item-input">
         <input ng-model="signup.email" type = "email" placeholder = "Email">
       </label>
+      <!--Input password-->
        <label class="item item-input">
         <input ng-model="signup.password" type = "password" placeholder = "Password">
       </label>
+      <!--Confirm password-->
       <label class="item item-input">
         <input ng-model="signup.confirm" type = "password" placeholder = "Confirm Password">
       </label>
+      <!--Select rank-->
       <label class="item item-input item-select">
         <div class="input-label">
           Rank
         </div>
+        <!--Rank options-->
         <select>
-        <!--select ng-model="mySelect" ng-change="showSelectValue(mySelect)"-->
           <option>Freshman (1st year)</option>
           <option>Sophomore (2nd year)</option>
           <option>Junior (3rd year)</option>
           <option>Senior (4th+ year)</option>
         </select>
       </label>
+      <!--Create account button-->
         <button ng-click="saveSignup()" class="button button-balanced button-block">Create Account</button>
-
 
   </ion-content>
 </ion-view>

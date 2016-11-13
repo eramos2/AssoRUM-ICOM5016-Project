@@ -3,12 +3,15 @@
   -->
 
 <ion-view>
+  <!--Title-->
   <ion-nav-title>
     <div>
+      <!--Logo and text-->
    <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
        Search
   </div>
    </ion-nav-title>
+   <!--Ionic list-->
     <ion-content>
 	    <div class="list">
 		    <div class="item item-input-inset">
@@ -20,6 +23,7 @@
                 <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
                 <button class="button button-small button-positive" ng-click="search()">Suggest Me!</button>
 			</div>
+      <!--Get and show events search--> 
 			<div class="item" ng-repeat="result in results">
                 {{result.name}}
             </div>
