@@ -54,9 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public'));
 
 
-
-
-
 var event = require("./event.js");
 var assoc = require("./assoc.js");
 
@@ -258,7 +255,7 @@ app.delete('/associations/:id', function(req, res) {
   }
 });
 
-// REST Operation - HTTP POST to add a new event
+// REST Operation - HTTP POST to add a new association
 app.post('/associations', function(req, res){
   console.log("POST");
 
@@ -313,7 +310,7 @@ app.get('/events/:id', function(req, res){
 });
 
 
-// REST Operation - HTTP PUT to updated a car based on its id
+// REST Operation - HTTP PUT to updated a event based on its id
 app.put('/events/:id', function(req, res){
   var id = req.params.id;
         console.log("PUT event: " + id);

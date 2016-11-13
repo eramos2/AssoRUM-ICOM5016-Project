@@ -82,7 +82,7 @@ angular.module('assorum.controllers', [])
 
 
 
-// TODO
+// 
 .controller('SearchCtrl', function($scope, Events, $http) {
   $scope.model = {term: ''};
   Events.getEvents();

@@ -65,7 +65,6 @@ angular.module('assorum.services', [])
       }
       return null;
     },
-
     getAssociations: function(){
      $http({
         method: 'GET',
@@ -76,8 +75,6 @@ angular.module('assorum.services', [])
         }
       })
     },
-
-
     addAssociation: function(name, description){
         var newAssociation = {
           "name": name,
@@ -147,9 +144,9 @@ angular.module('assorum.services', [])
       return null;
     },
 
-    o: function(){return eventsTest.favorites;},
+    //o: function(){return eventsTest.favorites;},
 
-
+    // adds a new event to server
     addEvent: function(name, description, location, date, association){
         var newEvent = {
           "name": name,
@@ -164,7 +161,7 @@ angular.module('assorum.services', [])
         console.log(res);
         });
     },
-
+    //deletes an event from server
     deleteEvent: function(eventId){
       $http.delete(SERVER.url + "/events/" + eventId)
       .then(function(res){
@@ -172,7 +169,7 @@ angular.module('assorum.services', [])
       });
     },
 
-
+    //gets all events from server
     getEvents: function(){
      $http({
         method: 'GET',
