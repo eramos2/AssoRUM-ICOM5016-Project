@@ -42,18 +42,11 @@ angular.module('assorum.controllers', [])
     }
 
 })
-<<<<<<< Updated upstream
+
 
 //Home page controller with list of events
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
-  
-=======
-//Home page controller
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
-  //Events.addEvent("test", "wowow", "amadeus", "hoy", "losmatapuercos");
-  //Events.deleteEvent(21);
->>>>>>> Stashed changes
   Events.getEvents();
 
   $scope.server = SERVER;
@@ -136,7 +129,7 @@ angular.module('assorum.controllers', [])
 })
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
-  //Function for going back to the home tab 
+  //Function for going back to the home tab
   $scope.goBackHome = function(){
     $state.go('tab.home');
   }
