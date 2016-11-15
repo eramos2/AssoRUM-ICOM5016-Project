@@ -1,9 +1,11 @@
 angular.module('assorum.services', [])
 
 // TODO : modificar para que reciba dummy data de node
-.factory('User', function($http){
-  // Some dummy data for testing
 
+//User service
+.factory('User', function($http){
+
+  // Some dummy data for testing
   var user = {
     firstname: 'Feliz',
     lastname:'Gonzalez',
@@ -16,22 +18,27 @@ angular.module('assorum.services', [])
   };
 
   return{
-
+    //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);
     },
+    //function for getting the memberships of a user
     getMemberships: function(association){
       return user.memberships;
     },
+    //Function for adding to favorites
     addToFavorites: function(event){
       user.favorites.unshift(event);
     },
+    //Funtion for getting favorite events
     getFavorites: function(){
       return user.favorites;
     },
+    //Funtion for removing events from favorites
     removeFavorite: function(event) {
-      favorites.splice(favorites.indexOf(event), 1);
+      user.favorites.splice(user.favorites.indexOf(event), 1);
     },
+    //Function for getting profile info
     getProfile: function(){
       return {
         ufirst: user.firstname,
@@ -43,7 +50,7 @@ angular.module('assorum.services', [])
     }
   }
 })
-
+//Association service
 .factory('Associations', function($http, SERVER){
 
   // Some dummy data for testing
@@ -51,12 +58,15 @@ angular.module('assorum.services', [])
   var currentAssociation = {current: ""};
 
   return {
+    //Function for getting all the associations, returns array.
     all: function() {
       return associations;
     },
+    //Function for removing an association
     remove: function(association) {
       associations.splice(associations.indexOf(association), 1);
     },
+    //Function for getting Association if it exists
     get: function(associationId) {
       for (var i = 0; i < associations.length; i++) {
         if (associations[i].id === parseInt(associationId)) {
@@ -65,7 +75,7 @@ angular.module('assorum.services', [])
       }
       return null;
     },
-
+    //Function for getting association from server
     getAssociations: function(){
      $http({
         method: 'GET',
@@ -76,8 +86,7 @@ angular.module('assorum.services', [])
         }
       })
     },
-
-
+    //Function for adding a association to the server.
     addAssociation: function(name, description){
         var newAssociation = {
           "name": name,
@@ -93,6 +102,8 @@ angular.module('assorum.services', [])
 })
 
 // TODO : hacer metodo para que busque entre los eventos el que desea
+
+//Search service.
 .factory('Search', function($http){
   // Some dummy data for testing
 
@@ -107,7 +118,8 @@ angular.module('assorum.services', [])
   return user;
 })
 
-// TODO : ....
+// Events service
+
 .factory('Events', function($http, SERVER,$state){
   // Some dummy data for testing
   var events = [];
@@ -131,13 +143,15 @@ angular.module('assorum.services', [])
   }];
 */
   return {
+    //Function for getting all the events
     all: function() {
       return events;
     },
-
+    //Funtion for removing an event
     remove: function(event) {
       events.splice(events.indexOf(event), 1);
     },
+    //Function for getting an event
     get: function(eventId) {
       for (var i = 0; i < events.length; i++) {
         if (events[i].id === parseInt(eventId)) {
@@ -147,9 +161,9 @@ angular.module('assorum.services', [])
       return null;
     },
 
-    o: function(){return eventsTest.favorites;},
+    //o: function(){return eventsTest.favorites;},
 
-
+    //Funtion for adding a new event to server
     addEvent: function(name, description, location, date, association){
         var newEvent = {
           "name": name,
@@ -164,7 +178,7 @@ angular.module('assorum.services', [])
         console.log(res);
         });
     },
-
+    //Funtion for deleting an event from server
     deleteEvent: function(eventId){
       $http.delete(SERVER.url + "/events/" + eventId)
       .then(function(res){
@@ -172,7 +186,7 @@ angular.module('assorum.services', [])
       });
     },
 
-
+    //Funtion for getting all events from server
     getEvents: function(){
      $http({
         method: 'GET',

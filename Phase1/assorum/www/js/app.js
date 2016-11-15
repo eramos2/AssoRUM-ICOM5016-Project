@@ -23,7 +23,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     }
   });
 })
-
+//setup states all the states of the app
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -45,13 +45,13 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
-
+  //Sign up page state
   .state('signup', {
      url: '/signup',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'
   })
-
+  //home page state
   .state('tab.home', {
     url: '/home',
       views: {
@@ -61,7 +61,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
     })
-
+    //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',
       views: {
@@ -71,7 +71,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
     })
-
+    //profile tab state
     .state('tab.profile', {
       url: '/profile',
       views: {
@@ -81,7 +81,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
     })
-
+    //search tab state
   .state('tab.search', {
     url: '/search',
     views: {
@@ -91,7 +91,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         }
       }
   })
-
+  //Association tab state
   .state('tab.asso',{
     url:'/asso',
     views:{
@@ -101,13 +101,13 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       }
     }
   })
-
+  //Association page state
   .state('association-page',{
     url:'/association',
     templateUrl:'templates/association.html',
     controller:"AssociationCtrl"
   })
-
+  //Event page state
   .state('event',{
     url:'/event',
     templateUrl:'templates/event-page.html',
@@ -118,7 +118,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   $urlRouterProvider.otherwise('/login');
 
 })
-
+//server state
 .constant('SERVER', {
   // Local server
   //url: 'http://localhost:3000'
