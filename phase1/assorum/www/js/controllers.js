@@ -93,7 +93,7 @@ angular.module('assorum.controllers', [])
 .controller('SearchCtrl', function($scope, Events, $http) {
   $scope.model = {term: ''};
   //get events
-  Events.getEvents();
+  Events.all();
   //search function
   $scope.search = function() {
     $scope.results = Events.all();
