@@ -112,9 +112,12 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, Events, User){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+
+  Events.getEvents();
+  $scope.events = Events.all();
 
   var initial_state = false;
   var editVisible = false;
@@ -152,7 +155,11 @@ angular.module('assorum.controllers', [])
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
   //Function for going back to the home tab
+
+
   $scope.goBackHome = function(){
     $state.go('tab.home');
   }
+
+
 });
