@@ -3,8 +3,8 @@ angular.module('assorum.services', [])
 // TODO : modificar para que reciba dummy data de node
 
 //User service
-.factory('User', function($http){
-
+.factory('User', function($http, SERVER,$q){
+  var validOP = false;
   // Some dummy data for testing
   var user = {
     firstname: '',
@@ -20,22 +20,27 @@ angular.module('assorum.services', [])
   return{
 
     getUser:function(Username,Password){
+
       $http({
          method: 'GET',
         url: SERVER.url + '/users/' + Username
       }).then(function(response){
-         if(Username === response.data.username && Password === response.data.password){
-        user.firstname = 'felitooo';
-        user.lastname = 'gonzalez';
-        user.email = 'felix.gonzalez3@upr.edu';
-        user.rank = '';
-        return true;
+        //console.log(Password);
+      //  console.log(Username === response.data.data.username && Password === response.data.data.password);
+         if(Username === response.data.data.username && Password === response.data.data.password){
+        user.firstname = response.data.data.firstname;
+        user.lastname = response.data.data.lastname;
+        user.email = response.data.data.email;
+        user.rank = response.data.data.rank;
+        validOP = true;
       }
 
-      })
+
+    })
       .catch(function(err){
-        return false;
+        console.log(err);
       });
+      return validOP;
     },
     //function for adding a membership to a user
     addToMemberships: function(association){

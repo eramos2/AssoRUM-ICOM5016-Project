@@ -1,7 +1,7 @@
 angular.module('assorum.controllers', [])
 
 //login page controller
-.controller('loginCtrl', function($scope, User, $state) {
+.controller('loginCtrl', function($scope, User, $state,$http) {
     $scope.login = {};
 
     //Submit function
@@ -9,6 +9,7 @@ angular.module('assorum.controllers', [])
         //email or username/Password where filled
         if(User.getUser($scope.login.EorU, $scope.login.password)){
             //change of state
+            console.log('HEllo');
             $state.go('tab.home');
         }else{
             //Missing information
