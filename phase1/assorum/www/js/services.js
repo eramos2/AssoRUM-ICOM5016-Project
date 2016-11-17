@@ -4,7 +4,7 @@ angular.module('assorum.services', [])
 
 //User service
 .factory('User', function($http, SERVER, $q){
-  var validOP = {value: false};
+
   // Some dummy data for testing
   var user = {
     firstname: '',
@@ -20,11 +20,11 @@ angular.module('assorum.services', [])
   return{
 
     getUser: function(Username,Password){
+      var validOP = {value: false};
       var promise = $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + Username
       }).then(function(response){
-        console.log(validOP.value);
       //  console.log(Username === response.data.data.username && Password === response.data.data.password);
          if(Username === response.data.data.username && Password === response.data.data.password){
         user.firstname = response.data.data.firstname;
@@ -34,9 +34,11 @@ angular.module('assorum.services', [])
         validOP.value = true;
         return validOP;
       }
+      return validOP;
     })
       .catch(function(err){
-        console.log(err);
+        //console.log(err);
+        return validOP;
       });
       return promise;
     },
