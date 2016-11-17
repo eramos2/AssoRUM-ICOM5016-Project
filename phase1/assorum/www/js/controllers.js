@@ -82,8 +82,13 @@ angular.module('assorum.controllers', [])
 })
 
 //Profile controller
-.controller('ProfileCtrl', function($scope, User) {
+.controller('ProfileCtrl', function($scope, User,$state) {
   //get user profile
+
+  $scope.logout = function(){
+    $state.go('login');
+  }
+
   $scope.user = User.getProfile();
 })
 
@@ -107,9 +112,13 @@ angular.module('assorum.controllers', [])
   //Associations.deleteAssociation(21);
 
   var initial_state = false;
-  var editVisible = true;
+  var editVisible = false;
   $scope.VisibleEvents = initial_state;
   $scope.editButton = editVisible;
+
+  $scope.isAdminEV = function(){
+      editVisible = true;
+  }
 
   $scope.toggleEventList = function(){
   $scope.VisibleEvents = !$scope.VisibleEvents;
