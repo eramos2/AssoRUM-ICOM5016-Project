@@ -4,7 +4,7 @@ angular.module('assorum.services', [])
 
 //User service
 .factory('User', function($http, SERVER,$q){
-  var validOP = false;
+  var validOP ={value: false};
   // Some dummy data for testing
   var user = {
     firstname: '',
@@ -25,14 +25,14 @@ angular.module('assorum.services', [])
          method: 'GET',
         url: SERVER.url + '/clients/' + Username
       }).then(function(response){
-        //console.log(Password);
+        console.log(validOP.value);
       //  console.log(Username === response.data.data.username && Password === response.data.data.password);
          if(Username === response.data.data.username && Password === response.data.data.password){
         user.firstname = response.data.data.firstname;
         user.lastname = response.data.data.lastname;
         user.email = response.data.data.email;
         user.rank = response.data.data.rank;
-        validOP = true;
+        validOP.value = true;
       }
 
 
@@ -40,8 +40,12 @@ angular.module('assorum.services', [])
       .catch(function(err){
         console.log(err);
       });
+
+    },
+    validOPER: function(){
       return validOP;
     },
+
     //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);
