@@ -23,7 +23,7 @@ angular.module('assorum.services', [])
 
       $http({
          method: 'GET',
-        url: SERVER.url + '/users/' + Username
+        url: SERVER.url + '/clients/' + Username
       }).then(function(response){
         //console.log(Password);
       //  console.log(Username === response.data.data.username && Password === response.data.data.password);
@@ -105,8 +105,9 @@ angular.module('assorum.services', [])
         method: 'GET',
         url: SERVER.url + '/associations'
       }).then(function(response){
-        for(var i=0;i<response.data.associations.length;i++){
-          associations.unshift(response.data.associations[i]);
+        console.log(response.data.data);
+        for(var i=0;i<response.data.data.length;i++){
+          associations.unshift(response.data.data[i]);
         }
       })
     },
@@ -216,8 +217,9 @@ angular.module('assorum.services', [])
         method: 'GET',
         url: SERVER.url + '/events'
       }).then(function(response){
-        for(var i=0;i<response.data.events.length;i++){
-          events.unshift(response.data.events[i]);
+        console.log(response.data.data.length);
+        for(var i=0;i<response.data.data.length;i++){
+          events.unshift(response.data.data[i]);
         }
       })
     }

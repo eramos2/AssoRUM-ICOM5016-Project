@@ -25,7 +25,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//For catching favicon error 500 
+app.get('/favicon.ico', function(req, res) {
+    res.sendStatus(200);
+});
 app.use('/', routes);
 app.use('/users', users);
 
@@ -59,5 +62,6 @@ app.use(function(err, req, res, next) {
     message: err.message
   });
 });
+
 
 module.exports = app;

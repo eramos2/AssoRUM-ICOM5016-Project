@@ -92,14 +92,14 @@ function removeEvent(req, res, next) {
 }
 
 // User queries
-function getAllUsers(req, res, next) {
-  db.any('select * from users')
+function getAllClients(req, res, next) {
+  db.any('select * from client')
     .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved ALL users'
+          message: 'Retrieved ALL clients'
         });
     })
     .catch(function (err) {
@@ -107,28 +107,43 @@ function getAllUsers(req, res, next) {
     });
 }
 
-function getSingleUser(req, res, next) {
+function getSingleClient(req, res, next) {
   var username = req.params.username;
-  db.one('select * from users where username = $1', username)
+  db.one('select * from client where username = $1', username)
     .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved ONE event'
+          message: 'Retrieved ONE client'
         });
     })
     .catch(function (err) {
       return next(err);
     });
 }
-
+// User queries
+function getAllAssociations(req, res, next) {
+  db.any('select * from association')
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL clients'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 module.exports = {
   getAllEvents: getAllEvents,
   getSingleEvent: getSingleEvent,
   createEvent: createEvent,
   updateEvent: updateEvent,
   removeEvent: removeEvent,
-  getAllUsers: getAllUsers,
-  getSingleUser: getSingleUser
+  getAllClients: getAllClients,
+  getSingleClient: getSingleClient,
+  getAllAssociations: getAllAssociations
 };

@@ -43,8 +43,8 @@ function getSingleEvent(req, res, next) {
 
 function createEvent(req, res, next) {
   req.body.age = parseInt(req.body.age);
-  db.none('insert into events(name, description, location, date, association, img)' +
-      'values(${name}, ${description}, ${location}, ${date}, ${association}, ${img})',
+  db.none('insert into events(name, description, image, date, location)' +
+      'values(${name}, ${description}, ${image}, ${date}, ${location})',
     req.body)
     .then(function () {
       res.status(200)

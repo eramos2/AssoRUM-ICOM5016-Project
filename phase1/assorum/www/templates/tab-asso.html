@@ -18,11 +18,11 @@
       -->
       <!--Get all associations-->
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" href= "#/association">
-        <img ng-src="{{ asso.img[0] }}">
+        <img ng-src="{{ asso.image }}">
         <!--Show association name-->
         <h2>{{asso.name}}</h2>
         <!--Show association description-->
-        <p>{{asso.desc}}</p>
+        <p>{{asso.description}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
 

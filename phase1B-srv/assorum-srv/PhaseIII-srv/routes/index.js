@@ -9,7 +9,10 @@ router.get('/api/events/:id', db.getSingleEvent);
 router.post('/api/events', db.createEvent);
 router.put('/api/events/:id', db.updateEvent);
 router.delete('/api/events/:id', db.removeEvent);
-router.get('/api/users', db.getAllUsers);
-router.get('/api/users/:username', db.getSingleUser);
+router.get('/api/clients', db.getAllClients);
+router.get('/api/clients/:username', db.getSingleClient);
+router.get('/api/associations', db.getAllAssociations);
+//router.get('/api/associations/:name', db.getSingleAssociation);
+
 
 module.exports = router;
