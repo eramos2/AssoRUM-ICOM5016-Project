@@ -3,8 +3,8 @@ angular.module('assorum.services', [])
 // TODO : modificar para que reciba dummy data de node
 
 //User service
-.factory('User', function($http, SERVER,$q){
-  var validOP ={value: false};
+.factory('User', function($http, SERVER, $q){
+  var validOP = {value: false};
   // Some dummy data for testing
   var user = {
     firstname: '',
@@ -19,9 +19,8 @@ angular.module('assorum.services', [])
 
   return{
 
-    getUser:function(Username,Password){
-
-      $http({
+    getUser: function(Username,Password){
+      var promise = $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + Username
       }).then(function(response){
@@ -33,19 +32,14 @@ angular.module('assorum.services', [])
         user.email = response.data.data.email;
         user.rank = response.data.data.rank;
         validOP.value = true;
+        return validOP;
       }
-
-
     })
       .catch(function(err){
         console.log(err);
       });
-
+      return promise;
     },
-    validOPER: function(){
-      return validOP;
-    },
-
     //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);

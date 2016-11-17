@@ -1,15 +1,16 @@
 angular.module('assorum.controllers', [])
 
 //login page controller
-.controller('loginCtrl', function($scope, User, $state,$http) {
+.controller('loginCtrl', function($scope, User, $state,$http,$q) {
     $scope.login = {};
+    $scope.validLogin = {};
     //Submit function
     $scope.saveLogin = function() {
         //email or username/Password where filled
 
-        User.getUser($scope.login.EorU, $scope.login.password);
-        console.log(User.validOPER().value);;
-          if(User.validOPER().value){
+        User.getUser($scope.login.EorU, $scope.login.password).then(function(hh){
+          console.log(hh);
+          if(hh.value){
               //change of state
               console.log('HEllo');
               $state.go('tab.home');
@@ -17,7 +18,7 @@ angular.module('assorum.controllers', [])
               //Missing information
               alert("Please fill out all fields");
           }
-
+        });
         };
 
 
