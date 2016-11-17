@@ -14,16 +14,19 @@
   <ion-content>
     <!--Ionic card template-->
   <div class="list card">
-  <div >
+    <div class="col text-right">
+    <button class="button icon-left ion-gear-a button-balanced" ng-show="editVisible">Edit</button><!--Event title-->
+  </div>
+  <div>
     <!--Association image-->
     <img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg">
-    <!--Event title-->
     <h3 class = "event-title">Orquesta de Cuerda UPRM<br></h3>
 
   </div>
+
   <div class="item item-text-wrap item-icon-left">
     <!--Department and deparment icon-->
-   <i class="icon ion-email"></i>
+   <i class="icon ion-university"></i>
    <strong>Department: </strong> Music
   </div>
   <!--Association information-->
@@ -42,14 +45,14 @@
    </p>
   </div>
   <div class="list">
-  <div class= "item item-divider ion-ios-list-outline" ng-click="toggleSomething()">
+  <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-  <a class= "item" ng-show="isVisible">
+  <a class= "item" ng-show="VisibleEvents">
   <!--a class="item" href="#"-->
     Butterfinger
   </a>
-  <a class= "item" ng-show="isVisible">
+  <a class= "item" ng-show="VisibleEvents">
   <!--a class="item" href="#"-->
     Butterfinger
   </a>
