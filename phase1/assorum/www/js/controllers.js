@@ -1,13 +1,13 @@
 angular.module('assorum.controllers', [])
 
 //login page controller
-.controller('loginCtrl', function($scope, user,$state) {
+.controller('loginCtrl', function($scope,$state) {
     $scope.login = {};
 
     //Submit function
     $scope.saveLogin = function() {
         //email or username/Password where filled
-        if(user.getUser($scope.login.EorU,$scope.login.password)){
+        if($scope.login.EorU && $scope.login.password){
             //change of state
             $state.go('tab.home');
         }else{

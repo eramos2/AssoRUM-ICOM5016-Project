@@ -5,19 +5,8 @@ angular.module('assorum.services', [])
 //User service
 .factory('User', function($http){
 
-   var user = {
-      firstname: '', 
-    lastname: '',
-    img: '',
-    email: '',
-    favorites: [],
-    membership: [],
-    newFavorites: 0
-   };
-    
-
   // Some dummy data for testing
-  /** var user = {
+  var user = {
     firstname: 'Feliz',
     lastname:'Gonzalez',
     img: 'img/feloespejuelo.png',
@@ -26,18 +15,9 @@ angular.module('assorum.services', [])
     favorites: [],
     membership: [],
     newFavorites: 0
-  }; */
+  };
 
   return{
-     getUser: function(Username,Password) {
-     // $http({
-       // method: 'GET',
-        //url: SERVER.url + '/user'
-      //}).then(function(response){
-        if(Username === felo && Password === felo)
-          return true
-      //})
-    },
     //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);
