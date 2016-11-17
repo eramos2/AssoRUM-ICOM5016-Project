@@ -12,7 +12,7 @@
   <ion-content >
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap" href= "#/event">
-        <img ng-src="{{event.image}}">
+        <img ng-src="{{event.img[0]}}">
         <!--Show event name-->
         <h2>{{event.name}}</h2>
         <!--Show event description-->

@@ -3,8 +3,8 @@ angular.module('assorum.services', [])
 // TODO : modificar para que reciba dummy data de node
 
 //User service
-.factory('User', function($http, SERVER,$q){
-  var validOP ={value: false};
+.factory('User', function($http){
+
   // Some dummy data for testing
   var user = {
     firstname: '',
@@ -20,32 +20,23 @@ angular.module('assorum.services', [])
   return{
 
     getUser:function(Username,Password){
-
       $http({
          method: 'GET',
-        url: SERVER.url + '/clients/' + Username
+        url: SERVER.url + '/users/' + Username
       }).then(function(response){
-        console.log(validOP.value);
-      //  console.log(Username === response.data.data.username && Password === response.data.data.password);
-         if(Username === response.data.data.username && Password === response.data.data.password){
-        user.firstname = response.data.data.firstname;
-        user.lastname = response.data.data.lastname;
-        user.email = response.data.data.email;
-        user.rank = response.data.data.rank;
-        validOP.value = true;
+         if(Username === response.data.username && Password === response.data.password){
+        user.firstname = 'felitooo';
+        user.lastname = 'gonzalez';
+        user.email = 'felix.gonzalez3@upr.edu';
+        user.rank = '';
+        return true;
       }
 
-
-    })
+      })
       .catch(function(err){
-        console.log(err);
+        return false;
       });
-
     },
-    validOPER: function(){
-      return validOP;
-    },
-
     //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);
@@ -109,9 +100,8 @@ angular.module('assorum.services', [])
         method: 'GET',
         url: SERVER.url + '/associations'
       }).then(function(response){
-        console.log(response.data.data);
-        for(var i=0;i<response.data.data.length;i++){
-          associations.unshift(response.data.data[i]);
+        for(var i=0;i<response.data.associations.length;i++){
+          associations.unshift(response.data.associations[i]);
         }
       })
     },
@@ -221,9 +211,8 @@ angular.module('assorum.services', [])
         method: 'GET',
         url: SERVER.url + '/events'
       }).then(function(response){
-        console.log(response.data.data.length);
-        for(var i=0;i<response.data.data.length;i++){
-          events.unshift(response.data.data[i]);
+        for(var i=0;i<response.data.events.length;i++){
+          events.unshift(response.data.events[i]);
         }
       })
     }
