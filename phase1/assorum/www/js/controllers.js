@@ -106,6 +106,14 @@ angular.module('assorum.controllers', [])
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
 
+  var initial_state = false;
+  $scope.isVisible = initial_state;
+
+  $scope.toggleSomething = function(){
+  $scope.isVisible = !$scope.isVisible;
+  console.log('make sure toggleSomething() is firing*');
+}
+
 
   Associations.getAssociations();
   $scope.associations = Associations.all();

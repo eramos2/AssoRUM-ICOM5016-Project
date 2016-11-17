@@ -41,23 +41,22 @@
      Stay tuned for new events coming up every month.
    </p>
   </div>
-  <div class="list">
-
-  <div class="item item-divider">
+  <div class="list"
+  <div class="item item-divider" ng-click="toggleSomething()">
   <strong>Events: </strong>
   </div>
-  <a class= "item">
+  <a class= "item" ng-show="isVisible">
   <!--a class="item" href="#"-->
     Butterfinger
   </a>
-  <a class= "item">
+  <a class= "item" ng-show="isVisible">
   <!--a class="item" href="#"-->
     Butterfinger
   </a>
-
 </div>
   <!--Back button-->
   <a class="button icon-left ion-chevron-left button-clear button-dark" href= '#/tab/home'>Back</a>
+
 
 </div>
 </ion-content>
