@@ -7,17 +7,36 @@ angular.module('assorum.services', [])
 
   // Some dummy data for testing
   var user = {
-    firstname: 'Feliz',
-    lastname:'Gonzalez',
-    img: 'img/feloespejuelo.png',
-    email:'feliz.gonzalez3@upr.edu',
-    rank: 'Freshman',
+    firstname: '',
+    lastname:'',
+    img: '',
+    email:'',
+    rank: '',
     favorites: [],
     membership: [],
     newFavorites: 0
   };
 
   return{
+
+    getUser:function(Username,Password){
+      $http({
+         method: 'GET',
+        url: SERVER.url + '/users/' + Username
+      }).then(function(response){
+         if(Username === response.data.username && Password === response.data.password){
+        user.firstname = 'felitooo';
+        user.lastname = 'gonzalez';
+        user.email = 'felix.gonzalez3@upr.edu';
+        user.rank = '';
+        return true;
+      }
+
+      })
+      .catch(function(err){
+        return false;
+      });
+    },
     //function for adding a membership to a user
     addToMemberships: function(association){
       user.memberships.unshift(association);
