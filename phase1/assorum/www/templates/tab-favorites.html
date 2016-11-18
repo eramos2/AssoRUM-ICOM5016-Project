@@ -1,18 +1,23 @@
 <ion-view>
   <ion-nav-title>
     <div>
+      <!--Logo and text-->
    <span><img style="position:fixed; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
        Favorites
 </div>
    </ion-nav-title>
+
     <ion-content>
         <ion-list>
-
+          <!--Get and show favorites list-->
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in favorites" type="item-text-wrap" href= "#/event">
                  <img ng-src="{{ event.img[0] }}">
+                    <!--Show favorite event name-->
                     <h2>{{ event.name }}</h2>
+                    <!--Show favorite event description-->
                      <p>{{ event.desc }}</p>
                  <i class="icon ion-chevron-right icon-accessory"></i>
+        <!--Remove from favorites button-->         
         <ion-option-button class="button-assertive" ng-click="deleteEvent(event)">
           Remove
         </ion-option-button>

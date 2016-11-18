@@ -1,10 +1,14 @@
 <ion-view>
+  <!--Title-->
   <ion-nav-title>
     <div>
+      <!--Logo-->
    <span><img style="position:absolute; left:0px; bottom:-28px; padding:0px;" src="img/paw.png" width="100" alt="App logo"/></span>
+   <!--Association text-->
    <span style="padding-left: 20px;">Associations</span>
     </div>
    </ion-nav-title>
+
   <ion-content >
     <ion-list>
       <!-- <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap">
@@ -12,14 +16,16 @@
         <a href='#/association'>Orquesta de Cuerda UPRM</a>
       </ion-item>
       -->
-      
+      <!--Get all associations-->
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" href= "#/association">
-        <img ng-src="{{ asso.img[0] }}">
+        <img ng-src="{{ asso.image }}">
+        <!--Show association name-->
         <h2>{{asso.name}}</h2>
-        <p>{{asso.desc}}</p>
+        <!--Show association description-->
+        <p>{{asso.description}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
-      
+
     </ion-list>
   </ion-content>
 </ion-view>
