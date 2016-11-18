@@ -124,8 +124,13 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   url: 'http://localhost:3000/api'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // assorum public Heroku server
   url: 'https://assorum.herokuapp.com'
+=======
+  // Public Heroku server
+  //url: 'https://assorum.herokuapp.com'
+>>>>>>> frontend
 =======
   // Public Heroku server
   //url: 'https://assorum.herokuapp.com'

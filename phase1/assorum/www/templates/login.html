@@ -1,27 +1,33 @@
   <ion-view>
+    <!--Title-->
     <ion-nav-title>
       <div>
+        <!--Logo and text-->
      <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
          LOG IN!
  </div>
      </ion-nav-title>
+     <!--setup controller-->
   <ion-content ng-controller="loginCtrl" class = "padding">
     <!--<ion-headear>
         <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
       </ion-headear>-->
-
+      <!--input or username-->
       <label class="item item-input">
         <input ng-model="login.EorU" type = "text" placeholder = "Email or Username">
       </label>
+      <!--input password-->
        <label class="item item-input">
         <input ng-model="login.password" type = "password" placeholder = "Password">
       </label>
-        <button ng-click="saveLogin()" class="button button-balanced button-block">Submit</button>
+      <!--Submit button-->
+        <button ng-click="saveLogin()" class="button icon-left ion-log-in button-balanced button-block">Submit</button>
        <div style = "text-align : center;">
           <p1>
           Dont have an account?
         </p1>
        </div>
-        <button ng-click="createAccount()" class="button button-balanced button-block">Create Account!</button>
+       <!--Create account button-->
+        <button ng-click="createAccount()" class="button icon-left ion-log-in button-balanced button-block">Create Account!</button>
   </ion-content>
   </ion-view>
