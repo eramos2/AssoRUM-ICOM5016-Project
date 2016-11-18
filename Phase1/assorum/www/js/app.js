@@ -97,7 +97,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     views:{
       'tab-asso':{
         templateUrl:'templates/tab-asso.html',
-        controller: "AssociationCtrl"
+        controller: "AssoCtrl"
       }
     }
   })

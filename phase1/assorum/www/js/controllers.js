@@ -118,7 +118,10 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
-
+  $scope.asso = Associations.getCurrentAssociation();
+  $scope.setCurrentAssociation = function(assoc){
+    Associations.setCurrentAssociation(assoc);
+  };
   var initial_state = false;
   var editVisible = false;
   $scope.VisibleEvents = initial_state;
@@ -149,7 +152,39 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state){
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER){
+  $scope.asso = Associations.getCurrentAssociation();
+  $scope.setCurrentAssociation = function(assoc){
+    Associations.setCurrentAssociation(assoc);
+  };
+  var initial_state = false;
+  var editVisible = false;
+  $scope.VisibleEvents = initial_state;
+  $scope.editButton = editVisible;
+
+  $scope.isAdminEV = function(){
+      editVisible = true;
+  };
+
+  $scope.toggleEventList = function(){
+      $scope.VisibleEvents = !$scope.VisibleEvents;
+  };
+
+  Associations.getAssociations();
+  $scope.associations = Associations.all();
+  $scope.server = SERVER;
+  //Remove association function
+  $scope.remove = function(association) {
+    Associations.remove(association);
+  };
+  //Delete Association
+  $scope.deleteAssociation = function(association){
+    Associations.deleteAssociation(association.id);
+  };
+  //Adding a membership to associations
+  $scope.addMembership = function(association){
+    User.addToMembership(association);
+  };
 
 })
 //Event page controller

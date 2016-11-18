@@ -17,12 +17,16 @@
       </ion-item>
       -->
       <!--Get all associations-->
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" href= "#/association">
-        <img ng-src="{{ asso.image }}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso)" href= "#/association">
+
+        <img ng-src="http://assorum.heroku.com/images/event/{{asso.image}}_large.jpeg">
+      <!--For testing without SERVER DB connection
+          <img ng-src="http://assorum.heroku.com/images/event/presencias_navidad_edition_small.jpeg">
+          -->
         <!--Show association name-->
-        <h2>{{asso.name}}</h2>
+        <h2>{{asso.asso_name}}</h2>
         <!--Show association description-->
-        <p>{{asso.description}}</p>
+        <p>{{asso.assodesc}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
 

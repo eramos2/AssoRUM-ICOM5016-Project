@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//For catching favicon error 500 
+//For catching favicon error 500
 app.get('/favicon.ico', function(req, res) {
     res.sendStatus(200);
 });
@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+/*if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.code || 500)
     .json({
@@ -52,7 +52,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
+*/
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {

@@ -99,6 +99,16 @@ angular.module('assorum.services', [])
       }
       return null;
     },
+
+    getCurrentAssociation: function(){
+      return currentAssociation.current;
+    },
+
+    setCurrentAssociation: function(assoc){
+      //for testing
+      console.log(assoc);
+      currentAssociation.current = assoc;
+    },
     //Function for getting association from server
     getAssociations: function(){
      $http({
@@ -216,6 +226,7 @@ angular.module('assorum.services', [])
     },
 
     setCurrentEvent: function(event){
+      //for testing
       console.log(event);
       currentEvent.current = event;
     },
