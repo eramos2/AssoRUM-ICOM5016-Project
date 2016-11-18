@@ -54,7 +54,9 @@ angular.module('assorum.controllers', [])
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
   Events.getEvents();
-
+  $scope.setCurrentEvent = function(event){
+    Events.setCurrentEvent(event);
+  };
   $scope.server = SERVER;
   //get all events
   $scope.events = Events.all();
@@ -152,6 +154,8 @@ angular.module('assorum.controllers', [])
 })
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
+  $scope.event = Events.getCurrentEvent();
+  console.log($scope.event);
   //Function for going back to the home tab
 
   /*$scope.event = {

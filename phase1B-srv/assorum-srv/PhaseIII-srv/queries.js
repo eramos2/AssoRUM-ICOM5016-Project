@@ -11,7 +11,7 @@ var db = pgp(connectionString);
 
 // add query functions
 function getAllEvents(req, res, next) {
-  db.any('select * from event')
+  db.any('select * from (event natural inner join location) natural inner join association')
     .then(function (data) {
       res.status(200)
         .json({

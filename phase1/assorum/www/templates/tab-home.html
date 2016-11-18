@@ -11,7 +11,8 @@
    <!--Get and show events-->
   <ion-content >
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap" href= "#/event">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap"  ng-click= "setCurrentEvent(event)" href= "#/event">
+
         <img ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
         <!--Show event name-->
         <h2>{{event.event_name}}</h2>

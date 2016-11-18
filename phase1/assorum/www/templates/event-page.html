@@ -21,7 +21,7 @@
   <div class="list card">
   <div >
     <!--Event image-->
-    <img style=" padding-left: 140px;" src= "{{event.image}}">
+    <img style=" padding-left: 140px;" src= "http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
     <!--img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg"-->
     <!--Event name-->
     <h3 class = "event-title"><!--Presencias Navidad Edition--> {{event.event_name}}<br></h3>
@@ -35,24 +35,24 @@
  <!--Event location-->
  <div class="item item-text-wrap item-icon-left">
   <i class="icon ion-location"></i>
-  <strong>Location: </strong><!--Portico-->{{event.location}}
+  <strong>Location: </strong><!--Portico-->{{event.locname}}
 </div>
  <!--Association name and icon-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-person-stalker"></i>
- <strong>Association:</strong> <a href='#/association'><!--Orquesta de Cuerda UPRM-->{{event.association}}</a>
+ <strong>Association:</strong> <a href='#/association'><!--Orquesta de Cuerda UPRM-->{{event.asso_name}}</a>
 </div>
 
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-person-pricetags"></i>
- <strong>tags:</strong> <a href='#/association'><!--Orquesta de Cuerda UPRM-->{{event.tag}},{{event.tag}},{{event.tag}}</a>
+ <strong>tags:</strong><!-- <a href='#/association'>Orquesta de Cuerda UPRM{{event.tag}},{{currentEvent.current.tag}},{{currentEvent.current.tag}}--></a>
 </div>
 <!--Association description and icon-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-clipboard"></i>
  <strong>Description:</strong>
  <p>
-   {{event.eve_desc}}
+   {{event.event_desc}}
    <!--Come and join our christmas spirit. Truly a night to remember,
     with special guest surprises and a lot of Puerto Rican typical
     Christmas songs.-->

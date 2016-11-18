@@ -186,10 +186,14 @@ angular.module('assorum.services', [])
       return null;
     },
 
+    getCurrentEvent: function(){
+      return currentEvent.current;
+    },
+
     //o: function(){return eventsTest.favorites;},
 
     //Funtion for adding a new event to server
-    addEvent: function(name, description, location, date, association){
+     addEvent: function(name, description, location, date, association){
         var newEvent = {
           "name": name,
           "description": description,
@@ -209,6 +213,11 @@ angular.module('assorum.services', [])
       .then(function(res){
         console.log(res);
       });
+    },
+
+    setCurrentEvent: function(event){
+      console.log(event);
+      currentEvent.current = event;
     },
 
     //Funtion for getting all events from server
