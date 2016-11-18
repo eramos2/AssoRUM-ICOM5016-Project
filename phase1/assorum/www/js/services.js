@@ -27,8 +27,8 @@ angular.module('assorum.services', [])
       }).then(function(response){
       //  console.log(Username === response.data.data.username && Password === response.data.data.password);
          if(Username === response.data.data.username && Password === response.data.data.password){
-        user.firstname = response.data.data.firstname;
-        user.lastname = response.data.data.lastname;
+        user.firstname = response.data.data.name.firstname;
+        user.lastname = response.data.data.name.lastname;
         user.email = response.data.data.email;
         user.rank = response.data.data.rank;
         validOP.value = true;
