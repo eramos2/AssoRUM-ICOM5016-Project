@@ -19,29 +19,31 @@
   </div>
   <div>
     <!--Association image-->
-    <img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg">
-    <h3 class = "event-title">Orquesta de Cuerda UPRM<br></h3>
+    <img style=" padding-left: 140px;" src={{asso.image}}>
+    <!--img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg"-->
+    <h3 class = "event-title"><!--Orquesta de Cuerda UPRM-->{{asso.asso_name}}<br></h3>
 
   </div>
 
   <div class="item item-text-wrap item-icon-left">
     <!--Department and deparment icon-->
    <i class="icon ion-university"></i>
-   <strong>Department: </strong> Music
+   <strong>Department: </strong> {{asso.department}} <!--Music->
   </div>
   <!--Association information-->
   <div class="item item-text-wrap item-icon-left">
     <!--Email and email icon-->
    <i class="icon ion-email"></i>
-   <strong>Contact us:</strong> orquesta.cuerda.uprm@hotmail.com
+   <strong>Contact us:</strong> <!--orquesta.cuerda.uprm@hotmail.com-->{{asso.asso_email}}
   </div>
   <!--Association description-->
   <div class="item item-text-wrap item-icon-left">
    <i class="icon ion-clipboard"></i>
    <strong>Description:</strong>
    <p>
-     Welcome to Orquesta de Cuerda UPRM home page.
-     Stay tuned for new events coming up every month.
+     {{asso.assodesc}}
+     <!--Welcome to Orquesta de Cuerda UPRM home page.
+     Stay tuned for new events coming up every month.-->
    </p>
   </div>
   <div class="list">

@@ -12,7 +12,7 @@
 <div class="list card">
   <div class="user">
     <!--get image-->
-    <div class="user" style="background-image:url('{{user.img}}')"></div>
+    <div class="user" style="background-image:url('{{user.image}}')"></div>
   </div>
   <!--div class="item item-avatar">
     <img src="{{user.img}}"/>
@@ -21,22 +21,22 @@
     <p>
       <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-happy"></i>
-       <strong>Username:</strong>
+       <strong>Username:</strong>{{user.username}}
  </div>
       <!--Get and show user first name-->
       <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-person"></i>
-       <strong>First name:</strong> {{user.ufirst}}
+       <strong>First name:</strong> {{user.firstName}}
  </div>
  <!--Get and show user's last name-->
  <div class="item item-text-wrap item-icon-left">
    <i class="icon ion-person"></i>
-   <strong>Last name:</strong> {{user.ulast}}
+   <strong>Last name:</strong> {{user.lastName}}
 </div>
 
 <div class="item item-text-wrap item-icon-left">
   <i class="icon ion-ios-paper"></i>
-<strong>Admin of:</strong>
+<strong>Admin of:</strong><!--show if admin the association-->
 </div>
 
 <!--Get and show user's email-->
@@ -47,7 +47,7 @@
 <!--Get and show user's rank-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-ios-star"></i>
- <strong>Rank:</strong> {{user.urank}}
+ <strong>Rank:</strong> {{user.rdescription}}
 </div>
     </p>
   </div>
