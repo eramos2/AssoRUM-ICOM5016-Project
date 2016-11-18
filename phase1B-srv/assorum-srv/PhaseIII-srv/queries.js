@@ -11,7 +11,7 @@ var db = pgp(connectionString);
 
 // add query functions
 function getAllEvents(req, res, next) {
-  db.any('select * from events')
+  db.any('select * from event')
     .then(function (data) {
       res.status(200)
         .json({
@@ -27,7 +27,7 @@ function getAllEvents(req, res, next) {
 
 function getSingleEvent(req, res, next) {
   var eventID = parseInt(req.params.id);
-  db.one('select * from events where id = $1', eventID)
+  db.one('select * from event where id = $1', eventID)
     .then(function (data) {
       res.status(200)
         .json({
@@ -43,7 +43,7 @@ function getSingleEvent(req, res, next) {
 
 function createEvent(req, res, next) {
   req.body.age = parseInt(req.body.age);
-  db.none('insert into events(name, description, location, date, association, img)' +
+  db.none('insert into event(name, description, location, date, association, img)' +
       'values(${name}, ${description}, ${location}, ${date}, ${association}, ${img})',
     req.body)
     .then(function () {

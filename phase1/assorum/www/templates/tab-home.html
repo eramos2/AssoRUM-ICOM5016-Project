@@ -12,11 +12,11 @@
   <ion-content >
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap" href= "#/event">
-        <img ng-src="{{event.image}}">
+        <img ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
         <!--Show event name-->
-        <h2>{{event.name}}</h2>
+        <h2>{{event.event_name}}</h2>
         <!--Show event description-->
-        <p>{{event.desc}}</p>
+        <p>{{event.event_desc}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
         <!--Add to favorites button-->
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
