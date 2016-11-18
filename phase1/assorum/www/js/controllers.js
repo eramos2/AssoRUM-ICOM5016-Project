@@ -153,7 +153,18 @@ angular.module('assorum.controllers', [])
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events){
   //Function for going back to the home tab
+
+  /*$scope.event = {
+                  event_name: "Workshop Ionic Framework",
+                  eve_desc: "Ionic workshop for those interested in learning the basic and advanced techniques of ionic Framework. ",
+                  location: "Anfiteatro Celis",
+                  date:"28/10/2016",
+                  association:"Hackertrons",
+                  eimage: ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg",
+                  "http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]
+                }*/
   $scope.goBackHome = function(){
     $state.go('tab.home');
   }
+
 });
