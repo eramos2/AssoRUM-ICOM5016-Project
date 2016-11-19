@@ -108,9 +108,10 @@ function getAllClients(req, res, next) {
     });
 }
 
+//returns cid, clientname, username, password, rankid, image,c_email
 function getSingleClient(req, res, next) {
   var username = req.params.username;
-  db.one('select * from (client natural inner join rank) where username = $1', username)
+  db.one('select * from client where username =$1', username)
     .then(function (data) {
       res.status(200)
         .json({
