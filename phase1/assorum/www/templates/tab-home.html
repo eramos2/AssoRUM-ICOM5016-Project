@@ -1,4 +1,4 @@
-<ion-view view-title = "Feed">
+<ion-view view-title = "Events Feed">
   <!--Title-->
   <!--ion-nav-title>
     <div>
@@ -10,12 +10,14 @@
    <!--Get and show events-->
 
   <ion-content>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
+    </ion-refresher>
 
     <ion-list>
       <ion-item href= "#/tab/event">
         Event
       </ion-item>
-      
+
     </ion-list>
     <!--ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap"  ng-click= "setCurrentEvent(event)" href= "#/event">

@@ -59,8 +59,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-home': {
           templateUrl: "templates/tab-home.html"
           //controller: 'HomeCtrl'
-        }}})
-
+      }}})
     //Event page state from home
     .state('tab.event',{
       url:"/event",
@@ -68,7 +67,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-home':{
       templateUrl:"templates/event-page.html"
       //controller:'EventCtrl'
-    }}})
+      }}})
     //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',
@@ -76,9 +75,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-favorites': {
           templateUrl: 'templates/tab-favorites.html',
           controller: 'favCtrl'
-        }
-      }
-    })
+      }}})
     //profile tab state
     .state('tab.profile', {
       url: '/profile',
@@ -86,9 +83,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-profile': {
           templateUrl: 'templates/tab-profile.html',
           controller: 'ProfileCtrl'
-        }
-      }
-    })
+      }}})
     //search tab state
   .state('tab.search', {
     url: '/search',
@@ -96,9 +91,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-search': {
           templateUrl: 'templates/tab-search.html',
           controller: 'SearchCtrl'
-        }
-      }
-  })
+      }}})
   //Association tab state
   .state('tab.asso',{
     url:'/asso',
@@ -107,7 +100,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         templateUrl:'templates/tab-asso.html',
         controller: "AssoCtrl"
       }}})
-      
+
   //Association page state
   .state('tab.association-page',{
     url:"/association",
@@ -115,7 +108,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
      'tab-asso':{
     templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
-  }}});
+      }}});
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

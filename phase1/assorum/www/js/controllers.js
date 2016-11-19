@@ -54,6 +54,13 @@ angular.module('assorum.controllers', [])
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
   Events.getEvents();
+
+
+  $scope.getNewData = function() {
+    //do something to load your new data here
+    $scope.$broadcast('scroll.refreshComplete');
+  };
+
   $scope.setCurrentEvent = function(event){
     Events.setCurrentEvent(event);
   };
@@ -93,7 +100,7 @@ angular.module('assorum.controllers', [])
 .controller('ProfileCtrl', function($scope, User,$state) {
   //get user profile
   $scope.user = User.getProfile();
-  
+
   $scope.logout = function(){
     User.logout();
     $state.go('login');
