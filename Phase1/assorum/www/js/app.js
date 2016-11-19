@@ -34,33 +34,41 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
 
   // setup an abstract state for the tabs directive
     .state('tab', {
-    url: '/tab',
+    url: "/tab",
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: "templates/tabs.html"
   })
 
   // Each tab has its own nav history stack
   .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
+    url: "/login",
+    templateUrl: "templates/login.html",
     controller: 'loginCtrl'
   })
   //Sign up page state
   .state('signup', {
-     url: '/signup',
-    templateUrl: 'templates/signup.html',
+     url: "/signup",
+    templateUrl: "templates/signup.html",
     controller: 'signupCtrl'
   })
+
   //home page state
   .state('tab.home', {
-    url: '/home',
+    url: "/home",
       views: {
         'tab-home': {
-          templateUrl: 'templates/tab-home.html',
-          controller: 'HomeCtrl'
-        }
-      }
-    })
+          templateUrl: "templates/tab-home.html"
+          //controller: 'HomeCtrl'
+        }}})
+
+    //Event page state from home
+    .state('tab.event',{
+      url:"/event",
+      views:{
+        'tab-home':{
+      templateUrl:"templates/event-page.html"
+      //controller:'EventCtrl'
+    }}})
     //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',
@@ -98,21 +106,16 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       'tab-asso':{
         templateUrl:'templates/tab-asso.html',
         controller: "AssoCtrl"
-      }
-    }
-  })
+      }}})
+      
   //Association page state
-  .state('association-page',{
-    url:'/association',
-    templateUrl:'templates/association.html',
+  .state('tab.association-page',{
+    url:"/association",
+    views:{
+     'tab-asso':{
+    templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
-  })
-  //Event page state
-  .state('event',{
-    url:'/event',
-    templateUrl:'templates/event-page.html',
-    controller:'EventCtrl'
-  });
+  }}});
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

@@ -1,13 +1,14 @@
-<ion-view>
+<ion-view view-title = "Associations">
+
   <!--Title-->
-  <ion-nav-title>
+  <!--ion-nav-title>
     <div>
-      <!--Logo-->
+
    <span><img style="position:absolute; left:0px; bottom:-28px; padding:0px;" src="img/paw.png" width="100" alt="App logo"/></span>
-   <!--Association text-->
+
    <span style="padding-left: 20px;">Associations</span>
     </div>
-   </ion-nav-title>
+  </ion-nav-title-->
 
   <ion-content >
     <ion-list>
@@ -17,7 +18,7 @@
       </ion-item>
       -->
       <!--Get all associations-->
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso)" href= "#/association">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso)" href= "#/tab/association">
 
         <img ng-src="http://assorum.heroku.com/images/event/{{asso.image}}_large.jpeg">
       <!--For testing without SERVER DB connection
