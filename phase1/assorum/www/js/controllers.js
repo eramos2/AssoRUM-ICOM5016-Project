@@ -92,12 +92,12 @@ angular.module('assorum.controllers', [])
 //Profile controller
 .controller('ProfileCtrl', function($scope, User,$state) {
   //get user profile
-
+  $scope.user = User.getProfile();
+  
   $scope.logout = function(){
+    User.logout();
     $state.go('login');
   }
-
-  $scope.user = User.getProfile();
 })
 
 

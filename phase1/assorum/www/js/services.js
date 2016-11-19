@@ -7,6 +7,7 @@ angular.module('assorum.services', [])
 
   // Some dummy data for testing
   var user = {
+    username: '',
     firstname: '',
     lastname:'',
     img: '',
@@ -14,31 +15,34 @@ angular.module('assorum.services', [])
     rank: '',
     favorites: [],
     membership: [],
-    newFavorites: 0
+    newFavorites: 0,
+    isLogged: {value:''}
   };
 
   return{
 
     getUser: function(Username,Password){
-      var validOP = {value: false};
+      user.isLogged.value = false;
       var promise = $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + Username
       }).then(function(response){
       //  console.log(Username === response.data.data.username && Password === response.data.data.password);
          if(Username === response.data.data.username && Password === response.data.data.password){
-        user.firstname = response.data.data.clientname.firstname;
-        user.lastname = response.data.data.clientname.lastname;
-        user.email = response.data.data.c_email;
-        user.rank = response.data.data.rankid;
-        validOP.value = true;
-        return validOP;
+           user.username = response.data.data.username;
+           user.firstname = response.data.data.clientname.substring(0,response.data.data.clientname.search("-"));
+           user.lastname = response.data.data.clientname.substring((response.data.data.clientname.search("-")+1),response.data.data.clientname.length);
+           user.email = response.data.data.c_email;
+           user.rank = response.data.data.rdescription;
+           user.img = response.data.data.image;
+           user.isLogged.value = true;
+           return user.isLogged;
       }
-      return validOP;
+      return user.isLogged;
     })
       .catch(function(err){
         //console.log(err);
-        return validOP;
+        return user.isLogged;
       });
       return promise;
     },
@@ -62,15 +66,13 @@ angular.module('assorum.services', [])
     removeFavorite: function(event) {
       user.favorites.splice(user.favorites.indexOf(event), 1);
     },
+    //logout user
+    logout: function(){
+      user.isLogged.value = false;
+    },
     //Function for getting profile info
     getProfile: function(){
-      return {
-        ufirst: user.firstname,
-        ulast: user.lastname,
-        img : user.img,
-        urank: user.rank,
-        email:user.email
-      };
+      return user;
     }
   }
 })

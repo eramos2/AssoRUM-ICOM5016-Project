@@ -12,7 +12,7 @@
 <div class="list card">
   <div class="user">
     <!--get image-->
-    <div class="user" style="background-image:url('{{user.image}}')"></div>
+    <div class="user" style="background-image:url('https://assorum2.herokuapp.com/images/clients'+{{user.img}}+'.jpeg')"></div>
   </div>
   <!--div class="item item-avatar">
     <img src="{{user.img}}"/>
@@ -21,17 +21,19 @@
     <p>
       <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-happy"></i>
-       <strong>Username:</strong>{{user.username}}
+       <strong>Username: </strong>{{user.username}}
+
+       </div>
  </div>
       <!--Get and show user first name-->
       <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-person"></i>
-       <strong>First name:</strong> {{user.name.firstName}}
+       <strong>First name:</strong> {{user.firstname}}
  </div>
  <!--Get and show user's last name-->
  <div class="item item-text-wrap item-icon-left">
    <i class="icon ion-person"></i>
-   <strong>Last name:</strong> {{user.name.lastName}}
+   <strong>Last name:</strong> {{user.lastname}}
 </div>
 
 <div class="item item-text-wrap item-icon-left">
@@ -47,7 +49,7 @@
 <!--Get and show user's rank-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-ios-star"></i>
- <strong>Rank:</strong> {{user.rdescription}}
+ <strong>Rank:</strong> {{user.rank}}
 </div>
     </p>
   </div>

@@ -94,7 +94,7 @@ function removeEvent(req, res, next) {
 
 // User queries
 function getAllClients(req, res, next) {
-  db.any('select * from client')
+  db.any('select * from (client natural inner join rank)')
     .then(function (data) {
       res.status(200)
         .json({
@@ -110,7 +110,7 @@ function getAllClients(req, res, next) {
 
 function getSingleClient(req, res, next) {
   var username = req.params.username;
-  db.one('select * from client where username = $1', username)
+  db.one('select * from (client natural inner join rank) where username = $1', username)
     .then(function (data) {
       res.status(200)
         .json({
@@ -123,21 +123,25 @@ function getSingleClient(req, res, next) {
       return next(err);
     });
 }
-// User queries
+// Association queries
 function getAllAssociations(req, res, next) {
-  db.any('select * from association')
+  db.any('select * from (association natural inner join administrator) natural inner join department')
     .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved ALL clients'
+          message: 'Retrieved ALL associations'
         });
     })
     .catch(function (err) {
       return next(err);
     });
 }
+
+
+
+
 module.exports = {
   getAllEvents: getAllEvents,
   getSingleEvent: getSingleEvent,
