@@ -10,12 +10,13 @@
    <!--Get and show events-->
 
   <ion-content ng-controller="HomeCtrl" class = "custom">
-    <ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
-    </ion-refresher>
+    <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
+    </ion-refresher>-->
 
     <ion-list>
       <ion-item ng-repeat="event in events" href= "#/tab/event">
-        Event
+        <img ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
+          {{event.event_name}}
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
           Favorite
         </ion-option-button>

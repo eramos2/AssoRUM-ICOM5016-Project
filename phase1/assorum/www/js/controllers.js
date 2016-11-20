@@ -12,14 +12,14 @@ angular.module('assorum.controllers', [])
           console.log(hh);
           if(hh.value){
               //change of state
-              console.log('HEllo');
+              console.log('Hello');
               $state.go('tab.home');
           }else{
               //Missing information
               alert("Please fill out all fields");
           }
         });
-        };
+    };
 
 
     //create account button function
@@ -53,9 +53,11 @@ angular.module('assorum.controllers', [])
 //Home page controller with list of events
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
-  Events.getEvents();
+  console.log(Events.getEvents());
   //get all events
+
   $scope.events = Events.all();
+  console.log($scope.events);
 
   $scope.getNewData = function() {
     //do something to load your new data here
