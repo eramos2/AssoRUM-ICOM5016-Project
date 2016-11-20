@@ -140,6 +140,56 @@ function getAllAssociations(req, res, next) {
     });
 }
 
+function getAssociationMemberships(req, res, next){
+  var asso_name = res.params.asso_name;
+  db.any('select typeofmembership, price from association natural inner join membership where association.asso_name = $1', asso_name)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All memberships of Association'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getAssociationEvents(req, res, next){
+  var asso_name = res.params.asso_name;
+  db.any('select eid,event_name,event_desc,eimage,eventdata from association natural inner join event where association.asso_name = $1', asso_name)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All events of Association'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+//returns tag id, event id, belongsto id, tag description
+function getEventTags(req, res, next){
+  var eid = res.params.eid;
+  db.any('select * from belongsto natural inner join tag where belongsto.eid = $1', eid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All tags of event'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+
+
 
 
 
@@ -151,5 +201,7 @@ module.exports = {
   removeEvent: removeEvent,
   getAllClients: getAllClients,
   getSingleClient: getSingleClient,
-  getAllAssociations: getAllAssociations
+  getAllAssociations: getAllAssociations,
+  getAssociationMemberships: getAssociationMemberships,
+  getAssociationEvents: getAssociationEvents
 };
