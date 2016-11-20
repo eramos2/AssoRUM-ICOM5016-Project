@@ -1,5 +1,14 @@
 angular.module('assorum.controllers', [])
 
+.controller('NavCtrl', function($scope,$ionicSideMenuDelegate){
+  $scope.showMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  };
+  $scope.showRightMenu = function(){
+    $ionicSideMenuDelegate.toggleRight();
+  };
+})
+
 //login page controller
 .controller('loginCtrl', function($scope, User, $state,$http,$q) {
     $scope.login = {};

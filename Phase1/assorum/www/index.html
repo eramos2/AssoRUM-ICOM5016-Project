@@ -43,15 +43,95 @@
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-balanced">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
+    <ion-side-menus>
+
+        <ion-side-menu-content ng-controller="NavCtrl">
+          <ion-nav-bar class="bar-balanced">
+            <ion-nav-back-button class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+              <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">
+              </button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="right">
+              <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()">
+              </button>
+            </ion-nav-buttons>
+          </ion-nav-bar>
+          <ion-nav-view animation="slide-left-right"></ion-nav-view>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="left">
+          <ion-header-bar class="bar bar-header bar-balanced">
+            <h1 class="title">Menu</h1>
+          </ion-header-bar>
+          <ion-content class = "custom"  has-header="true" padding="true">
+
+            <div class="list">
+              <div class="item item-divider">
+                Main Options
+              </div>
+              <a class="item" href="#/tab/home">
+                Home
+              </a>
+              <a class="item" href="#/tab/favorites">
+                Favorites
+              </a>
+              <a class="item" href="#/tab/search">
+                Search
+              </a>
+            </div>
+            
+            <div class="list">
+              <div class="item item-divider">
+                Main Options
+              </div>
+              <a class="item" href="#/tab/home">
+                Home
+              </a>
+              <a class="item" href="#/tab/favorites">
+                Favorites
+              </a>
+              <a class="item" href="#/tab/search">
+                Search
+              </a>
+            </div>
+            <!--ul class="list">
+              <li>
+                <a class="item" menu-close href= "#/tab/profile">Profile</a>
+              </li>
+              <li>
+                <a class="item" menu-close nav-clear href = "#/tab/home">Events Feed</a>
+              </li>
+              <li>
+                <a class="item" menu-close>More Facts</a>
+              </li>
+            </ul-->
+          </ion-content>
+        </ion-side-menu>
+
+        <ion-side-menu side="right">
+          <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Settings</h1>
+          </ion-header-bar>
+          <ion-content class = "custom"  has-header="true" padding="true">
+            <ul class="list">
+              <li>
+                <a class="item" menu-close nav-clear>Search</a>
+              </li>
+              <li>
+                <a class="item" menu-close nav-clear>Settings</a>
+              </li>
+            </ul>
+          </ion-content>
+        </ion-side-menu>
+
+      </ion-side-menus>
+
+      <!--The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
-    <ion-nav-view></ion-nav-view>
+      have templates inline in this html file if you'd like).-->
   </body>
 </html>
