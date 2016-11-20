@@ -54,10 +54,13 @@ angular.module('assorum.controllers', [])
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
   Events.getEvents();
-
+  //get all events
+  $scope.events = Events.all();
 
   $scope.getNewData = function() {
     //do something to load your new data here
+    Events.getEvents();
+    $scope.events = Events.all();
     $scope.$broadcast('scroll.refreshComplete');
   };
 
@@ -65,8 +68,7 @@ angular.module('assorum.controllers', [])
     Events.setCurrentEvent(event);
   };
   $scope.server = SERVER;
-  //get all events
-  $scope.events = Events.all();
+
   //function for removing events
   $scope.remove = function(event) {
     Events.remove(event);

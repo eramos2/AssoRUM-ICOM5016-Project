@@ -239,6 +239,7 @@ angular.module('assorum.services', [])
         method: 'GET',
         url: SERVER.url + '/events'
       }).then(function(response){
+        events = []; //so events are not repeated
         console.log(response.data.data.length);
         for(var i=0;i<response.data.data.length;i++){
           events.unshift(response.data.data[i]);

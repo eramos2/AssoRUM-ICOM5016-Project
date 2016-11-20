@@ -9,12 +9,12 @@
 
    <!--Get and show events-->
 
-  <ion-content class = "custom">
+  <ion-content ng-controller="HomeCtrl" class = "custom">
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
     </ion-refresher>
 
     <ion-list>
-      <ion-item href= "#/tab/event">
+      <ion-item ng-repeat="event in events" href= "#/tab/event">
         Event
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
           Favorite

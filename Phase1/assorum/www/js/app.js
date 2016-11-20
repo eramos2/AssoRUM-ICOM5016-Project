@@ -57,8 +57,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     url: "/home",
       views: {
         'tab-home': {
-          templateUrl: "templates/tab-home.html"
-          //controller: 'HomeCtrl'
+          templateUrl: "templates/tab-home.html",
+          controller: 'HomeCtrl'
       }}})
     //Event page state from home
     .state('tab.event',{
