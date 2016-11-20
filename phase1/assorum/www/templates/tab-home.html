@@ -16,9 +16,15 @@
     <ion-list>
       <ion-item href= "#/tab/event">
         Event
+        <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
+          Favorite
+        </ion-option-button>
       </ion-item>
 
     </ion-list>
+
+
+</div>
     <!--ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap"  ng-click= "setCurrentEvent(event)" href= "#/event">
 

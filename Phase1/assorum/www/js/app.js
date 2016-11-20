@@ -65,8 +65,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       url:"/event",
       views:{
         'tab-home':{
-      templateUrl:"templates/event-page.html"
-      //controller:'EventCtrl'
+      templateUrl:"templates/event-page.html",
+      controller:'EventCtrl'
       }}})
     //favorite tab state
     .state('tab.favorites', {
@@ -80,8 +80,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     .state('tab.profile', {
       url: '/profile',
       views: {
-        'tab-profile': {
-          templateUrl: 'templates/tab-profile.html',
+          'tab-home':{
+          templateUrl: "templates/tab-profile.html",
           controller: 'ProfileCtrl'
       }}})
     //search tab state
