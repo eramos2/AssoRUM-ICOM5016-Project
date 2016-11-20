@@ -53,16 +53,17 @@ angular.module('assorum.controllers', [])
 //Home page controller with list of events
 .controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
 
-  console.log(Events.getEvents());
+  Events.getEvents();
   //get all events
 
   $scope.events = Events.all();
-  console.log($scope.events);
+
 
   $scope.getNewData = function() {
     //do something to load your new data here
     Events.getEvents();
     $scope.events = Events.all();
+    console.log($scope.events);
     $scope.$broadcast('scroll.refreshComplete');
   };
 

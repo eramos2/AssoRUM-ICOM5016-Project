@@ -235,7 +235,7 @@ angular.module('assorum.services', [])
 
     //Funtion for getting all events from server
     getEvents: function(){
-     var promise = $http({
+      $http({
         method: 'GET',
         url: SERVER.url + '/events'
       }).then(function(response){
@@ -245,13 +245,11 @@ angular.module('assorum.services', [])
         for(var i=0;i<response.data.data.length;i++){
           events.unshift(response.data.data[i]);
         }
-        //console.log(events);
-        return events;
       }).catch(function(err){
-        //console.log(err);
-        return events;
+        console.log(err);
+
       });
-      return promise;
+
     }
   };
 });
