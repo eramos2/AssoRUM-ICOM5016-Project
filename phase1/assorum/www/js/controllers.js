@@ -15,7 +15,7 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
   $scope.$on('$ionicView.leave', function(){
-      $ionicSideMenuDelegate.canDragContent(true);
+      $ionicSideMenuDelegate.canDragContent(false);
     });
     $scope.login = {};
     $scope.validLogin = {};
@@ -51,7 +51,7 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
   $scope.$on('$ionicView.leave', function(){
-      $ionicSideMenuDelegate.canDragContent(true);
+      $ionicSideMenuDelegate.canDragContent(false);
     });
     $scope.signup = {};
 
@@ -72,8 +72,14 @@ angular.module('assorum.controllers', [])
 
 
 //Home page controller with list of events
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate) {
 
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
   Events.getEvents();
   //get all events
 
@@ -114,7 +120,7 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
   $scope.$on('$ionicView.leave', function(){
-      $ionicSideMenuDelegate.canDragContent(true);
+      $ionicSideMenuDelegate.canDragContent(false);
     });
 
   //get user favorite events
@@ -149,7 +155,7 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
   $scope.$on('$ionicView.leave', function(){
-      $ionicSideMenuDelegate.canDragContent(true);
+      $ionicSideMenuDelegate.canDragContent(false);
     });
 
   $scope.model = {term: ''};
