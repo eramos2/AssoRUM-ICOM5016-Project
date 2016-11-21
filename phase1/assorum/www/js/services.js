@@ -77,11 +77,11 @@ angular.module('assorum.services', [])
   }
 })
 //Association service
-.factory('Associations', function($http, SERVER){
+.factory('Associations', function($http, SERVER, $state){
 
   // Some dummy data for testing
   var associations = [];
-  var currentAssociation = {current: ""};
+  var currentAssociation = {current: "", events: ""};
 
   return {
     //Function for getting all the associations, returns array.
@@ -103,13 +103,19 @@ angular.module('assorum.services', [])
     },
 
     getCurrentAssociation: function(){
-      return currentAssociation.current;
+      console.log(currentAssociation.current);
+      return currentAssociation.current[0];
     },
 
-    setCurrentAssociation: function(assoc){
-      //for testing
-      console.log(assoc);
-      currentAssociation.current = assoc;
+    setCurrentAssociation: function(assoid){
+      var promise = $http({
+         method: 'GET',
+         url: SERVER.url + '/associations/'+assoid
+       }).then(function(response){
+          currentAssociation.current =response.data.data;
+          console.log(currentAssociation.current);
+       })
+       return promise
     },
     //Function for getting association from server
     getAssociations: function(){
@@ -122,6 +128,19 @@ angular.module('assorum.services', [])
           associations.unshift(response.data.data[i]);
         }
       })
+    },
+
+    getAssociationEvents: function(assoid){
+      console.log(assoid);
+      var promise = $http({
+         method: 'GET',
+         url: SERVER.url + '/associations/'+assoid +'/events'
+       }).then(function(response){
+          currentAssociation.events =response.data.data;
+          console.log(currentAssociation.events);
+          return response.data.data
+       })
+       return promise
     },
     //Function for adding a association to the server.
     addAssociation: function(name, description){

@@ -26,7 +26,7 @@
   <div class="item item-text-wrap item-icon-left">
     <!--Department and deparment icon-->
    <i class="icon ion-university"></i>
-   <strong>Department: </strong> {{asso.department}} <!--Music->
+   <strong>Department: </strong> {{asso.depname}} <!--Music->
   </div>
   <!--Association information-->
   <div class="item item-text-wrap item-icon-left">
@@ -48,14 +48,16 @@
   <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-  <a class= "item" ng-show="VisibleEvents">
+  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents">
   <!--a class="item" href="#"-->
+    {{event.event_name}}
+  </a>
+
+  <a class= "item" ng-show="VisibleEvents">
+  <!--<a class="item" href="#">-->
     Butterfinger
   </a>
-  <a class= "item" ng-show="VisibleEvents">
-  <!--a class="item" href="#"-->
-    Butterfinger
-  </a>
+
 </div>
   <!--Back button-->
   <!--a class="button icon-left ion-chevron-left button-clear button-dark" href= '#/tab/home'>Back</a-->

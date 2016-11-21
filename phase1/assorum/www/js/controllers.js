@@ -173,9 +173,11 @@ angular.module('assorum.controllers', [])
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.asso = Associations.getCurrentAssociation();
-  $scope.setCurrentAssociation = function(assoc){
-    Associations.setCurrentAssociation(assoc);
-  };
+  $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
+    console.log(events);
+    return events;
+  });
+  console.log($scope.assoevents);
   var initial_state = false;
   var editVisible = false;
   $scope.VisibleEvents = initial_state;
@@ -189,8 +191,8 @@ angular.module('assorum.controllers', [])
   $scope.VisibleEvents = !$scope.VisibleEvents;
 }
 
-  Associations.getAssociations();
-  $scope.associations = Associations.all();
+  //Associations.getAssociations();
+  //$scope.associations = Associations.all();
   $scope.server = SERVER;
   //Remove association function
   $scope.remove = function(association) {
@@ -242,8 +244,15 @@ angular.module('assorum.controllers', [])
 
 })
 //Event page controller
-.controller('EventCtrl',function(SERVER,$scope,$state,Events){
-  $scope.event = Events.getCurrentEvent();
+.controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations){
+  $scope.event = Events.getCurrentEvent()
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    console.log($scope.event.assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
+  };
   console.log($scope.event);
   //Function for going back to the home tab
 
