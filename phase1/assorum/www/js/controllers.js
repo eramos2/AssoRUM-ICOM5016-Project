@@ -143,7 +143,7 @@ angular.module('assorum.controllers', [])
 
 
 //Search page controller
-.controller('SearchCtrl', function($scope, Events, $http,$ionicSideMenuDelegate) {
+.controller('SearchCtrl', function($scope, Events, $http,$ionicSideMenuDelegate){
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -151,6 +151,7 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(true);
     });
+
   $scope.model = {term: ''};
   //get events
   Events.all();
