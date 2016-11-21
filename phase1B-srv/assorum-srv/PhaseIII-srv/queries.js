@@ -27,8 +27,8 @@ function getAllEvents(req, res, next) {
 }
 
 function getSingleEvent(req, res, next) {
-  var eventID = parseInt(req.params.id);
-  db.one('select * from event where id = $1', eventID)
+  var eID = parseInt(req.params.eid);
+  db.one('select * from event where eid = $1', eID)
     .then(function (data) {
       res.status(200)
         .json({
@@ -139,10 +139,10 @@ function getAllAssociations(req, res, next) {
       return next(err);
     });
 }
-
-function getAssociationMemberships(req, res, next){
-  var asso_name = res.params.asso_name;
-  db.any('select typeofmembership, price from association natural inner join membership where association.asso_name = $1', asso_name)
+// returns asso info and client that manages it
+function getSingleAssociation(req, res, next){
+  var assoid = parseInt(req.params.assoid);
+  db.any('select * from (association natural inner join manages) natural inner join department,client where association.assoid = $1 and client.cid = manages.cid', assoid)
   .then(function (data) {
     res.status(200)
       .json({
@@ -157,8 +157,8 @@ function getAssociationMemberships(req, res, next){
 }
 
 function getAssociationEvents(req, res, next){
-  var asso_name = res.params.asso_name;
-  db.any('select eid,event_name,event_desc,eimage,eventdata from association natural inner join event where association.asso_name = $1', asso_name)
+  var assoid = parseInt(req.params.assoid);
+  db.any('select eid,event_name,event_desc,eimage,eventdata from association natural inner join event where association.assoid = $1', assoid)
   .then(function (data) {
     res.status(200)
       .json({
@@ -173,8 +173,24 @@ function getAssociationEvents(req, res, next){
 }
 //returns tag id, event id, belongsto id, tag description
 function getEventTags(req, res, next){
-  var eid = res.params.eid;
+  var eid = parseInt(req.params.eid);
   db.any('select * from belongsto natural inner join tag where belongsto.eid = $1', eid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All tags of event'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+//
+function getClientFavorites(req, res, next){
+  var cid = parseInt(req.params.eid);
+  db.any('select * from belongsto natural inner join tag where belongsto.eid = $1', cid)
   .then(function (data) {
     res.status(200)
       .json({
@@ -202,6 +218,7 @@ module.exports = {
   getAllClients: getAllClients,
   getSingleClient: getSingleClient,
   getAllAssociations: getAllAssociations,
-  getAssociationMemberships: getAssociationMemberships,
-  getAssociationEvents: getAssociationEvents
+  getSingleAssociation: getSingleAssociation,
+  getAssociationEvents: getAssociationEvents,
+  getEventTags: getEventTags
 };
