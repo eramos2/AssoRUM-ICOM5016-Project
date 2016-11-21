@@ -111,9 +111,10 @@ angular.module('assorum.controllers', [])
 })
 
 //Profile controller
-.controller('ProfileCtrl', function($scope, User,$state) {
+.controller('ProfileCtrl', function($scope, User,$state,$ionicNavBarDelegate) {
   //get user profile
   $scope.user = User.getProfile();
+  $ionicNavBarDelegate.showBackButton(false);
 
   $scope.logout = function(){
     User.logout();
@@ -124,7 +125,8 @@ angular.module('assorum.controllers', [])
 
 
 //Search page controller
-.controller('SearchCtrl', function($scope, Events, $http) {
+.controller('SearchCtrl', function($scope, Events, $http,$ionicSideMenuDelegate) {
+  $ionicSideMenuDelegate.canDragContent(false);
   $scope.model = {term: ''};
   //get events
   Events.all();

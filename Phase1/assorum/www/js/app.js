@@ -83,7 +83,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
           'tab-home':{
           templateUrl: "templates/tab-profile.html",
           controller: 'ProfileCtrl'
-      }}})
+      }
+    }})
     //search tab state
   .state('tab.search', {
     url: '/search',
