@@ -135,7 +135,13 @@ angular.module('assorum.controllers', [])
 })
 
 //Profile controller
-.controller('ProfileCtrl', function($scope, User,$state,$ionicNavBarDelegate) {
+.controller('ProfileCtrl', function($scope, User,$state) {
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
   //get user profile
   $scope.user = User.getProfile();
   $ionicNavBarDelegate.showBackButton(false);
@@ -169,7 +175,14 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User ,$ionicSideMenuDelegate){
+
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.asso = Associations.getCurrentAssociation();
@@ -206,7 +219,13 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state, Associations, SERVER){
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
   $scope.asso = Associations.getCurrentAssociation();
   $scope.setCurrentAssociation = function(assoc){
     Associations.setCurrentAssociation(assoc);
@@ -242,7 +261,13 @@ angular.module('assorum.controllers', [])
 
 })
 //Event page controller
-.controller('EventCtrl',function(SERVER,$scope,$state,Events){
+.controller('EventCtrl',function(SERVER,$scope,$state,Events,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
   $scope.event = Events.getCurrentEvent();
   console.log($scope.event);
   //Function for going back to the home tab
