@@ -10,7 +10,13 @@ angular.module('assorum.controllers', [])
 })
 
 //login page controller
-.controller('loginCtrl', function($scope, User, $state,$http,$q) {
+.controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate) {
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
     $scope.login = {};
     $scope.validLogin = {};
     //Submit function
@@ -40,7 +46,13 @@ angular.module('assorum.controllers', [])
 })
 
 //Signup page controller
-.controller('signupCtrl', function($scope, $state) {
+.controller('signupCtrl', function($scope, $state,$ionicSideMenuDelegate) {
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
     $scope.signup = {};
 
     //submit signup information
@@ -97,7 +109,13 @@ angular.module('assorum.controllers', [])
 
 })
 //Favorite page controller
-.controller('favCtrl', function($scope, User, Events, $state){
+.controller('favCtrl', function($scope, User, Events, $state,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
 
   //get user favorite events
   $scope.favorites = User.getFavorites();
@@ -126,7 +144,12 @@ angular.module('assorum.controllers', [])
 
 //Search page controller
 .controller('SearchCtrl', function($scope, Events, $http,$ionicSideMenuDelegate) {
-  $ionicSideMenuDelegate.canDragContent(false);
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.canDragContent(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicSideMenuDelegate.canDragContent(true);
+    });
   $scope.model = {term: ''};
   //get events
   Events.all();

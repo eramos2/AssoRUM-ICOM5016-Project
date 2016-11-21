@@ -106,7 +106,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   .state('tab.association-page',{
     url:"/association",
     views:{
-     'tab-asso':{
+     'tab-home':{
     templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
       }}});
