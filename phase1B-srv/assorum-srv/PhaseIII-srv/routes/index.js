@@ -15,7 +15,16 @@ router.get('/api/clients/:username', db.getSingleClient);
 router.get('/api/associations', db.getAllAssociations);
 router.get('/api/associations/:assoid', db.getSingleAssociation);
 router.get('/api/associations/:assoid/events', db.getAssociationEvents);
-
-
+router.get('/api/associations/:assoid/memberships', db.getAssociationMemberships);
+router.get('/api/tags', db.getTags);
+router.get('/api/tags/:tid', db.getSingleTag);
+router.get('/api/locations', db.getLocations);
+router.get('/api/locations/:loc_id', db.getSingleLocation);
+router.get('/api/ranks', db.getRanks);
+router.get('/api/ranks/:rankid', db.getSingleRank);
+router.get('/api/memberships', db.getMemberships);
+router.get('/api/memberships/:mbspid', db.getSingleMembership);
+router.get('/api/departments', db.getDepartments);
+router.get('/api/departments/:depid', db.getSingleDepartment);
 
 module.exports = router;
