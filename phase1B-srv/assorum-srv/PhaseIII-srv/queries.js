@@ -41,6 +41,35 @@ function getSingleEvent(req, res, next) {
       return next(err);
     });
 }
+// Finds event with name or description matching given keyword
+function searchEvents(req, res, next) {
+  console.log(req.params.keyword);
+  var keyword = req.params.keyword.split("-");
+  console.log(keyword);
+  var searchString = "";
+  for(var i=0;i<keyword.length;i++){
+    if(i == 0){
+      searchString = keyword[i];
+    }
+    else {
+      searchString += " " + keyword[i];
+    }
+  }
+  console.log(searchString);
+  db.any('select * from (event natural inner join location) natural inner join association where event_name ILIKE $1 OR event_desc ILIKE $1', ['%' + searchString + '%'])
+    .then(function (data) {
+      console.log(data);
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL matched events'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 function createEvent(req, res, next) {
   req.body.age = parseInt(req.body.age);
@@ -380,6 +409,7 @@ function getSingleDepartment(req, res, next){
 module.exports = {
   getAllEvents: getAllEvents,
   getSingleEvent: getSingleEvent,
+  searchEvents: searchEvents,
   createEvent: createEvent,
   updateEvent: updateEvent,
   removeEvent: removeEvent,

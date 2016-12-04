@@ -7,6 +7,7 @@ var db = require('../queries');
 router.get('/api/events', db.getAllEvents);
 router.get('/api/events/:eid', db.getSingleEvent);
 router.get('/api/events/:eid/tags', db.getEventTags);
+router.get('/api/events/search/:keyword', db.searchEvents);
 router.post('/api/events', db.createEvent);
 router.put('/api/events/:eid', db.updateEvent);
 router.delete('/api/events/:eid', db.removeEvent);
