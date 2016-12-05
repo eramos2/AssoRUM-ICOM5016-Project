@@ -208,7 +208,8 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state, Associations, SERVER){
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate){
+  $ionicNavBarDelegate.showBackButton(false);
   $scope.asso = Associations.getCurrentAssociation();
   $scope.setCurrentAssociation = function(assoc){
     Associations.setCurrentAssociation(assoc);
