@@ -119,6 +119,7 @@ angular.module('assorum.services', [])
     },
     //Function for getting association from server
     getAssociations: function(){
+      associations = [];
      $http({
         method: 'GET',
         url: SERVER.url + '/associations'
