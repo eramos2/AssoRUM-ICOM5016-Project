@@ -161,7 +161,7 @@ angular.module('assorum.services', [])
 // TODO : hacer metodo para que busque entre los eventos el que desea
 
 //Search service.
-.factory('Search', function($http){
+.factory('Search', function($http, SERVER, $state){
   // Some dummy data for testing
 
   var  user = {
@@ -180,7 +180,7 @@ angular.module('assorum.services', [])
 .factory('Events', function($http, SERVER,$state){
   // Some dummy data for testing
   var events = [];
-  var currentEvent = {current: ""};
+  var currentEvent = {current: "", tags: []};
 
   /*var events = [{
     id:0,
@@ -251,7 +251,24 @@ angular.module('assorum.services', [])
       //for testing
       console.log(event);
       currentEvent.current = event;
+      $http({
+        method: 'GET',
+        url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
+      }).then(function(response){
+        //events = []; //so events are not repeated
+        //console.log(response.data.data.length)
+        console.log(response.data.data);
+        currentEvent.current.tags = [];
+        for(var i=0;i<response.data.data.length;i++){
+          currentEvent.current.tags.unshift(response.data.data[i]);
+        }
+      }).catch(function(err){
+        console.log(err);
+
+      });
+
     },
+
 
     //Funtion for getting all events from server
     getEvents: function(){
