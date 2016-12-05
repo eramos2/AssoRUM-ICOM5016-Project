@@ -15,6 +15,7 @@ router.get('/api/clients', db.getAllClients);
 router.get('/api/clients/:username', db.getSingleClient);
 router.get('/api/associations', db.getAllAssociations);
 router.get('/api/associations/:assoid', db.getSingleAssociation);
+router.get('/api/associations/search/:keyword', db.searchAssociations);
 router.get('/api/associations/:assoid/events', db.getAssociationEvents);
 router.get('/api/associations/:assoid/memberships', db.getAssociationMemberships);
 router.get('/api/tags', db.getTags);

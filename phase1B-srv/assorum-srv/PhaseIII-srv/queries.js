@@ -201,6 +201,32 @@ function getAssociationEvents(req, res, next){
   });
 }
 
+// Finds associations with asso_name or assodescmatching given keyword
+function searchAssociations(req, res, next) {
+  var keyword = req.params.keyword.split("-");
+  var searchString = "";
+  for(var i=0;i<keyword.length;i++){
+    if(i == 0){
+      searchString = keyword[i];
+    }
+    else {
+      searchString += " " + keyword[i];
+    }
+  }
+  db.any('select * from (association natural inner join manages) natural inner join department,client where (association.asso_name ILIKE $1 OR association.assodesc ILIKE $1) and client.cid = manages.cid', ['%' + searchString + '%'])
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL matched events'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function getAssociationMemberships(req, res, next){
   var assoid = parseInt(req.params.assoid);
   db.any('select mbspid,typeofmembership,price from membership where assoid = $1', assoid)
@@ -417,6 +443,7 @@ module.exports = {
   getSingleClient: getSingleClient,
   getAllAssociations: getAllAssociations,
   getSingleAssociation: getSingleAssociation,
+  searchAssociations: searchAssociations,
   getAssociationEvents: getAssociationEvents,
   getAssociationMemberships: getAssociationMemberships,
   getEventTags: getEventTags,
