@@ -97,7 +97,7 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
   .state('tab.asso',{
     url:'/asso',
     views:{
-      'tab-asso':{
+      'tab-home':{
         templateUrl:'templates/tab-asso.html',
         controller: "AssoCtrl"
       }}})
@@ -109,7 +109,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
      'tab-home':{
     templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
-      }}});
+      }
+    }});
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
