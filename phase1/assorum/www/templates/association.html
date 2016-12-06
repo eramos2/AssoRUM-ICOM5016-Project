@@ -40,18 +40,21 @@
    <strong>Description:</strong>
    <p>
      {{asso.assodesc}}
+
      <!--Welcome to Orquesta de Cuerda UPRM home page.
      Stay tuned for new events coming up every month.-->
    </p>
   </div>
   <div class="list">
+
   <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents">
+  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)" href= "#/tab/event">
   <!--a class="item" href="#"-->
     {{event.event_name}}
   </a>
+
 
   <a class= "item" ng-show="VisibleEvents">
   <!--<a class="item" href="#">-->
