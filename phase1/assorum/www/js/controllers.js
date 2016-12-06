@@ -8,6 +8,15 @@ angular.module('assorum.controllers', [])
     $ionicSideMenuDelegate.toggleRight();
   };
 })
+.controller('HomeTabLocalCtrl', function($scope, $state) {
+  console.log('HomeTabLocalCtrl');
+
+  $scope.onTabSelected = function() {
+    $state.go('tab.home');
+  }
+
+})
+
 
 //login page controller
 .controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate) {
@@ -72,7 +81,7 @@ angular.module('assorum.controllers', [])
 
 
 //Home page controller with list of events
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory) {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -80,7 +89,11 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
-    
+
+    $scope.clearHistory = function(){
+      $ionicHistory.goBack(-100);
+    };
+
   Events.getEvents();
   //get all events
 
@@ -116,7 +129,8 @@ angular.module('assorum.controllers', [])
 
 })
 //Favorite page controller
-.controller('favCtrl', function($scope, User, Events, $state,$ionicSideMenuDelegate){
+.controller('favCtrl', function($scope, User, Events, $state, $ionicSideMenuDelegate){
+
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
@@ -136,10 +150,13 @@ angular.module('assorum.controllers', [])
 })
 
 //Profile controller
-.controller('ProfileCtrl', function($scope, User,$state,$ionicNavBarDelegate) {
+.controller('ProfileCtrl', function($scope, User,$state,$ionicNavBarDelegate,$ionicSideMenuDelegate) {
   //get user profile
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.toggleLeft();
+    });
   $scope.user = User.getProfile();
-  $ionicNavBarDelegate.showBackButton(false);
+  $ionicNavBarDelegate.showBackButton(true);
 
   $scope.logout = function(){
     User.logout();
@@ -150,7 +167,7 @@ angular.module('assorum.controllers', [])
 
 
 //Search page controller
-.controller('SearchCtrl', function($scope, Events, $http,$ionicSideMenuDelegate){
+.controller('SearchCtrl', function($scope, Events, $http, $ionicSideMenuDelegate){
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -209,8 +226,13 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate){
-  $ionicNavBarDelegate.showBackButton(false);
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate,$ionicSideMenuDelegate,$ionicTabsDelegate){
+  $ionicNavBarDelegate.showBackButton(true);
+
+  //$scope.$on('$ionicView.enter', function(){
+  //    $ionicSideMenuDelegate.toggleLeft();
+  //  });
+
   $scope.asso = Associations.getCurrentAssociation();
   $scope.setCurrentAssociation = function(assoc){
     Associations.setCurrentAssociation(assoc);
