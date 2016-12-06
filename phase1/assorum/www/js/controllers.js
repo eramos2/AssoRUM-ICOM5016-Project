@@ -187,9 +187,16 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+  $ionicModal.fromTemplateUrl('templates/payment.html', {
+      id:'1',
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
     console.log(events);
@@ -267,6 +274,7 @@ angular.module('assorum.controllers', [])
   };
 
 })
+
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations){
   $scope.event = Events.getCurrentEvent()
