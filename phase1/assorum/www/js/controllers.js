@@ -247,7 +247,7 @@ angular.module('assorum.controllers', [])
 })
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations){
-  $scope.event = Events.getCurrentEvent()
+  $scope.event = Events.getCurrentEvent();
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
     console.log($scope.event.assoid);
