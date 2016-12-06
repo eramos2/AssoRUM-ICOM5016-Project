@@ -80,6 +80,7 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
+    
   Events.getEvents();
   //get all events
 
