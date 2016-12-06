@@ -190,8 +190,9 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+  var initial_state = false;
+  var editVisible = false;
   $ionicModal.fromTemplateUrl('templates/payment.html', {
-      id:'1',
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
@@ -203,8 +204,6 @@ angular.module('assorum.controllers', [])
     return events;
   });
   console.log($scope.assoevents);
-  var initial_state = false;
-  var editVisible = false;
   $scope.VisibleEvents = initial_state;
   $scope.editButton = editVisible;
 
