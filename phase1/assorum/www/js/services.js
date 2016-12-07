@@ -108,21 +108,11 @@ angular.module('assorum.services', [])
     },
 
     setCurrentAssociation: function(assoid){
-      console.log(assoid);
-      $http({
-         method: 'GET',
-         url: SERVER.url + '/associations/'+assoid +'/events'
-       }).then(function(response){
-          currentAssociation.events =response.data.data;
-          console.log("this are the events ");
-          console.log(currentAssociation.events);
-       });
       var promise = $http({
          method: 'GET',
          url: SERVER.url + '/associations/'+assoid
        }).then(function(response){
           currentAssociation.current =response.data.data;
-          console.log("this is the current asso");
           console.log(currentAssociation.current);
        })
        return promise
@@ -141,9 +131,17 @@ angular.module('assorum.services', [])
       })
     },
 
-    getAssociationEvents: function(){
-      console.log(currentAssociation.events);
-      return currentAssociation.events;
+    getAssociationEvents: function(assoid){
+      console.log(assoid);
+      var promise = $http({
+         method: 'GET',
+         url: SERVER.url + '/associations/'+assoid +'/events'
+       }).then(function(response){
+          currentAssociation.events =response.data.data;
+          console.log(currentAssociation.events);
+          return response.data.data
+       })
+       return promise
     },
     //Function for adding a association to the server.
     addAssociation: function(name, description){
@@ -253,7 +251,7 @@ angular.module('assorum.services', [])
       //for testing
       console.log(event);
       currentEvent.current = event;
-      var promise = $http({
+      $http({
   method: 'GET',
   url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
 }).then(function(response){
@@ -268,7 +266,6 @@ angular.module('assorum.services', [])
   console.log(err);
 
 });
-return promise;
 
     },
 
