@@ -90,10 +90,10 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
 
+
     $scope.clearHistory = function(){
       $ionicHistory.goBack(-100);
-    };
-
+}
   Events.getEvents();
   //get all events
 
@@ -192,7 +192,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal, Events){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   var initial_state = false;
@@ -204,10 +204,7 @@ angular.module('assorum.controllers', [])
     });
 
   $scope.asso = Associations.getCurrentAssociation();
-  $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
-    console.log(events);
-    return events;
-  });
+  $scope.assoevents = Associations.getAssociationEvents();
   console.log($scope.assoevents);
   $scope.VisibleEvents = initial_state;
   $scope.editButton = editVisible;
@@ -237,17 +234,18 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate,$ionicSideMenuDelegate,$ionicTabsDelegate){
+
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER, Events, $ionicNavBarDelegate,$ionicSideMenuDelegate,$ionicTabsDelegate){
   $ionicNavBarDelegate.showBackButton(true);
 
   //$scope.$on('$ionicView.enter', function(){
   //    $ionicSideMenuDelegate.toggleLeft();
   //  });
-
   $scope.asso = Associations.getCurrentAssociation();
+  $scope.events = Associations.getAssociationEvents($scope.asso.assoid);
   $scope.setCurrentAssociation = function(assoc){
     Associations.setCurrentAssociation(assoc);
-  };
+    };
   var initial_state = false;
   var editVisible = false;
   $scope.VisibleEvents = initial_state;
@@ -281,7 +279,9 @@ angular.module('assorum.controllers', [])
 
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations){
-  $scope.event = Events.getCurrentEvent()
+  $scope.event = Events.getCurrentEvent();
+  console.log("this is the current");
+  console.log($scope.event);
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
     console.log($scope.event.assoid);
