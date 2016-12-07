@@ -185,6 +185,11 @@ angular.module('assorum.controllers', [])
   };
 
 })
+.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicModal,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.toggleLeft();
+    });
+})
 
 //Association page controller
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal, Events){
