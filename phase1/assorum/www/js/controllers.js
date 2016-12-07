@@ -195,6 +195,30 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+  var initial_state = false;
+  var editVisible = false;
+  $ionicModal.fromTemplateUrl('templates/payment.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+  $scope.asso = Associations.getCurrentAssociation();
+  $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
+    console.log(events);
+    return events;
+  });
+  console.log($scope.assoevents);
+  $scope.VisibleEvents = initial_state;
+  $scope.editButton = editVisible;
+
+  $scope.isAdminEV = function(){
+      editVisible = true;
+  }
+
+  $scope.toggleEventList = function(){
+  $scope.VisibleEvents = !$scope.VisibleEvents;
+}
 
   //Associations.getAssociations();
   //$scope.associations = Associations.all();
@@ -219,23 +243,15 @@ angular.module('assorum.controllers', [])
   //$scope.$on('$ionicView.enter', function(){
   //    $ionicSideMenuDelegate.toggleLeft();
   //  });
-  var initial_state = false;
-  var editVisible = false;
-  $ionicModal.fromTemplateUrl('templates/payment.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
 
   $scope.asso = Associations.getCurrentAssociation();
-  $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
-    console.log(events);
-    return events;
-  });
-  console.log($scope.assoevents);
+  $scope.setCurrentAssociation = function(assoc){
+    Associations.setCurrentAssociation(assoc);
+  };
+  var initial_state = false;
+  var editVisible = false;
   $scope.VisibleEvents = initial_state;
   $scope.editButton = editVisible;
-
 
   $scope.isAdminEV = function(){
       editVisible = true;
