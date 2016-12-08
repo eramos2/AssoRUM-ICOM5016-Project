@@ -24,13 +24,19 @@
 		    <div class="item item-input-inset">
                 <label class="item-input-wrapper">
                     <!-- Search Bar receives tags, keywords, etc. -->
-                    <input type="search" ng-model="model.term" placeholder= "Search for an Event">
+                    <input type="search" ng-model="model.term" placeholder= "Search">
                 </label>
-				<button class="button button-small button-positive" ng-click="search()">Submit</button>
-                <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
-                <button class="button button-small button-positive" ng-click="search()">Suggest Me!</button>
+
 			</div>
+      <p class = "row">
+      <div padding = "true" has-header = "true">
+      <button class="button button-outline icon-left ion-search button-small button-balanced" ng-click="search()">Search event</button>
+  <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
+      <button class="button button-outline icon-left ion-search button-small button-balanced" ng-click="search()">Search association</button>
+
       <!--Get and show events search-->
+    </div>
+  </p>
 			<div class="item" ng-repeat="result in results">
                 {{result.name}}
             </div>
