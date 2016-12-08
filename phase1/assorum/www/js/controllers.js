@@ -81,11 +81,12 @@ angular.module('assorum.controllers', [])
 
 
 //Home page controller with list of events
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory,$ionicViewService) {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
       $ionicHistory.clearHistory();
+      $ionicViewService.clearHistory()
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -188,9 +189,15 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+  $scope.$on('$ionicView.enter', function(){
+      $ionicTabsDelegate.showBar(false);
+    });
+  $scope.$on('$ionicView.leave', function(){
+      $ionicTabsDelegate.showBar(true);
+    });
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       id:'1',
       scope: $scope
