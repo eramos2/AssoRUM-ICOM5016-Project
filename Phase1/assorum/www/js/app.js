@@ -23,6 +23,17 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     }
   });
 })
+.directive('ionView', function ($rootScope) {
+    return {
+      restrict: 'EA',
+      priority: 6666,
+      link    : function ($scope, element, attrs) {
+        $scope.$on("$ionicView.beforeEnter", function () {
+          $rootScope.hideTabs = 'hideTabs' in attrs || false;
+        });
+      }
+    };
+  })
 //setup states all the states of the app
 .config(function($stateProvider, $urlRouterProvider) {
 

@@ -192,10 +192,6 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
-  $ionicTabsDelegate.showBar(false);
-  $scope.$on('$ionicView.leave', function(){
-      $ionicTabsDelegate.showBar(true);
-    });
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       id:'1',
       scope: $scope
@@ -295,10 +291,6 @@ angular.module('assorum.controllers', [])
 
 //Event page controller
 .controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
-  $ionicTabsDelegate.showBar(true);
-  $scope.$on('$ionicView.enter', function(){
-      $ionicTabsDelegate.showBar(true);
-    });
   $scope.event = Events.getCurrentEvent()
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
@@ -325,7 +317,7 @@ angular.module('assorum.controllers', [])
 
 })
 .controller('EventCtrl2',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
-  $ionicTabsDelegate.showBar(false);
+
   $scope.event = Events.getCurrentEvent()
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
