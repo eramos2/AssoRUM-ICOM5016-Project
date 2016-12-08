@@ -17,7 +17,6 @@ angular.module('assorum.controllers', [])
 
 })
 
-
 //login page controller
 .controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(){
@@ -190,7 +189,7 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
-  $ionicModal.fromTemplateUrl('templates/payment.html', {
+  $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       id:'1',
       scope: $scope
     }).then(function(modal) {
@@ -273,6 +272,17 @@ angular.module('assorum.controllers', [])
     User.addToMembership(association);
   };
 
+})
+.controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.toggleRight();
+    });
+})
+
+.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicModal,$ionicSideMenuDelegate){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicSideMenuDelegate.toggleLeft();
+    });
 })
 
 //Event page controller
