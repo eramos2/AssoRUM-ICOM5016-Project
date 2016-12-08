@@ -1,0 +1,51 @@
+<!--Event page-->
+<ion-view view-title="Event">
+  <ion-nav-bar class="bar-balanced">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      Back
+  </ion-nav-back-button>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="custom"  has-header="true" padding="true">
+    <div class="list card">
+      <div>
+        <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_large.jpeg">
+        <h3 class="event-title"> {{event.event_name}}<br></h3>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-calendar"></i>
+        <strong>Date:</strong> {{event.eventdata | date:'MM/dd/yyyy'}}
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-location"></i>
+        <strong>Location: </strong>{{event.locname}}
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-person-stalker"></i>
+        <strong>Association:</strong> <a ng-click="setCurrentAssociation({{event.assoid}})">{{event.asso_name}}</a>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-pricetags"></i>
+        <strong>Tags:</strong></a><p ng-repeat="tag in event.tags">{{tag.tdescription}}</p>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-clipboard"></i>
+        <strong>Description:</strong>
+        <p>
+          {{event.event_desc}}
+        </p>
+      </div>
+    </div>
+
+    </div>
+  </ion-content>
+</ion-view>

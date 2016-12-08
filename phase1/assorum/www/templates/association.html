@@ -1,5 +1,20 @@
 <!--Association page-->
 <ion-view view-title = "Asssociation">
+  <ion-nav-bar class="bar-balanced">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      Back
+  </ion-nav-back-button>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
   <!--Title-->
   <!--ion-nav-title>
     <div>
@@ -40,21 +55,18 @@
    <strong>Description:</strong>
    <p>
      {{asso.assodesc}}
-
      <!--Welcome to Orquesta de Cuerda UPRM home page.
      Stay tuned for new events coming up every month.-->
    </p>
   </div>
   <div class="list">
-
   <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)" href= "#/tab/event">
+  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents">
   <!--a class="item" href="#"-->
     {{event.event_name}}
   </a>
-
 
   <a class= "item" ng-show="VisibleEvents">
   <!--<a class="item" href="#">-->

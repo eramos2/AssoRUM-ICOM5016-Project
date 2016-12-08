@@ -20,11 +20,12 @@
  </div>
      </ion-nav-title-->
      <!--setup controller-->
-  <ion-content ng-controller="loginCtrl" class = "padding">
+  <ion-content ng-controller="loginCtrl" padding="true" class ="custom">
     <!--<ion-headear>
         <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
       </ion-headear>-->
       <!--input or username-->
+      <div>
       <label class="item item-input">
         <input ng-model="login.EorU" type = "text" placeholder = "Email or Username">
       </label>
@@ -36,10 +37,11 @@
         <button ng-click="saveLogin()" class="button icon-left ion-log-in button-balanced button-block">Submit</button>
        <div style = "text-align : center;">
           <p1>
-          Dont have an account?
+          Don't have an account?
         </p1>
        </div>
        <!--Create account button-->
         <button ng-click="createAccount()" class="button icon-left ion-log-in button-balanced button-block">Create Account!</button>
+      </div>
   </ion-content>
   </ion-view>
