@@ -204,7 +204,9 @@ angular.module('assorum.controllers', [])
     }).then(function(modal) {
       $scope.modal = modal;
     });
-
+    $scope.setCurrentEvent = function(event){
+      Events.setCurrentEvent(event);
+    };
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents();
   console.log($scope.assoevents);
