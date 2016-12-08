@@ -189,7 +189,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
