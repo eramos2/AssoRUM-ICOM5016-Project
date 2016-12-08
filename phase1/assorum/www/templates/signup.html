@@ -13,11 +13,12 @@
     </button>
   </ion-nav-buttons>
   </ion-nav-bar>
-  
-  <ion-content ng-controller="signupCtrl" class ="padding">
+
+  <ion-content ng-controller="signupCtrl" padding="true" class = "custom">
    <!-- <ion-headear>
         <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
       </ion-headear> -->
+      <div>
       <!--Input first name-->
       <label class="item item-input">
         <input ng-model="signup.firstName" type = "text" placeholder = "First Name">
@@ -58,5 +59,6 @@
       <!--Create account button-->
         <button ng-click="saveSignup()" class="button icon-left ion-log-in button-balanced button-block">Create Account</button>
 
+      </div>
   </ion-content>
 </ion-view>
