@@ -68,6 +68,13 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
       templateUrl:"templates/event-page.html",
       controller:'EventCtrl'
       }}})
+      .state('tab.event2',{
+        url:"/event2",
+        views:{
+          'tab-home':{
+        templateUrl:"templates/event-page2.html",
+        controller:'EventCtrl2'
+        }}})
     //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',

@@ -192,9 +192,7 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
-  $scope.$on('$ionicView.enter', function(){
-      $ionicTabsDelegate.showBar(false);
-    });
+  $ionicTabsDelegate.showBar(false);
   $scope.$on('$ionicView.leave', function(){
       $ionicTabsDelegate.showBar(true);
     });
@@ -296,7 +294,38 @@ angular.module('assorum.controllers', [])
 })
 
 //Event page controller
-.controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations){
+.controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
+  $ionicTabsDelegate.showBar(true);
+  $scope.$on('$ionicView.enter', function(){
+      $ionicTabsDelegate.showBar(true);
+    });
+  $scope.event = Events.getCurrentEvent()
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    console.log($scope.event.assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
+  };
+  console.log($scope.event);
+  //Function for going back to the home tab
+
+  /*$scope.event = {
+                  event_name: "Workshop Ionic Framework",
+                  eve_desc: "Ionic workshop for those interested in learning the basic and advanced techniques of ionic Framework. ",
+                  location: "Anfiteatro Celis",
+                  date:"28/10/2016",
+                  association:"Hackertrons",
+                  eimage: ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg",
+                  "http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]
+                }*/
+  $scope.goBackHome = function(){
+    $state.go('tab.home');
+  }
+
+})
+.controller('EventCtrl2',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
+  $ionicTabsDelegate.showBar(false);
   $scope.event = Events.getCurrentEvent()
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
