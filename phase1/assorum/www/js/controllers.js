@@ -189,7 +189,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.$on('$ionicView.enter', function(){
@@ -206,10 +206,7 @@ angular.module('assorum.controllers', [])
     });
 
   $scope.asso = Associations.getCurrentAssociation();
-  $scope.assoevents = Associations.getAssociationEvents($scope.asso.assoid).then(function(events){
-    console.log(events);
-    return events;
-  });
+  $scope.assoevents = Associations.getAssociationEvents();
   console.log($scope.assoevents);
   var initial_state = false;
   var editVisible = false;
@@ -241,16 +238,18 @@ angular.module('assorum.controllers', [])
   };
 })
 
-.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate,$ionicSideMenuDelegate,$ionicTabsDelegate){
+.controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate,Events, $ionicSideMenuDelegate,$ionicTabsDelegate){
   $ionicNavBarDelegate.showBackButton(true);
 
   //$scope.$on('$ionicView.enter', function(){
   //    $ionicSideMenuDelegate.toggleLeft();
   //  });
 
-  $scope.asso = Associations.getCurrentAssociation();
-  $scope.setCurrentAssociation = function(assoc){
-    Associations.setCurrentAssociation(assoc);
+  //$scope.events = Associations.getAssociationEvents($scope.asso.assoid);
+  $scope.setCurrentAssociation = function(assoid){
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
   };
   var initial_state = false;
   var editVisible = false;

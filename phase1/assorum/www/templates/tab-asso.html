@@ -33,7 +33,7 @@
       </ion-item>
       -->
       <!--Get all associations-->
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso)" href= "#/tab/association">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso.assoid)">
 
         <img ng-src="http://assorum.heroku.com/images/event/{{asso.image}}_large.jpeg">
       <!--For testing without SERVER DB connection
