@@ -84,6 +84,7 @@ angular.module('assorum.controllers', [])
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
+      $ionicHistory.clearHistory();
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
