@@ -18,9 +18,10 @@ angular.module('assorum.controllers', [])
 })
 
 //login page controller
-.controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate) {
+.controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate,$ionicHistory) {
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
+      $ionicHistory.clearHistory();
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
