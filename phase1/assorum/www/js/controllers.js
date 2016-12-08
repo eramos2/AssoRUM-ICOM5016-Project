@@ -189,10 +189,18 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events){
+.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+
   $ionicTabsDelegate.showBar(false);
+
+  $scope.backState = $ionicHistory.backView();
+  console.log("this is the back view "+$scope.backState);
+  $scope.$on('$ionicView.enter', function(){
+      $ionicTabsDelegate.showBar(false);
+    });
+
   $scope.$on('$ionicView.leave', function(){
       $ionicTabsDelegate.showBar(true);
     });
