@@ -46,16 +46,14 @@
       <!--Select rank-->
       <label class="item item-input item-select">
         <div class="input-label">
-          Rank
+          <strong>Rank:</strong>
         </div>
         <!--Rank options-->
         <select>
-          <option>Freshman (1st year)</option>
-          <option>Sophomore (2nd year)</option>
-          <option>Junior (3rd year)</option>
-          <option>Senior (4th+ year)</option>
+          <option ng-repeat="Rank in Ranks" value="{{Rank}}">{{Rank}}</option>
         </select>
       </label>
+      
       <!--Create account button-->
         <button ng-click="saveSignup()" class="button icon-left ion-log-in button-balanced button-block">Create Account</button>
 

@@ -61,15 +61,16 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
-    $scope.signup = {};
 
+    $scope.signup = {};
+    $scope.Ranks = ['Freshman','Sophomore','Junior','Senior'];
     //submit signup information
     $scope.saveSignup = function() {
         //verify if information was filled
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
             //change state to home page
-            console.log($scope.signup);
+            //console.log($scope.signup);
             User.addUser($scope.signup);
             $state.go('tab.home');
          }else{
@@ -204,10 +205,13 @@ angular.module('assorum.controllers', [])
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
+  $scope.tags = ['one','two','three','four'];
+  $scope.locations = ['Mangual','Pineiro','casa de emma'];
+
 
   $scope.saveNewEvent = function() {
       //verify if information was filled
-      if($scope.newEvent.date){
+      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
           //change state to home page
           console.log($scope.newEvent);
           $scope.newEvent={};
@@ -218,10 +222,6 @@ angular.module('assorum.controllers', [])
            alert("Please fill out all fields");
       }
   }
-
-
-
-
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       id:'1',
       scope: $scope

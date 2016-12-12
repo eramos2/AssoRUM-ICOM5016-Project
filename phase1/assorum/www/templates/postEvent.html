@@ -14,14 +14,48 @@
               <input type="text" placeholder="mm/dd/yyyy (Please follow format)" ng-model = "newEvent.date">
             </label>
             <!--cambiar a select-->
-            <label class="item item-input item-stacked-label">
-              <strong class="input-label">Location:</strong>
-              <input type="text" placeholder="Ex. Coliseo Rafael Mangual" ng-model = "newEvent.location">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                <strong>Location:</strong>
+              </div>
+              <!--Rank options-->
+              <select>
+                <option ng-repeat="location in locations" value="{{location}}">{{location}}</option>
+              </select>
             </label>
             <label class="item item-input item-stacked-label" ng-model ="newEvent.description" >
               <strong class="input-label">Descrption:</strong>
               <textarea type="text" placeholder="write your description" ng-model ="newEvent.description" ></textarea>
             </label>
+
+            <label class="item item-input item-select">
+              <div class="input-label">
+                <strong>Tag1:</strong>
+              </div>
+              <!--Rank options-->
+              <select>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                <strong>Tag2:</strong>
+              </div>
+              <!--Rank options-->
+              <select>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+              </select>
+            </label>
+            <label class="item item-input item-select">
+              <div class="input-label">
+                <strong>Tag3:</strong>
+              </div>
+              <!--Rank options-->
+              <select>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+              </select>
+            </label>
+
             <button class="button button-full button-balanced" ng-click= "saveNewEvent()">Post</button>
           </div>
         </ion-content>
