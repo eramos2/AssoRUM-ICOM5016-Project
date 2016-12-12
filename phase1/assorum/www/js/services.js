@@ -49,16 +49,23 @@ angular.module('assorum.services', [])
         for(var i=0;i<response.data.data.length;i++){
           user.memberships.unshift(response.data.data[i]);
         }
-      }).catch(function(err){
-              console.log(err);
-              return pro;
-            });
-            return pro
+      }).then(function(pro){
+        $http({
+           method: 'GET',
+          url: SERVER.url + '/clients/' + parseInt(user.cid) + '/favorites'
+        }).then(function(response){
+          for(var i=0;i<response.data.data.length;i++){
+            user.favorites.unshift(response.data.data[i]);
+          }
+
+      })
     })
-      .catch(function(err){
-        //console.log(err);
-        return user.isLogged;
-      });
+    return pro;
+  })
+  .catch(function(err){
+    console.log(err);
+    return pro;
+  });
       return promise;
     },
     //function for adding a membership to a user

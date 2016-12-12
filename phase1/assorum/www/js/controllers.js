@@ -121,6 +121,8 @@ angular.module('assorum.controllers', [])
     Events.remove(event);
   };
 
+
+
   //function for adding events to favorites
   $scope.addToFavorites = function(event){
     User.addToFavorites(event);
@@ -141,10 +143,16 @@ angular.module('assorum.controllers', [])
       $ionicSideMenuDelegate.canDragContent(false);
     });
 
+    $scope.setCurrentEvent = function(event){
+      Events.setCurrentEvent(event).then(function(response){
+        $state.go('tab.event');
+      });
+    };
+    
   //get user favorite events
   $scope.favorites = User.getFavorites();
   //test
-  console.log($scope.favorites);
+  console.log(User.getFavorites());
   //function for deleting events from favorites
   $scope.deleteEvent = function(event){
     //remove event from favorites
