@@ -12,7 +12,7 @@ var db = pgp(connectionString);
 
 // Association queries
 function getAllAssociations(req, res, next) {
-  db.any('select * from (association natural inner join administrator) natural inner join department')
+  db.any('select * from association natural inner join department')
     .then(function (data) {
       res.status(200)
         .json({
@@ -28,7 +28,7 @@ function getAllAssociations(req, res, next) {
 // returns asso info and client that manages it
 function getSingleAssociation(req, res, next){
   var assoid = parseInt(req.params.assoid);
-  db.any('select * from (association natural inner join manages) natural inner join department,client where association.assoid = $1 and client.cid = manages.cid', assoid)
+  db.any('select * from association natural inner join department,client where association.assoid = $1 and client.cid = association.adminid', assoid)
   .then(function (data) {
     res.status(200)
       .json({
@@ -70,7 +70,7 @@ function searchAssociations(req, res, next) {
       searchString += " " + keyword[i];
     }
   }
-  db.any('select * from (association natural inner join manages) natural inner join department,client where (association.asso_name ILIKE $1 OR association.assodesc ILIKE $1) and client.cid = manages.cid', ['%' + searchString + '%'])
+  db.any('select * from association natural inner join department,client where (association.asso_name ILIKE $1 OR association.assodesc ILIKE $1) and client.cid = association.adminid', ['%' + searchString + '%'])
     .then(function (data) {
       res.status(200)
         .json({
