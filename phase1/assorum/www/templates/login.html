@@ -1,18 +1,31 @@
-  <ion-view>
-    <!--Title-->
-    <ion-nav-title>
+  <ion-view view-title="Log In">
+    <ion-nav-bar class="bar-balanced">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
+      </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+      <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
+      </button>
+    </ion-nav-buttons>
+    </ion-nav-bar>    <!--Title-->
+    <!--ion-nav-title>
       <div>
-        <!--Logo and text-->
      <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
          LOG IN!
  </div>
-     </ion-nav-title>
+     </ion-nav-title-->
      <!--setup controller-->
-  <ion-content ng-controller="loginCtrl" class = "padding">
+  <ion-content ng-controller="loginCtrl" padding="true" class ="custom">
     <!--<ion-headear>
         <h2 style = "color : #21BD14; text-align : center; ">ASSORUM</h2>
       </ion-headear>-->
       <!--input or username-->
+      <div>
       <label class="item item-input">
         <input ng-model="login.EorU" type = "text" placeholder = "Email or Username">
       </label>
@@ -24,10 +37,11 @@
         <button ng-click="saveLogin()" class="button icon-left ion-log-in button-balanced button-block">Submit</button>
        <div style = "text-align : center;">
           <p1>
-          Dont have an account?
+          Don't have an account?
         </p1>
        </div>
        <!--Create account button-->
         <button ng-click="createAccount()" class="button icon-left ion-log-in button-balanced button-block">Create Account!</button>
+      </div>
   </ion-content>
   </ion-view>

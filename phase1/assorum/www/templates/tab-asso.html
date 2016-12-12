@@ -1,15 +1,31 @@
-<ion-view>
+<ion-view view-title = "Associations">
+  <ion-nav-bar class="bar-balanced">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      Back
+  </ion-nav-back-button>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
+
   <!--Title-->
-  <ion-nav-title>
+  <!--ion-nav-title>
     <div>
-      <!--Logo-->
+
    <span><img style="position:absolute; left:0px; bottom:-28px; padding:0px;" src="img/paw.png" width="100" alt="App logo"/></span>
-   <!--Association text-->
+
    <span style="padding-left: 20px;">Associations</span>
     </div>
-   </ion-nav-title>
+  </ion-nav-title-->
 
-  <ion-content >
+  <ion-content class = "custom"  has-header="true" padding="true">
     <ion-list>
       <!-- <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap">
         <img style=" padding-left: 0px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_small.jpeg">
@@ -17,7 +33,7 @@
       </ion-item>
       -->
       <!--Get all associations-->
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso)" href= "#/association">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="asso in associations" type="item-text-wrap" ng-click="setCurrentAssociation(asso.assoid)">
 
         <img ng-src="http://assorum.heroku.com/images/event/{{asso.image}}_large.jpeg">
       <!--For testing without SERVER DB connection

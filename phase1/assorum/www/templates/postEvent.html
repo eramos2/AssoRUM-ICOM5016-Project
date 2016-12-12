@@ -1,0 +1,27 @@
+<ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Add Event</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <strong class="input-label">Event name:</strong>
+              <input type="text" placeholder="Ex. Bebelatas Reunion">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <strong class="input-label">Date:</strong>
+              <input type="text" placeholder="mm/dd/yyyy (Please follow format)">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <strong class="input-label">Location:</strong>
+              <input type="text" placeholder="Ex. Coliseo Rafael Mangual">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <strong class="input-label">Descrption:</strong>
+              <textarea type="text" placeholder="write your description"></textarea>
+            </label>
+            <button class="button button-full button-balanced">Post</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>

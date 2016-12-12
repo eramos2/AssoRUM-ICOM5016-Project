@@ -1,33 +1,64 @@
-<ion-view>
+<ion-view view-title = "Events Feed">
   <!--Title-->
-  <ion-nav-title>
+  <!--ion-nav-title>
     <div>
-      <!--Logo and Home text-->
    <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
    Home
 </div>
-   </ion-nav-title>
+   </ion-nav-title-->
 
    <!--Get and show events-->
-  <ion-content >
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap"  ng-click= "setCurrentEvent(event)" href= "#/event">
 
-        <img ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
-        <!--Show event name-->
-        <h2>{{event.event_name}}</h2>
-        <!--Show event description-->
-        <p>{{event.event_desc}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-        <!--Add to favorites button-->
+  <ion-content class = "custom" padding = "true" >
+    <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
+    </ion-refresher>-->
+
+    <div class="row">
+   <div class="col col-33 text-right">
+     <button class="button icon-left ion-arrow-swap button-outline button-small button-balanced">
+  Sort-date
+  </button>
+</div>
+  <div class="col col-90 text-center">
+  <button class="button icon-left ion-arrow-swap button-outline button-small button-balanced">
+Sort-name
+</button>
+</div>
+</div>
+
+    <ion-list>
+
+      <ion-item ng-repeat="event in events" ng-click="setCurrentEvent(event)">
+
+        <img ng-src="http://assorum.heroku.com/images/event{{event.eimage}}_small.jpeg">
+          {{event.event_name}}
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
           Favorite
         </ion-option-button>
-        <!--Delete event button-->
+      </ion-item>
+
+    </ion-list>
+
+
+</div>
+    <!--ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in events" type="item-text-wrap"  ng-click= "setCurrentEvent(event)" href= "#/event">
+
+        <img ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_small.jpeg">
+
+        <h2>{{event.event_name}}</h2>
+
+        <p>{{event.event_desc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
+          Favorite
+        </ion-option-button>
+
         <ion-option-button class="button-assertive" ng-click="deleteEvent(event)">
           Delete
         </ion-option-button>
       </ion-item>
-    </ion-list>
+    </ion-list-->
   </ion-content>
 </ion-view>

@@ -23,6 +23,17 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     }
   });
 })
+.directive('ionView', function ($rootScope) {
+    return {
+      restrict: 'EA',
+      priority: 6666,
+      link    : function ($scope, element, attrs) {
+        $scope.$on("$ionicView.beforeEnter", function () {
+          $rootScope.hideTabs = 'hideTabs' in attrs || false;
+        });
+      }
+    };
+  })
 //setup states all the states of the app
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -34,33 +45,47 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
 
   // setup an abstract state for the tabs directive
     .state('tab', {
-    url: '/tab',
+    url: "/tab",
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: "templates/tabs.html"
   })
 
   // Each tab has its own nav history stack
   .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
+    url: "/login",
+    templateUrl: "templates/login.html",
     controller: 'loginCtrl'
   })
   //Sign up page state
   .state('signup', {
-     url: '/signup',
-    templateUrl: 'templates/signup.html',
+     url: "/signup",
+    templateUrl: "templates/signup.html",
     controller: 'signupCtrl'
   })
+
   //home page state
   .state('tab.home', {
-    url: '/home',
+    url: "/home",
       views: {
         'tab-home': {
-          templateUrl: 'templates/tab-home.html',
+          templateUrl: "templates/tab-home.html",
           controller: 'HomeCtrl'
-        }
-      }
-    })
+      }}})
+    //Event page state from home
+    .state('tab.event',{
+      url:"/event",
+      views:{
+        'tab-home':{
+      templateUrl:"templates/event-page.html",
+      controller:'EventCtrl'
+      }}})
+      .state('tab.event2',{
+        url:"/event2",
+        views:{
+          'tab-home':{
+        templateUrl:"templates/event-page2.html",
+        controller:'EventCtrl2'
+        }}})
     //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',
@@ -68,19 +93,16 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-favorites': {
           templateUrl: 'templates/tab-favorites.html',
           controller: 'favCtrl'
-        }
-      }
-    })
+      }}})
     //profile tab state
     .state('tab.profile', {
       url: '/profile',
       views: {
-        'tab-profile': {
-          templateUrl: 'templates/tab-profile.html',
+          'tab-home':{
+          templateUrl: "templates/tab-profile.html",
           controller: 'ProfileCtrl'
-        }
       }
-    })
+    }})
     //search tab state
   .state('tab.search', {
     url: '/search',
@@ -88,31 +110,41 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         'tab-search': {
           templateUrl: 'templates/tab-search.html',
           controller: 'SearchCtrl'
-        }
-      }
-  })
+      }}})
   //Association tab state
   .state('tab.asso',{
     url:'/asso',
     views:{
-      'tab-asso':{
+      'tab-home':{
         templateUrl:'templates/tab-asso.html',
         controller: "AssoCtrl"
-      }
-    }
-  })
+      }}})
+
+      .state('tab.billing',{
+        url:'/billingInfo',
+        views:{
+          'tab-home':{
+            templateUrl:'templates/billingInfo.html',
+            controller: "BillInfoCtrl"
+          }}})
+
+          .state('tab.membership',{
+        url:'/membership',
+        views:{
+          'tab-home':{
+            templateUrl:'templates/user-ms.html',
+            controller: "MembershipCtrl"
+          }}})
+
   //Association page state
-  .state('association-page',{
-    url:'/association',
-    templateUrl:'templates/association.html',
+  .state('tab.association-page',{
+    url:"/association",
+    views:{
+     'tab-home':{
+    templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
-  })
-  //Event page state
-  .state('event',{
-    url:'/event',
-    templateUrl:'templates/event-page.html',
-    controller:'EventCtrl'
-  });
+      }
+    }});
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
@@ -121,8 +153,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
 //server state
 .constant('SERVER', {
   // Local server
-  //url: 'http://localhost:3000/api'
+  //url: 'http://localhost:3000'
 
   // Public Heroku server
-  url: 'https://assorum2.herokuapp.com/api'
+  url: 'https://assorum2.herokuapp.com'
 });

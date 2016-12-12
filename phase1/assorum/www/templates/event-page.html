@@ -1,67 +1,95 @@
 <!--Event page-->
-<ion-view>
+<ion-view view-title="Event">
+  <ion-nav-bar class="bar-balanced">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      Back
+  </ion-nav-back-button>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
   <!--Title-->
-  <ion-nav-title>
+  <!--ion-nav-title>
     <div>
-    <!--Back button-->
     <button ng-click ='goBackHome()' style="padding-left:0px; padding-top:0px;float: left;" class="button button-clear button-dark button-small">
     <i class="icon ion-ios-arrow-back"></i>
   </button>
-  <!--App logo-->
-   <!--<span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>-->
-
-   <!--Event text-->
+   <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
    <span style="padding-right: 20px">Event</span>
     </div>
   </ion-nav-title>
-  </div>
+</div-->
+  <ion-content class="custom"  has-header="true" padding="true">
+    <div class="list card">
+      <div>
+        <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_large.jpeg">
+        <h3 class="event-title"> {{event.event_name}}<br></h3>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-calendar"></i>
+        <strong>Date:</strong> {{event.eventdata | date:'MM/dd/yyyy'}}
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-location"></i>
+        <strong>Location: </strong>{{event.locname}}
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-person-stalker"></i>
+        <strong>Association:</strong> <a ng-click="setCurrentAssociation(event.assoid)">{{event.asso_name}}</a>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-pricetags"></i>
+        <strong>Tags:</strong></a><p ng-repeat="tag in event.tags">{{tag.tdescription}}</p>
+      </div>
+      <div class="item item-text-wrap item-icon-left">
+        <i class="icon ion-clipboard"></i>
+        <strong>Description:</strong>
+        <p>
+          {{event.event_desc}}
+        </p>
+      </div>
+    </div>
 
-  <ion-content>
-    <!--Ionic card template-->
-  <div class="list card">
+    </div>
+  </ion-content>
+
+  <!--<div class="list card">
   <div >
-    <!--Event image-->
     <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_large.jpeg">
-    <!--img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg"-->
-    <!--Event name-->
-    <h3 class = "event-title"><!--Presencias Navidad Edition--> {{event.event_name}}<br></h3>
-
+    <h3 class = "event-title"> {{event.event_name}}<br></h3>
   </div>
-  <!--Date text and icon-->
   <div class="item item-text-wrap item-icon-left">
    <i class="icon ion-calendar"></i>
-   <strong>Date:</strong> {{event.date}}<!--10/december/2016-->
+   <strong>Date:</strong> {{event.date}}
  </div>
- <!--Event location-->
  <div class="item item-text-wrap item-icon-left">
   <i class="icon ion-location"></i>
-  <strong>Location: </strong><!--Portico-->{{event.locname}}
+  <strong>Location: </strong>{{event.locname}}
 </div>
- <!--Association name and icon-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-person-stalker"></i>
- <strong>Association:</strong> <a href='#/association'><!--Orquesta de Cuerda UPRM-->{{event.asso_name}}</a>
+ <strong>Association:</strong> <a href='#/association'>{{event.asso_name}}</a>
 </div>
-
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-person-pricetags"></i>
- <strong>tags:</strong><!-- <a href='#/association'>Orquesta de Cuerda UPRM{{event.tag}},{{currentEvent.current.tag}},{{currentEvent.current.tag}}--></a>
+ <strong>tags:</strong></a>
 </div>
-<!--Association description and icon-->
 <div class="item item-text-wrap item-icon-left">
  <i class="icon ion-clipboard"></i>
  <strong>Description:</strong>
  <p>
    {{event.event_desc}}
-   <!--Come and join our christmas spirit. Truly a night to remember,
-    with special guest surprises and a lot of Puerto Rican typical
-    Christmas songs.-->
  </p>
 </div>
   </div>
 
-</div>
-</ion-content>
-
-
+</div>-->
+  <!--/ion-content-->
 </ion-view>
