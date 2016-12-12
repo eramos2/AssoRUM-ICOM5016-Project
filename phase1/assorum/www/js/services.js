@@ -208,11 +208,42 @@ angular.module('assorum.services', [])
     },
     //Function for adding to favorites
     addToFavorites: function(event){
-      user.favorites.unshift(event);
+      console.log(event);
+      var data ={
+        "eid": event.eid,
+        "cid": user.cid,
+      }
+      console.log(data);
+      console.log(user.cid);
+      var promise = $http.post(SERVER.url+"/clients/"+parseInt(user.cid)+"/favorites/"+event.eid, data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+        user.favorites.unshift(event);
+      })
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+
     },
     //Funtion for getting favorite events
-    getFavorites: function(){
-      return user.favorites;
+    getFavorites: function(cid){
+      var promise = $http({
+         method: 'GET',
+        url: SERVER.url + '/clients/' + parseInt(cid) + '/favorites'
+      }).then(function(response){
+
+        for(var i=0;i<response.data.data.length;i++){
+          user.favorites.unshift(response.data.data[i]);
+        }
+        return user.favorites;
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+      return promise;
+
     },
     //Funtion for removing events from favorites
     removeFavorite: function(event) {
