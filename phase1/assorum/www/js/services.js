@@ -22,6 +22,36 @@ angular.module('assorum.services', [])
   };
 
   return{
+    newBillInfo: function(newInfo){
+
+      var data ={
+        "cid":User.getUser().cid,
+        "typeofcard":newInfo.card,
+        "cardnumber": newInfo.cardNumber,
+        "address":newInfo.address
+      }
+      console.log(data);
+      var promise = $http.post(SERVER.url+"/paymentmethod",data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+    },
+
+    hasBillingInfo: function(){
+
+      console.log(user.billing);
+        if(user.billinginfo[0].typeofcard && user.billinginfo[0].address && user.billinginfo[0].cardnumber){
+          return true;
+        }else{
+          return false;
+        }
+
+    },
     addUser: function(NewUser){
       user.username = NewUser.username;
       user.firstname = NewUser.firstName;
@@ -29,14 +59,27 @@ angular.module('assorum.services', [])
       user.email = NewUser.email;
       user.rank = NewUser.rank;
 
-    /*  var cname = '"'+user.firstname +'-'+user.lastname+'"';
+
+      var cname = user.firstname +'-'+user.lastname;
+
       var data ={
         "username": user.username,
+        "password": NewUser.password,
         "clientname" : cname,
-        "client_email":user.email,
+        "c_email":user.email,
         "rankid":user.rank
       }
-      var promise = $http({
+      console.log(data);
+      var promise = $http.post(SERVER.url+"/clients",data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+      /*var promise = $http({
          method: 'POST',
          data: data,
         url: SERVER.url + '/clients',
@@ -71,14 +114,17 @@ angular.module('assorum.services', [])
       }
       return user.isLogged;
     }).then(function(pro){
+      console.log("memberships get befooouurr" + user.cid);
       $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + parseInt(user.cid) + '/memberships'
       }).then(function(response){
+        console.log("estamos vivos");
         for(var i=0;i<response.data.data.length;i++){
           user.memberships.unshift(response.data.data[i]);
         }
       }).then(function(pro){
+        console.log("hellouuu favorites");
         $http({
            method: 'GET',
           url: SERVER.url + '/clients/' + parseInt(user.cid) + '/favorites'
@@ -89,11 +135,13 @@ angular.module('assorum.services', [])
 
       })
     }).then(function(pro){
+      console.log(user.cid);
       $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + parseInt(user.cid) + '/paymentmethod'
       }).then(function(response){
-          console.log(response.data.data);
+              console.log("hellooooou");
+          console.log(response);
           user.billinginfo = response.data.data;
     })
     })
@@ -101,7 +149,6 @@ angular.module('assorum.services', [])
   })
   .catch(function(err){
     console.log(err);
-    return pro;
   });
       return promise;
     },
@@ -111,8 +158,36 @@ angular.module('assorum.services', [])
       return user.billinginfo;
     },
     //function for adding a membership to a user
-    addToMemberships: function(association){
-      user.memberships.unshift(association);
+    addToMemberships: function(membership){
+      console.log(membership);
+      var data ={
+        "mbspid": membership.mbspid,
+        "cid": user.cid,
+      }
+      console.log(data);
+      console.log(user.cid);
+      var promise = $http.post(SERVER.url+"/clients/"+parseInt(user.cid)+"/memberships/"+membership.mbspid, data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+        user.memberships.unshift(membership);
+      }).then(function(){
+        console.log("memberships get befooouurr" + user.cid);
+        $http({
+           method: 'GET',
+          url: SERVER.url + '/clients/' + parseInt(user.cid) + '/memberships'
+        }).then(function(response){
+          console.log("estamos vivos");
+          user.memberships = [];
+          for(var i=0;i<response.data.data.length;i++){
+            user.memberships.unshift(response.data.data[i]);
+          }
+        })})
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+
     },
     //function for getting the memberships of a user
     getMemberships: function(cid){
@@ -365,7 +440,7 @@ angular.module('assorum.services', [])
 
 // Events service
 
-.factory('Events', function($http, SERVER,$state){
+.factory('Events', function($http, SERVER,$state,Associations){
   // Some dummy data for testing
   var events = [];
   var currentEvent = {current: "", tags: []};
@@ -394,7 +469,19 @@ angular.module('assorum.services', [])
     },
     //Funtion for removing an event
     remove: function(event) {
-      events.splice(events.indexOf(event), 1);
+
+      var promise = $http.delete(SERVER.url+"/events/"+event.eid).then(function(data){
+        console.log("success bitches");
+        events.splice(events.indexOf(event), 1);
+
+      })
+      .catch(function(err){
+          console.log(err);
+        });
+
+      return promise;
+
+
     },
     //Function for getting an event
     get: function(eventId) {
@@ -413,19 +500,38 @@ angular.module('assorum.services', [])
     //o: function(){return eventsTest.favorites;},
 
     //Funtion for adding a new event to server
-     addEvent: function(name, description, location, date, association){
-        var newEvent = {
-          "name": name,
-          "description": description,
-          "location": location,
-          "date": date,
-          "association": association
+     addEvent: function(newEvent){
+        var eventTags = {
+          "Tag1": newEvent.tag1,
+          "Tag2": newEvent.tag2,
+          "Tag3": newEvent.tag3
         };
+        var data ={
+          "event_name": newEvent.name,
+          "event_desc": newEvent.description,
+          "eventdata": newEvent.date,
+          "loc_id":newEvent.location,
+          "assoid": Associations.getCurrentAssociation().assoid
+        };
+        console.log(data);
+        console.log(eventTags);
 
-        $http.post(SERVER.url + "/events", newEvent)
-        .then(function (res){
-        console.log(res);
-        });
+        var promise = $http.post(SERVER.url+"/events",data).then(function(res){
+          console.log("success bitches");
+          console.log(res);
+          data.eid = res.data.data[0];
+          events.unshift(data);
+          console.log(res.data.data[0]);
+        })
+        .catch(function(err){
+            console.log(err);
+          });
+        return promise;
+
+        //$http.post(SERVER.url + "/events", newEvent)
+        //.then(function (res){
+        //console.log(res);
+        //});
     },
     //Funtion for deleting an event from server
     deleteEvent: function(eventId){

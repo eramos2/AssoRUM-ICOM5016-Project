@@ -6,15 +6,15 @@
         <ion-content padding = "true" class = "custom" has-header = "true">
           <div = class = "list card">
             <label class="item item-input">
-              <strong class="input-label">Type of card:</strong>
+              <strong class="input-label">Type of card:</strong>{{information.typeofcard}}
               <input type="text" placeholder="Ex. Visa, Mastercard, American Express, etc." ng-model = "newInfo.card">
             </label>
             <label class="item item-input">
-              <strong class="input-label">Card number:</strong>
+              <strong class="input-label">Card number:</strong>{{information.cardnumber}}
               <input type="text" placeholder="Ex. 1234092811118888" ng-model = "newInfo.cardNumber">
             </label>
             <label class="item item-input">
-              <strong class="input-label">Address:</strong>
+              <strong class="input-label">Address:</strong>{{information.address}}
               <textarea type="text" placeholder="Ex. Urb. Borinquen Calle Luis Paler CR, PR" ng-model ="newInfo.address" ></textarea>
             </label>
           </div>

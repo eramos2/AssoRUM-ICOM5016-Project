@@ -74,9 +74,12 @@ angular.module('assorum.controllers', [])
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
             //change state to home page
+
+
             console.log($scope.signup);
             User.addUser($scope.signup);
-            $state.go('tab.home');
+            $scope.showPopup();
+            //add this to popup
          }else{
             //information not filled completely
              var alertPopup = $ionicPopup.alert({
@@ -88,17 +91,64 @@ angular.module('assorum.controllers', [])
              });
         }
     }
+    $scope.validationKey = {};
+    // Triggered on a button click, or some other target
+$scope.showPopup = function() {
+  $scope.validationKey = {};
+
+  // An elaborate, custom popup
+  var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="validationKey.key" placeholder= "Enter key">',
+    title: '<strong>Enter key!</strong>',
+    subTitle: 'Please check your email for validation key',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel',
+      //
+      onTap: function() {
+        //delete user
+        return;
+      }
+      //
+     },
+      {
+        text: '<b>Enter</b>',
+        type: 'button-balanced',
+        //
+        onTap: function(e) {
+          if (!$scope.validationKey.key){
+            //don't allow the user to close unless he enters wifi password
+             e.preventDefault();
+          } else {
+            if($scope.validationKey.key ==="1234"){
+            $state.go('tab.home');
+          }else{
+              e.preventDefault();
+          }
+            return  $scope.validationKey.key;
+          }
+        }
+        //
+      }
+    ]
+  });
+
+  myPopup.then(function(res) {
+    console.log('Tapped!', res);
+  });
+ };
 
 })
 
 
 //Home page controller with list of events
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory,$ionicViewService) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory) {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
+      $state.go($state.current, {}, {reload: true});
       $ionicHistory.clearHistory();
-      $ionicViewService.clearHistory()
+      //$ionicViewService.clearHistory()
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -131,7 +181,10 @@ angular.module('assorum.controllers', [])
 
   //function for removing events
   $scope.remove = function(event) {
-    Events.remove(event);
+    Events.remove(event).then(function(){
+      $state.go($state.current, {}, {reload: true});
+    });
+
   };
 
 
@@ -226,9 +279,8 @@ angular.module('assorum.controllers', [])
   };
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
-    console.log($scope.event.assoid);
     Associations.setCurrentAssociation(assoid).then(function(hh){
-      $state.go('tab.association-page');
+      $state.go('tab.association-page3');
     });
   };
   //get events
@@ -258,7 +310,7 @@ angular.module('assorum.controllers', [])
 
 //Association page controller
 
-.controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl', function($scope,$state,$ionicActionSheet, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -270,7 +322,44 @@ angular.module('assorum.controllers', [])
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
 
-  $scope.showConfirm = function() {
+  // Triggered on a button click, or some other target
+  // to othor associations
+$scope.showAS = function(eventClicked) {
+  // Show the action sheet
+  console.log(eventClicked);
+  var hideSheet = $ionicActionSheet.show({
+    buttons: [
+      { text: '<b>Go</b> '},
+      { text: 'Favorite' },
+      { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
+    ],
+    titleText: 'Choose Action:',
+    cancelText: 'Cancel',
+    cancel: function() {
+         // add cancel code..
+       },
+    buttonClicked: function(index) {
+      if(index === 0){
+        $scope.setCurrentEvent(eventClicked);
+      }else{
+        if(index === 1){
+          User.addToFavorites(eventClicked);
+        }else{
+          if(index ===2){
+            Events.remove(eventClicked).then(function(){
+              $scope.assoevents = Associations.getAssociationEvents();
+              $state.go($state.current, {}, {reload: true});
+            });
+
+          }
+        }
+      }
+      return true;
+    }
+  });
+};
+
+  $scope.showConfirm = function(ms) {
   var confirmPopup = $ionicPopup.confirm({
     title: 'Want to be a member?',
     template: 'Are you sure you want to get this membership?'
@@ -278,14 +367,27 @@ angular.module('assorum.controllers', [])
   confirmPopup.then(function(res) {
     if(res) {
       //if true
+      console.log(User.hasBillingInfo());
+      if(User.hasBillingInfo()){
+        User.addToMemberships(ms);
       var alertPopup = $ionicPopup.alert({
         title: 'Congratulations!',
-        template: 'You are now a member of ...'
+        template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
+        //method msID
+      });
+      alertPopup.then(function(res) {
+        //after pressing ok
+      });
+    }else{
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error!',
+        template: 'Please fill billing info'
       });
       alertPopup.then(function(res) {
         //after pressing ok
       });
 
+    }
     } else {
       //if not true
     }
@@ -296,9 +398,20 @@ angular.module('assorum.controllers', [])
       //verify if information was filled
       if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
           //change state to home page
+          if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Error!',
+              template: 'Please select diferent Tags'
+            });
+            alertPopup.then(function(res) {
+              //after pressing ok
+            });
+          }else{
           console.log($scope.newEvent);
+          Events.addEvent($scope.newEvent);
           $scope.newEvent={};
           $scope.modal.hide();
+        }
 
        }else{
           //information not filled completely
@@ -357,7 +470,7 @@ angular.module('assorum.controllers', [])
     User.addToMembership(association);
   };
 })
-.controller('AssociationCtrl2', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl2', function($scope,$state, $ionicActionSheet,SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -369,42 +482,101 @@ angular.module('assorum.controllers', [])
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
 
-  $scope.showConfirm = function() {
-  var confirmPopup = $ionicPopup.confirm({
-    title: 'Want to be a member?',
-    template: 'Are you sure you want to get this membership?'
-  });
-  confirmPopup.then(function(res) {
-    if(res) {
-      //if true
-      var alertPopup = $ionicPopup.alert({
-        title: 'Congratulations!',
-        template: 'You are now a member of ...'
-      });
-      alertPopup.then(function(res) {
-        //after pressing ok
-      });
+  $scope.showAS = function(eventClicked) {
+    // Show the action sheet
+    console.log(eventClicked);
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: '<b>Go</b> '},
+        { text: 'Favorite' },
+        { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
+      ],
+      titleText: 'Choose Action:',
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+         },
+      buttonClicked: function(index) {
+        if(index === 0){
+          $scope.setCurrentEvent(eventClicked);
+        }else{
+          if(index === 1){
+            User.addToFavorites(eventClicked);
+          }else{
+            if(index ===2){
+              Events.remove(eventClicked).then(function(){
+                $scope.assoevents = Associations.getAssociationEvents();
+                $state.go($state.current, {}, {reload: true});
+              });
 
-    } else {
-      //if not true
-    }
-  });
-};
-
-  $scope.saveNewEvent = function() {
-      //verify if information was filled
-      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
-          //change state to home page
-          console.log($scope.newEvent);
-          $scope.newEvent={};
-          $scope.modal.hide();
-          console.log($scope.newEvent);
-
-       }else{
-          //information not filled completely
-           alert("Please fill out all fields");
+            }
+          }
+        }
+        return true;
       }
-  }
+    });
+  };
+
+    $scope.showConfirm = function(ms) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Want to be a member?',
+      template: 'Are you sure you want to get this membership?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        //if true
+        console.log(User.hasBillingInfo());
+        if(User.hasBillingInfo()){
+          User.addToMemberships(ms);
+        var alertPopup = $ionicPopup.alert({
+          title: 'Congratulations!',
+          template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
+          //method msID
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Please fill billing info'
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+
+      }
+      } else {
+        //if not true
+      }
+    });
+  };
+
+
+$scope.saveNewEvent = function() {
+    //verify if information was filled
+    if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
+        //change state to home page
+        if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Error!',
+            template: 'Please select diferent Tags'
+          });
+          alertPopup.then(function(res) {
+            //after pressing ok
+          });
+        }else{
+        console.log($scope.newEvent);
+        Events.addEvent($scope.newEvent);
+        $scope.newEvent={};
+        $scope.modal.hide();
+      }
+
+     }else{
+        //information not filled completely
+         alert("Please fill out all fields");
+    }
+}
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       scope: $scope
     }).then(function(modal) {
@@ -457,7 +629,7 @@ angular.module('assorum.controllers', [])
     User.addToMembership(association);
   };
 })
-.controller('AssociationCtrl3', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl3', function($scope,$state,$ionicActionSheet, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -469,41 +641,102 @@ angular.module('assorum.controllers', [])
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
 
-  $scope.showConfirm = function() {
-  var confirmPopup = $ionicPopup.confirm({
-    title: 'Want to be a member?',
-    template: 'Are you sure you want to get this membership?'
-  });
-  confirmPopup.then(function(res) {
-    if(res) {
-      //if true
-      var alertPopup = $ionicPopup.alert({
-        title: 'Congratulations!',
-        template: 'You are now a member of ...'
-      });
-      alertPopup.then(function(res) {
-        //after pressing ok
-      });
+  $scope.showAS = function(eventClicked) {
+    // Show the action sheet
+    console.log(eventClicked);
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: '<b>Go</b> '},
+        { text: 'Favorite' },
+        { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
+      ],
+      titleText: 'Choose Action:',
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+         },
+      buttonClicked: function(index) {
+        if(index === 0){
+          $scope.setCurrentEvent(eventClicked);
+        }else{
+          if(index === 1){
+            User.addToFavorites(eventClicked);
+          }else{
+            if(index ===2){
+              Events.remove(eventClicked).then(function(){
+                $scope.assoevents = Associations.getAssociationEvents();
+                $state.go($state.current, {}, {reload: true});
+              });
 
-    } else {
-      //if not true
-    }
-  });
-};
-
-  $scope.saveNewEvent = function() {
-      //verify if information was filled
-      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
-          //change state to home page
-          console.log($scope.newEvent);
-          $scope.newEvent={};
-          $scope.modal.hide();
-
-       }else{
-          //information not filled completely
-           alert("Please fill out all fields");
+            }
+          }
+        }
+        return true;
       }
-  }
+    });
+  };
+
+    $scope.showConfirm = function(ms) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Want to be a member?',
+      template: 'Are you sure you want to get this membership?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        //if true
+        console.log(User.hasBillingInfo());
+        if(User.hasBillingInfo()){
+          User.addToMemberships(ms);
+        var alertPopup = $ionicPopup.alert({
+          title: 'Congratulations!',
+          template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
+          //method msID
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Please fill billing info'
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+
+      }
+      } else {
+        //if not true
+      }
+    });
+  };
+
+
+
+$scope.saveNewEvent = function() {
+    //verify if information was filled
+    if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
+        //change state to home page
+        if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Error!',
+            template: 'Please select diferent Tags'
+          });
+          alertPopup.then(function(res) {
+            //after pressing ok
+          });
+        }else{
+        console.log($scope.newEvent);
+        Events.addEvent($scope.newEvent);
+        $scope.newEvent={};
+        $scope.modal.hide();
+      }
+
+     }else{
+        //information not filled completely
+         alert("Please fill out all fields");
+    }
+}
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       scope: $scope
     }).then(function(modal) {
@@ -611,6 +844,7 @@ angular.module('assorum.controllers', [])
     //send to server
     $scope.showNewinfo = function(){
       console.log($scope.newInfo);
+      User.newBillInfo(newInfo);
       $scope.newInfo={};
       $scope.modal.hide();
     }

@@ -13,7 +13,7 @@
     <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="getNewData()">
     </ion-refresher>-->
 
-    <div class="row">
+    <!--div class="row">
    <div class="col col-33 text-right">
      <button class="button icon-left ion-arrow-swap button-outline button-small button-balanced">
   Sort-date
@@ -24,17 +24,18 @@
 Sort-name
 </button>
 </div>
-</div>
+</div-->
 
     <ion-list>
 
-      <ion-item ng-repeat="event in events" ng-click="setCurrentEvent(event)">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"  ng-repeat="event in events" ng-click="setCurrentEvent(event)">
 
-        <img ng-src="http://assorum.heroku.com/images/event{{event.eimage}}_small.jpeg">
+        <img ng-src="http://assorum2.heroku.com/images/events{{event.eimage}}_small.jpeg">
           {{event.event_name}}
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
           Favorite
         </ion-option-button>
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
 
     </ion-list>
