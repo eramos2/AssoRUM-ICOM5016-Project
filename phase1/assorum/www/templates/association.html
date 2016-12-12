@@ -15,14 +15,6 @@
     </button>
   </ion-nav-buttons>
   </ion-nav-bar>
-  <!--Title-->
-  <!--ion-nav-title>
-    <div>
-
-   <span style="padding-left: 20px">Association</span>
-    </div>
-  </ion-nav-title-->
-  <!--/div-->
   <!--Association Profile-->
   <ion-content class = "custom"  has-header="true" padding="true">
     <!--Ionic card template-->
@@ -61,30 +53,31 @@
    </p>
   </div>
   <div class="list">
+    <div class= "item item-divider ion-card" ng-click="toggleMsList()">
+    <strong style="padding-left: 20px">Memberships </strong>
+    </div>
+    <a  class= "item" ng-repeat="membership in memberships" ng-show="ms_init_state" ng-click="showConfirm()">
+    <!--a class="item" href="#"-->
+    {{membership}}
+    </a>
+
   <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-
   <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)">
   <!--a class="item" href="#"-->
     {{event.event_name}}
 
   </a>
+<!--/div>
 
-
-  <!--
-  <a class= "item" ng-show="VisibleEvents">
-    Butterfinger
-  </a> -->
-  <div class="buttons">
-    <button class="button button-icon ion-compose" ng-click="modal.show()">
-    </button>
-  </div>
+<div class="list"-->
 
 </div>
-  <!--Back button-->
-  <!--a class="button icon-left ion-chevron-left button-clear button-dark" href= '#/tab/home'>Back</a-->
-
+<div class="buttons">
+  <button class="button button-icon ion-compose" ng-click="modal.show()">
+  </button>
+</div>
 
 </div>
 </ion-content>

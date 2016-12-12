@@ -201,12 +201,36 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
+.controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
   $scope.tags = ['one','two','three','four'];
   $scope.locations = ['Mangual','Pineiro','casa de emma'];
+  $scope.memberships = ['Regular', 'OG','Purple Kush', 'L$D'];
+
+
+  $scope.showConfirm = function() {
+  var confirmPopup = $ionicPopup.confirm({
+    title: 'Want to be a member?',
+    template: 'Are you sure you want to get this membership?'
+  });
+  confirmPopup.then(function(res) {
+    if(res) {
+      //if true
+      var alertPopup = $ionicPopup.alert({
+        title: 'Congratulations!',
+        template: 'You are now a member of ...'
+      });
+      alertPopup.then(function(res) {
+        //after pressing ok
+      });
+
+    } else {
+      //if not true
+    }
+  });
+};
 
 
   $scope.saveNewEvent = function() {
@@ -241,13 +265,18 @@ angular.module('assorum.controllers', [])
   $scope.assoevents = Associations.getAssociationEvents();
   console.log($scope.assoevents);
   var initial_state = false;
+  var ms_init_state = false;
   var editVisible = false;
   $scope.VisibleEvents = initial_state;
+  $scope.VisibleMemberships = ms_init_state;
   $scope.editButton = editVisible;
 
   $scope.isAdminEV = function(){
       editVisible = true;
   }
+  $scope.toggleMsList = function(){
+  $scope.ms_init_state = !$scope.ms_init_state;
+}
 
   $scope.toggleEventList = function(){
   $scope.VisibleEvents = !$scope.VisibleEvents;

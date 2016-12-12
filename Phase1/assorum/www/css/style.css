@@ -23,3 +23,14 @@
 .custom {
   background-color: #3f4041 !important; /* This sets the background color*/
  }
+
+ .popup-head {
+  background-color : #42CB53 !important;
+}
+
+.popup-buttons .button:last-child {
+
+    background-color: #42CB53 !important;
+
+
+}
