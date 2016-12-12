@@ -250,8 +250,49 @@ angular.module('assorum.services', [])
     setCurrentEvent: function(event){
       //for testing
       console.log(event);
-      currentEvent.current = event;
-      var promise = $http({
+      //currentEvent.current = event;
+      /*$http({
+        method: 'GET',
+        url: SERVER.url + '/events/' + parseInt(event.eid)
+      }).then(function(response){
+        //events = []; //so events are not repeated
+        //console.log(response.data.data.length)
+        //console.log(response.data.data);
+        for(var i=0;i<response.data.data.length;i++){
+          console.log(response.data.data[i]);
+          currentEvent.current = response.data.data[i];
+        }
+      }).catch(function(err){
+        console.log(err);
+
+      });*/
+      var promise =   $http({
+          method: 'GET',
+          url: SERVER.url + '/events/' + parseInt(event.eid)
+        }).then(function(response){
+          console.log("we here to ");
+          console.log(response.data.data);
+          currentEvent.current = response.data.data;
+        }).then(function(asd){
+          $http({
+      method: 'GET',
+      url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
+    }).then(function(response){
+      //events = []; //so events are not repeated
+      //console.log(response.data.data.length)
+      console.log(response.data.data);
+      currentEvent.current.tags = [];
+      for(var i=0;i<response.data.data.length;i++){
+        currentEvent.current.tags.unshift(response.data.data[i]);
+      }
+        }).catch(function(err){
+          console.log(err);
+
+        });
+      });
+
+
+      /*$http({
   method: 'GET',
   url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
 }).then(function(response){
@@ -262,10 +303,21 @@ angular.module('assorum.services', [])
   for(var i=0;i<response.data.data.length;i++){
     currentEvent.current.tags.unshift(response.data.data[i]);
   }
-}).catch(function(err){
-  console.log(err);
 
-});
+}).then(function(cont){
+  console.log("started from the bottom now we here");
+  console.log(currentEvent.current.eid);
+  $http({
+    method: 'GET',
+    url: SERVER.url + '/events/' + parseInt(currentEvent.current.eid)
+  }).then(function(response){
+    console.log("we here to ");
+    console.log(response.data.data);
+    currentEvent.current = response.data.data;
+  }).catch(function(err){
+    console.log(err);
+
+  });*/
 return promise;
 
     },

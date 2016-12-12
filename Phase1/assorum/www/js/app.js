@@ -153,8 +153,8 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
 //server state
 .constant('SERVER', {
   // Local server
-  //url: 'http://localhost:3000/api'
+  //url: 'http://localhost:3000'
 
   // Public Heroku server
-  url: 'https://assorum2.herokuapp.com/api'
+  url: 'https://assorum2.herokuapp.com'
 });

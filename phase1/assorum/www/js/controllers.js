@@ -111,7 +111,9 @@ angular.module('assorum.controllers', [])
   };
 
   $scope.setCurrentEvent = function(event){
-    Events.setCurrentEvent(event);
+    Events.setCurrentEvent(event).then(function(response){
+      $state.go('tab.event');
+    });
   };
   $scope.server = SERVER;
 
@@ -199,8 +201,13 @@ angular.module('assorum.controllers', [])
       $scope.modal = modal;
     });
     $scope.setCurrentEvent = function(event){
-      Events.setCurrentEvent(event);
+      Events.setCurrentEvent(event).then(function(response){
+        $state.go('tab.event2');
+      });
     };
+/*    $scope.setCurrentEvent = function(event){
+      Events.setCurrentEvent(event);
+    };*/
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents();
   console.log($scope.assoevents);

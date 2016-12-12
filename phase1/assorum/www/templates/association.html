@@ -54,7 +54,7 @@
    <i class="icon ion-clipboard"></i>
    <strong>Description:</strong>
    <p>
-     {{backState.stateId}}
+
      {{asso.assodesc}}
      <!--Welcome to Orquesta de Cuerda UPRM home page.
      Stay tuned for new events coming up every month.-->
@@ -65,7 +65,7 @@
   <strong style="padding-left: 20px">Events </strong>
   </div>
 
-  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)" href= "#/tab/event2">
+  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)">
   <!--a class="item" href="#"-->
     {{event.event_name}}
 
