@@ -70,7 +70,7 @@ function getClientMemberships(req, res, next){
       .json({
         status: 'success',
         data: data,
-        message: 'Retrieved All favorites of client'
+        message: 'Retrieved All memberships of client'
       });
   })
   .catch(function (err) {
