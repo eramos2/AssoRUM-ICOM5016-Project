@@ -240,8 +240,8 @@ function makePayment(req, res, next) {
 }
 
 function removeFavorite(req, res, next) {
-  var req.body.eid = parseInt(req.params.eid);
-  var req.body.cid =parseInt(req.params.cid);
+  req.body.eid = parseInt(req.params.eid);
+  req.body.cid =parseInt(req.params.cid);
   db.result('delete from favorited where eid = ${eid} and cid =${cid}', req.body)
     .then(function (result) {
       /* jshint ignore:start */
