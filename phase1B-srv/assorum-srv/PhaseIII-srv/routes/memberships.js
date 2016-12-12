@@ -4,7 +4,7 @@ var router = express.Router();
 var db = require('../queries/memberships-queries');
 
 
-router.get('/memberships', db.getMemberships);
-router.get('/memberships/:mbspid', db.getSingleMembership);
+router.get('/', db.getMemberships);
+router.get('/:mbspid', db.getSingleMembership);
 
 module.exports = router;

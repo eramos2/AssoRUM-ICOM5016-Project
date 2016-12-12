@@ -5,7 +5,7 @@ var db = require('../queries/departments-queries');
 
 
 
-router.get('/departments', db.getDepartments);
-router.get('/departments/:depid', db.getSingleDepartment);
+router.get('/', db.getDepartments);
+router.get('/:depid', db.getSingleDepartment);
 
 module.exports = router;

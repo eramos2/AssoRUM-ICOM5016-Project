@@ -28,7 +28,7 @@ function getAllEvents(req, res, next) {
 
 function getSingleEvent(req, res, next) {
   var eID = parseInt(req.params.eid);
-  db.one('select * from event where eid = $1', eID)
+  db.one('select * from (event natural inner join location) natural inner join association where eid = $1', eID)
     .then(function (data) {
       res.status(200)
         .json({

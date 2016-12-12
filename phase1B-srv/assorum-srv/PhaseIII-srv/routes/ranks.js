@@ -3,8 +3,8 @@ var router = express.Router();
 
 var db = require('../queries/ranks-queries');
 
-router.get('/ranks', db.getRanks);
-router.get('/ranks/:rankid', db.getSingleRank);
+router.get('/', db.getRanks);
+router.get('/:rankid', db.getSingleRank);
 
 
 module.exports = router;

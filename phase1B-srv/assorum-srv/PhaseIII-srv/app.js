@@ -6,7 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
+
+var associations = require('./routes/associations');
+var clients = require('./routes/clients');
+var departments = require('./routes/departments');
+var events = require('./routes/events');
+var locations = require('./routes/locations');
+var memberships = require('./routes/memberships');
+var ranks = require('./routes/ranks');
+var tags = require('./routes/tags');
 
 var app = express();
 
@@ -29,8 +38,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/favicon.ico', function(req, res) {
     res.sendStatus(200);
 });
+
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
+app.use('/associations', associations);
+app.use('/clients', clients);
+app.use('/departments',departments);
+app.use('/events', events);
+app.use('/locations', locations);
+app.use('/memberships', memberships);
+app.use('/ranks', ranks);
+app.use('/tags', tags);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,7 +62,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-/*if (app.get('env') === 'development') {
+if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.code || 500)
     .json({
@@ -52,16 +71,16 @@ app.use(function(req, res, next) {
     });
   });
 }
-*/
+
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500)
-  .json({
-    status: 'error',
-    message: err.message
-  });
-});
+//app.use(function(err, req, res, next) {
+//  res.status(err.status || 500)
+//  .json({
+//    status: 'error',
+//    message: err.message
+///  });
+//});
 
 
 module.exports = app;

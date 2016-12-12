@@ -4,8 +4,8 @@ var router = express.Router();
 var db = require('../queries/tags-queries');
 
 
-router.get('/tags', db.getTags);
-router.get('/tags/:tid', db.getSingleTag);
+router.get('/', db.getTags);
+router.get('/:tid', db.getSingleTag);
 
 
 module.exports = router;
