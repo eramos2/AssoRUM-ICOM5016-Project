@@ -31,7 +31,6 @@ angular.module('assorum.controllers', [])
     //Submit function
     $scope.saveLogin = function() {
         //email or username/Password where filled
-
         User.getUser($scope.login.EorU, $scope.login.password).then(function(hh){
           console.log(hh);
           if(hh.value){
@@ -290,10 +289,17 @@ angular.module('assorum.controllers', [])
     });
 })
 
-.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicModal,$ionicSideMenuDelegate){
+.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicModal,$ionicSideMenuDelegate, User, Associations){
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.toggleLeft();
     });
+  $scope.user = User.getProfile();
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
+  };
 })
 
 //Event page controller

@@ -10,11 +10,12 @@ angular.module('assorum.services', [])
     username: '',
     firstname: '',
     lastname:'',
+    cid: '',
     img: '',
     email:'',
     rank: '',
     favorites: [],
-    membership: [],
+    memberships: [],
     newFavorites: 0,
     isLogged: {value:''}
   };
@@ -32,6 +33,7 @@ angular.module('assorum.services', [])
            user.username = response.data.data.username;
            user.firstname = response.data.data.clientname.substring(0,response.data.data.clientname.search("-"));
            user.lastname = response.data.data.clientname.substring((response.data.data.clientname.search("-")+1),response.data.data.clientname.length);
+           user.cid = response.data.data.cid;
            user.email = response.data.data.c_email;
            user.rank = response.data.data.rdescription;
            user.img = response.data.data.image;
@@ -39,6 +41,19 @@ angular.module('assorum.services', [])
            return user.isLogged;
       }
       return user.isLogged;
+    }).then(function(pro){
+      $http({
+         method: 'GET',
+        url: SERVER.url + '/clients/' + parseInt(user.cid) + '/memberships'
+      }).then(function(response){
+        for(var i=0;i<response.data.data.length;i++){
+          user.memberships.unshift(response.data.data[i]);
+        }
+      }).catch(function(err){
+              console.log(err);
+              return pro;
+            });
+            return pro
     })
       .catch(function(err){
         //console.log(err);
@@ -51,8 +66,19 @@ angular.module('assorum.services', [])
       user.memberships.unshift(association);
     },
     //function for getting the memberships of a user
-    getMemberships: function(association){
-      return user.memberships;
+    getMemberships: function(cid){
+      var promise = $http({
+         method: 'GET',
+        url: SERVER.url + '/clients/' + parseInt(cid) + '/memberships'
+      }).then(function(response){
+        for(var i=0;i<response.data.data.length;i++){
+          user.memberships.unshift(response.data.data[i]);
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+      return promise;
     },
     //Function for adding to favorites
     addToFavorites: function(event){
