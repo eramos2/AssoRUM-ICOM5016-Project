@@ -50,10 +50,10 @@
         </div>
         <!--Rank options-->
         <select>
-          <option ng-repeat="Rank in Ranks" value="{{Rank}}">{{Rank}}</option>
+          <option ng-repeat="Rank in Ranks" value="{{Rank}}">{{Rank.rdescription}}</option>
         </select>
       </label>
-      
+
       <!--Create account button-->
         <button ng-click="saveSignup()" class="button icon-left ion-log-in button-balanced button-block">Create Account</button>
 

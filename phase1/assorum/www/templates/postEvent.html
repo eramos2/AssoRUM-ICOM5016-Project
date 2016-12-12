@@ -20,11 +20,11 @@
               </div>
               <!--Rank options-->
               <select>
-                <option ng-repeat="location in locations" value="{{location}}">{{location}}</option>
+                <option ng-repeat="location in locations" value="location.locname">{{location.locname}}</option>
               </select>
             </label>
             <label class="item item-input item-stacked-label" ng-model ="newEvent.description" >
-              <strong class="input-label">Descrption:</strong>
+              <strong class="input-label">Description:</strong>
               <textarea type="text" placeholder="write your description" ng-model ="newEvent.description" ></textarea>
             </label>
 
@@ -34,7 +34,7 @@
               </div>
               <!--Rank options-->
               <select>
-                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
             </label>
             <label class="item item-input item-select">
@@ -43,7 +43,7 @@
               </div>
               <!--Rank options-->
               <select>
-                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
             </label>
             <label class="item item-input item-select">
@@ -52,7 +52,7 @@
               </div>
               <!--Rank options-->
               <select>
-                <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+                <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
             </label>
 

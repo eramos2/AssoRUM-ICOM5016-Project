@@ -18,7 +18,7 @@ angular.module('assorum.controllers', [])
 })
 
 //login page controller
-.controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate,$ionicHistory) {
+.controller('loginCtrl', function($scope, User, $state,$http,$q,$ionicSideMenuDelegate,$ionicHistory,Ranks) {
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
       $ionicHistory.clearHistory();
@@ -47,14 +47,17 @@ angular.module('assorum.controllers', [])
 
     //create account button function
     $scope.createAccount = function(){
-      //change state to signup
-      $state.go('signup');
+      Ranks.getRanks().then(function(){
+        //change state to signup
+        $state.go('signup');
+      });
+
     }
 
 })
 
 //Signup page controller
-.controller('signupCtrl', function($scope, $state, User ,$ionicSideMenuDelegate) {
+.controller('signupCtrl', function($scope, $state, User ,$ionicSideMenuDelegate,Ranks) {
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
@@ -63,7 +66,7 @@ angular.module('assorum.controllers', [])
     });
 
     $scope.signup = {};
-    $scope.Ranks = ['Freshman','Sophomore','Junior','Senior'];
+    $scope.Ranks = Ranks.ranks();
     //submit signup information
     $scope.saveSignup = function() {
         //verify if information was filled
@@ -201,14 +204,17 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
+
 .controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
-  $scope.tags = ['one','two','three','four'];
-  $scope.locations = ['Mangual','Pineiro','casa de emma'];
-  $scope.memberships = ['Regular', 'OG','Purple Kush', 'L$D'];
-
+  $scope.asso = Associations.getCurrentAssociation();
+  $scope.assoevents = Associations.getAssociationEvents();
+  $scope.tags = Tags.tags();
+  $scope.locations = Locations.locations();
+  $scope.memberships = Associations.getCurrentAssociationMemberships()
+  console.log($scope.locations);
 
   $scope.showConfirm = function() {
   var confirmPopup = $ionicPopup.confirm({
@@ -232,7 +238,6 @@ angular.module('assorum.controllers', [])
   });
 };
 
-
   $scope.saveNewEvent = function() {
       //verify if information was filled
       if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
@@ -253,6 +258,7 @@ angular.module('assorum.controllers', [])
       $scope.modal = modal;
     });
 
+
     $scope.setCurrentEvent = function(event){
       Events.setCurrentEvent(event).then(function(response){
         $state.go('tab.event2');
@@ -261,8 +267,7 @@ angular.module('assorum.controllers', [])
 /*    $scope.setCurrentEvent = function(event){
       Events.setCurrentEvent(event);
     };*/
-  $scope.asso = Associations.getCurrentAssociation();
-  $scope.assoevents = Associations.getAssociationEvents();
+
 
   console.log($scope.assoevents);
   var initial_state = false;
@@ -363,13 +368,17 @@ angular.module('assorum.controllers', [])
 })
 
 //Event page controller
-.controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
+.controller('EventCtrl',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate,Tags,Locations){
   $scope.event = Events.getCurrentEvent()
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
     console.log($scope.event.assoid);
     Associations.setCurrentAssociation(assoid).then(function(hh){
-      $state.go('tab.association-page');
+      Locations.getLocations().then(function(){
+        Tags.getTags().then(function(){
+          $state.go('tab.association-page');
+        })
+      });
     });
   };
   console.log($scope.event);

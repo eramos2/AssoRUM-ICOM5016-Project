@@ -86,9 +86,11 @@ angular.module('assorum.services', [])
          method: 'GET',
         url: SERVER.url + '/clients/' + parseInt(cid) + '/memberships'
       }).then(function(response){
+
         for(var i=0;i<response.data.data.length;i++){
           user.memberships.unshift(response.data.data[i]);
         }
+
       })
       .catch(function(err){
         console.log(err);
@@ -122,7 +124,7 @@ angular.module('assorum.services', [])
 
   // Some dummy data for testing
   var associations = [];
-  var currentAssociation = {current: "", events: ""};
+  var currentAssociation = {current: "", events: "", memberships: ""};
 
   return {
     //Function for getting all the associations, returns array.
@@ -144,18 +146,9 @@ angular.module('assorum.services', [])
     },
 
     getCurrentAssociationMemberships: function(){
-      var promise = $http({
-         method: 'GET',
-         url: SERVER.url + '/associations/'+currentAssociation.assoid+'/memberships'
-       }).then(function(response){
-         var memberships = [];
-         for(var i=0;i<response.data.data.length;i++){
-           memberships.unshift(response.data.data[i]);
-         }
-         return memberships;
-       })
-       return promise
+      return currentAssociation.memberships;
     },
+
 
     getCurrentAssociation: function(){
       console.log(currentAssociation.current);
@@ -177,6 +170,13 @@ angular.module('assorum.services', [])
        }).then(function(response){
           currentAssociation.current =response.data.data;
           console.log(currentAssociation.current);
+       }).then(function(){
+         $http({
+            method: 'GET',
+            url: SERVER.url + '/associations/'+assoid+'/memberships'
+          }).then(function(response){
+            currentAssociation.memberships = response.data.data
+          })
        })
        return promise;
     },
@@ -218,22 +218,19 @@ angular.module('assorum.services', [])
 
 
 //locations service.
-.factory('Locations', function($http,SERVER,$state){
+.factory('Locations', function($http,SERVER,$state,$q){
   // Some dummy data for testing
-
+  var locations = {locations: ""};
 
   return {
-    getLocations: function(){
+    locations: function(){return locations.locations},
 
+    getLocations: function(){
       var promise = $http({
         method: 'GET',
         url: SERVER.url + '/locations'
       }).then(function(response){
-        var locations = [];
-        for(var i=0;i<response.data.data.length;i++){
-          locations.unshift(response.data.data[i]);
-        }
-        return locations;
+          locations.locations = response.data.data
       }).catch(function(err){
         console.log(err);
 
@@ -246,20 +243,19 @@ angular.module('assorum.services', [])
 //Ranks service.
 .factory('Ranks', function($http,SERVER,$state){
   // Some dummy data for testing
-
+  var ranks = {ranks:""};
 
   return {
+    ranks: function(){
+      return ranks.ranks;
+    },
     getRanks: function(){
 
       var promise = $http({
         method: 'GET',
         url: SERVER.url + '/ranks'
       }).then(function(response){
-        var ranks = [];
-        for(var i=0;i<response.data.data.length;i++){
-          ranks.unshift(response.data.data[i]);
-        }
-        return ranks;
+        ranks.ranks = response.data.data;
       }).catch(function(err){
         console.log(err);
 
@@ -272,20 +268,18 @@ angular.module('assorum.services', [])
 //Tags service.
 .factory('Tags', function($http,SERVER,$state){
   // Some dummy data for testing
-
+  var tags = {tags:""};
 
   return {
+    tags: function(){
+      return tags.tags;
+    },
     getTags: function(){
-
       var promise = $http({
         method: 'GET',
         url: SERVER.url + '/tags'
       }).then(function(response){
-        var tags = [];
-        for(var i=0;i<response.data.data.length;i++){
-          tags.unshift(response.data.data[i]);
-        }
-        return tags;
+        tags.tags = response.data.data;
       }).catch(function(err){
         console.log(err);
 
