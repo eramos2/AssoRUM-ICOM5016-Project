@@ -143,6 +143,20 @@ angular.module('assorum.services', [])
       return null;
     },
 
+    getCurrentAssociationMemberships: function(){
+      var promise = $http({
+         method: 'GET',
+         url: SERVER.url + '/associations/'+currentAssociation.assoid+'/memberships'
+       }).then(function(response){
+         var memberships = [];
+         for(var i=0;i<response.data.data.length;i++){
+           memberships.unshift(response.data.data[i]);
+         }
+         return memberships;
+       })
+       return promise
+    },
+
     getCurrentAssociation: function(){
       console.log(currentAssociation.current);
       return currentAssociation.current[0];
@@ -164,7 +178,7 @@ angular.module('assorum.services', [])
           currentAssociation.current =response.data.data;
           console.log(currentAssociation.current);
        })
-       return promise
+       return promise;
     },
     //Function for getting association from server
     getAssociations: function(){
@@ -200,6 +214,86 @@ angular.module('assorum.services', [])
 })
 
 // TODO : hacer metodo para que busque entre los eventos el que desea
+
+
+
+//locations service.
+.factory('Locations', function($http,SERVER,$state){
+  // Some dummy data for testing
+
+
+  return {
+    getLocations: function(){
+
+      var promise = $http({
+        method: 'GET',
+        url: SERVER.url + '/locations'
+      }).then(function(response){
+        var locations = [];
+        for(var i=0;i<response.data.data.length;i++){
+          locations.unshift(response.data.data[i]);
+        }
+        return locations;
+      }).catch(function(err){
+        console.log(err);
+
+      });
+      return promise;
+    }
+  };
+})
+
+//Ranks service.
+.factory('Ranks', function($http,SERVER,$state){
+  // Some dummy data for testing
+
+
+  return {
+    getRanks: function(){
+
+      var promise = $http({
+        method: 'GET',
+        url: SERVER.url + '/ranks'
+      }).then(function(response){
+        var ranks = [];
+        for(var i=0;i<response.data.data.length;i++){
+          ranks.unshift(response.data.data[i]);
+        }
+        return ranks;
+      }).catch(function(err){
+        console.log(err);
+
+      });
+      return promise;
+    }
+  };
+})
+
+//Tags service.
+.factory('Tags', function($http,SERVER,$state){
+  // Some dummy data for testing
+
+
+  return {
+    getTags: function(){
+
+      var promise = $http({
+        method: 'GET',
+        url: SERVER.url + '/tags'
+      }).then(function(response){
+        var tags = [];
+        for(var i=0;i<response.data.data.length;i++){
+          tags.unshift(response.data.data[i]);
+        }
+        return tags;
+      }).catch(function(err){
+        console.log(err);
+
+      });
+      return promise;
+    }
+  };
+})
 
 //Search service.
 .factory('Search', function($http,SERVER,$state){

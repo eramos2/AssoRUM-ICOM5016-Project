@@ -201,7 +201,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Association page controller
-.controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
+.controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations,Memberships){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -263,6 +263,10 @@ angular.module('assorum.controllers', [])
     };*/
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents();
+  $scope.tags = Tags.getTags();
+  $scope.locations = Locations.getLocations();
+  $scope.asso.memberships = Associations.getCurrentAssociationMemberships();
+
   console.log($scope.assoevents);
   var initial_state = false;
   var ms_init_state = false;
