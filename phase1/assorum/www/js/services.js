@@ -21,6 +21,14 @@ angular.module('assorum.services', [])
   };
 
   return{
+    addUser: function(NewUser){
+      user.username = NewUser.username;
+      user.firstname = NewUser.firstName;
+      user.lastname = NewUser.lastName;
+      user.email = NewUser.email;
+      //user.rank = NewUser;
+      console.log(NewUser);
+    },
 
     getUser: function(Username,Password){
       user.isLogged.value = false;

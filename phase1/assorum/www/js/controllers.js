@@ -54,7 +54,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Signup page controller
-.controller('signupCtrl', function($scope, $state,$ionicSideMenuDelegate) {
+.controller('signupCtrl', function($scope, $state, User ,$ionicSideMenuDelegate) {
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
@@ -69,7 +69,9 @@ angular.module('assorum.controllers', [])
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
             //change state to home page
-             $state.go('tab.home');
+            console.log($scope.signup);
+            User.addUser($scope.signup);
+            $state.go('tab.home');
          }else{
             //information not filled completely
              alert("Please fill out all fields");
@@ -148,7 +150,7 @@ angular.module('assorum.controllers', [])
         $state.go('tab.event');
       });
     };
-    
+
   //get user favorite events
   $scope.favorites = User.getFavorites();
   //test
@@ -201,12 +203,32 @@ angular.module('assorum.controllers', [])
 .controller('AssociationCtrl', function($scope,$state, SERVER, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
+  $scope.newEvent = {};
+
+  $scope.saveNewEvent = function() {
+      //verify if information was filled
+      if($scope.newEvent.date){
+          //change state to home page
+          console.log($scope.newEvent);
+          $scope.newEvent={};
+          $scope.modal.hide();
+
+       }else{
+          //information not filled completely
+           alert("Please fill out all fields");
+      }
+  }
+
+
+
+
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       id:'1',
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
+
     $scope.setCurrentEvent = function(event){
       Events.setCurrentEvent(event).then(function(response){
         $state.go('tab.event2');

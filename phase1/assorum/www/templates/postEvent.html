@@ -7,21 +7,22 @@
           <div class="list">
             <label class="item item-input item-stacked-label">
               <strong class="input-label">Event name:</strong>
-              <input type="text" placeholder="Ex. Bebelatas Reunion">
+              <input type="text" placeholder="Ex. Bebelatas Reunion" ng-model = "newEvent.name">
             </label>
             <label class="item item-input item-stacked-label">
               <strong class="input-label">Date:</strong>
-              <input type="text" placeholder="mm/dd/yyyy (Please follow format)">
+              <input type="text" placeholder="mm/dd/yyyy (Please follow format)" ng-model = "newEvent.date">
             </label>
+            <!--cambiar a select-->
             <label class="item item-input item-stacked-label">
               <strong class="input-label">Location:</strong>
-              <input type="text" placeholder="Ex. Coliseo Rafael Mangual">
+              <input type="text" placeholder="Ex. Coliseo Rafael Mangual" ng-model = "newEvent.location">
             </label>
-            <label class="item item-input item-stacked-label">
+            <label class="item item-input item-stacked-label" ng-model ="newEvent.description" >
               <strong class="input-label">Descrption:</strong>
-              <textarea type="text" placeholder="write your description"></textarea>
+              <textarea type="text" placeholder="write your description" ng-model ="newEvent.description" ></textarea>
             </label>
-            <button class="button button-full button-balanced">Post</button>
+            <button class="button button-full button-balanced" ng-click= "saveNewEvent()">Post</button>
           </div>
         </ion-content>
       </ion-modal-view>
