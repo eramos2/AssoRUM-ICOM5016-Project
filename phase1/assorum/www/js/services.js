@@ -2,6 +2,7 @@ angular.module('assorum.services', [])
 
 // TODO : modificar para que reciba dummy data de node
 
+
 //User service
 .factory('User', function($http, SERVER, $q){
 
