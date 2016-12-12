@@ -16,6 +16,8 @@
   </ion-nav-buttons>
 </ion-nav-bar>
   <ion-content class="custom"  has-header="true" padding="true">
+    <div ui-view="tab-home"></div>
+     <div ui-view="tab-favorites"></div>
     <div class="list card">
       <div>
         <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event/{{event.eimage}}_large.jpeg">
