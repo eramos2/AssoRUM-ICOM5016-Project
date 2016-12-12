@@ -228,16 +228,15 @@ angular.module('assorum.services', [])
 
     },
     //Funtion for getting favorite events
-    getFavorites: function(cid){
+    getFavorites: function(){
       var promise = $http({
          method: 'GET',
-        url: SERVER.url + '/clients/' + parseInt(cid) + '/favorites'
+        url: SERVER.url + '/clients/' + parseInt(user.cid) + '/favorites'
       }).then(function(response){
 
         for(var i=0;i<response.data.data.length;i++){
           user.favorites.unshift(response.data.data[i]);
         }
-        return user.favorites;
       })
       .catch(function(err){
         console.log(err);
@@ -247,7 +246,15 @@ angular.module('assorum.services', [])
     },
     //Funtion for removing events from favorites
     removeFavorite: function(event) {
-      user.favorites.splice(user.favorites.indexOf(event), 1);
+      var promise = $http.delete(SERVER.url + '/clients/' + parseInt(user.cid) + '/favorites/'+event.eid).then(function(response){
+
+        user.favorites.splice(user.favorites.indexOf(event), 1);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+      return promise;
+
     },
     //logout user
     logout: function(){

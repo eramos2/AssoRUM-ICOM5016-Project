@@ -204,6 +204,8 @@ $scope.showPopup = function() {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
+      User.getFavorites();
+
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -216,13 +218,14 @@ $scope.showPopup = function() {
     };
 
   //get user favorite events
-  $scope.favorites = User.getFavorites();
+  $scope.favorites = User.getProfile().favorites;
+
   //test
-  console.log(User.getFavorites());
+
   //function for deleting events from favorites
   $scope.deleteEvent = function(event){
     //remove event from favorites
-    User.removeFavorite(event.id);
+    User.removeFavorite(event);
   };
 })
 
