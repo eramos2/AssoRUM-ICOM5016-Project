@@ -192,8 +192,21 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
+  $scope.showAsso = false;
+  $scope.showEvent = false;
+  $scope.word = {};
 
-  $scope.model = {term: ''};
+  $scope.searchAssociation= function(){
+    $scope.showEvent = false;
+    $scope.showAsso = true;
+
+    console.log($scope.word.keyword);
+  }
+  $scope.searchEvent= function(){
+    $scope.showEvent = true;
+    $scope.showAsso = false;
+    console.log($scope.word.keyword);
+  }
   //get events
   Events.all();
   //search function

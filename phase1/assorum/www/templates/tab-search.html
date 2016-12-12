@@ -24,22 +24,32 @@
 		    <div class="item item-input-inset">
                 <label class="item-input-wrapper">
                     <!-- Search Bar receives tags, keywords, etc. -->
-                    <input type="search" ng-model="model.term" placeholder= "Search">
+                    <input type="search" ng-model="word.keyword" placeholder= "Search">
                 </label>
 
 			</div>
       <p class = "row">
       <div padding = "true" has-header = "true">
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="search()">Search event</button>
+      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchEvent()">Search event</button>
   <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="search()">Search association</button>
+      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchAssociation()">Search association</button>
 
       <!--Get and show events search-->
     </div>
   </p>
-			<div class="item" ng-repeat="result in results">
+  </div>
+  <div class = "list">
+    <div class= "item item-divider ion-android-list" ng-show = "showAsso">
+    <strong style="padding-left: 20px">Associations </strong>
+    </div>
+    <div class= "item item-divider ion-android-list" ng-show = "showEvent">
+    <strong style="padding-left: 20px">Events </strong>
+    </div>
+
+			<div class="item" ng-repeat="result in results" has-header ="true" padding = "true">
                 {{result.name}}
             </div>
-		</div>
+    </div>
+
 	</ion-content>
 </ion-view>
