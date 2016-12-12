@@ -185,6 +185,8 @@ angular.module('assorum.controllers', [])
 
 //Search page controller
 .controller('SearchCtrl', function($scope, Events, $http, $ionicSideMenuDelegate){
+  $scope.resultAsso = ['papa','tu','soy','yo'];
+  $scope.resultEvent = ['jjij'];
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);

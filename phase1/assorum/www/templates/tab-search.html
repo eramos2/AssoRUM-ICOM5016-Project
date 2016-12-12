@@ -45,10 +45,16 @@
     <div class= "item item-divider ion-android-list" ng-show = "showEvent">
     <strong style="padding-left: 20px">Events </strong>
     </div>
+			<div class="item" ng-repeat="result in resultAsso" value={{result}} ng-show = "showAsso">
+            {{result}}
 
-			<div class="item" ng-repeat="result in results" has-header ="true" padding = "true">
-                {{result.name}}
             </div>
+            
+      <div class="item" ng-repeat="result in resultEvent" value = "{{result}}" ng-show = "showEvent">
+            {{result}}
+
+            </div>
+
     </div>
 
 	</ion-content>
