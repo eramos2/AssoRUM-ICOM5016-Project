@@ -6,8 +6,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
-//var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
+//var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
+var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
 var db = pgp(connectionString);
 
 // add query functions
@@ -76,10 +76,11 @@ function createEvent(req, res, next) {
   req.body.assoid = parseInt(req.body.assoid);
   db.any('insert into event(event_name, event_desc, loc_id, eventdata, assoid)' +
       'values(${event_name}, ${event_desc}, ${loc_id}, ${eventdata}, ${assoid}) returning eid', req.body)
-    .then(function () {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'Inserted one event'
         });
     })
@@ -105,14 +106,15 @@ function updateEvent(req, res, next) {
 }
 
 function removeEvent(req, res, next) {
-  var eventID = parseInt(req.params.id);
-  db.result('delete from events where id = $1', eventID)
+  var eid = parseInt(req.params.eid);
+  db.result('delete from favorited where eid = $1; ' +
+  'delete from event where eid = $1;', eid)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} event`
+          message: `Removed event`
         });
       /* jshint ignore:end */
     })
