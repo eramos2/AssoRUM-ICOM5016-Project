@@ -61,6 +61,22 @@ function getClientFavorites(req, res, next){
   });
 }
 
+//returns eid, favid, cid, loc_id, event_name, event_desc, eimage, evendata(time),assoid
+function getClientMemberships(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select assoid, mbspid, typeofmembership, price, depid, asso_name, asso_email, assodesc, asso_image from (client natural inner join rank) natural inner join (hasmembership natural inner join membership) natural inner join association where cid = $1', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All favorites of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
 
 function addFavorite(req, res, next) {
   req.body.eid = parseInt(req.body.eid);
@@ -100,6 +116,7 @@ module.exports = {
   getAllClients: getAllClients,
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
+  getClientMemberships: getClientMemberships,
   addFavorite: addFavorite,
   removeFavorite: removeFavorite
 };
