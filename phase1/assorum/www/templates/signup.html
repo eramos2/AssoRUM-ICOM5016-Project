@@ -44,16 +44,15 @@
         <input ng-model="signup.confirm" type = "password" placeholder = "Confirm Password">
       </label>
       <!--Select rank-->
-      <label class="item item-input item-select">
-        <div class="input-label">
-          <strong>Rank:</strong>
-        </div>
         <!--Rank options-->
-        <select>
-          <option ng-repeat="Rank in Ranks" value="{{Rank}}">{{Rank.rdescription}}</option>
-        </select>
-      </label>
-
+        <label for="repeatSelect" class="item item-input item-select"> <strong>Rank:</strong>
+    <select name="repeatSelect" id="repeatSelect" ng-model="signup.rank">
+      <option ng-repeat="Rank in Ranks" value="{{Rank.rankid}}">{{Rank.rdescription}}</option>
+    </select>
+        <!--select>
+          <option ng-repeat="Rank in Ranks" value="{{Rank}}" ng-model = "signup.rank">{{Rank.rdescription}}</option>
+        </select-->
+        </label>
       <!--Create account button-->
         <button ng-click="saveSignup()" class="button icon-left ion-log-in button-balanced button-block">Create Account</button>
 

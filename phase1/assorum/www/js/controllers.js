@@ -70,10 +70,11 @@ angular.module('assorum.controllers', [])
     //submit signup information
     $scope.saveSignup = function() {
         //verify if information was filled
+        console.log($scope.signup);
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
             //change state to home page
-            //console.log($scope.signup);
+            console.log($scope.signup);
             User.addUser($scope.signup);
             $state.go('tab.home');
          }else{
