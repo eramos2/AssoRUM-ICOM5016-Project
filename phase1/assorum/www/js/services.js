@@ -77,11 +77,11 @@ angular.module('assorum.services', [])
   }
 })
 //Association service
-.factory('Associations', function($http, SERVER, $state){
+.factory('Associations', function($http, SERVER){
 
   // Some dummy data for testing
   var associations = [];
-  var currentAssociation = {current: "", events: ""};
+  var currentAssociation = {current: ""};
 
   return {
     //Function for getting all the associations, returns array.
@@ -103,31 +103,16 @@ angular.module('assorum.services', [])
     },
 
     getCurrentAssociation: function(){
-      console.log(currentAssociation.current);
-      return currentAssociation.current[0];
+      return currentAssociation.current;
     },
 
-    setCurrentAssociation: function(assoid){
-      $http({
-   method: 'GET',
-   url: SERVER.url + '/associations/'+assoid +'/events'
- }).then(function(response){
-    currentAssociation.events =response.data.data;
-    console.log("this are the events ");
-    console.log(currentAssociation.events);
- });
-      var promise = $http({
-         method: 'GET',
-         url: SERVER.url + '/associations/'+assoid
-       }).then(function(response){
-          currentAssociation.current =response.data.data;
-          console.log(currentAssociation.current);
-       })
-       return promise
+    setCurrentAssociation: function(assoc){
+      //for testing
+      console.log(assoc);
+      currentAssociation.current = assoc;
     },
     //Function for getting association from server
     getAssociations: function(){
-      associations = [];
      $http({
         method: 'GET',
         url: SERVER.url + '/associations'
@@ -137,11 +122,6 @@ angular.module('assorum.services', [])
           associations.unshift(response.data.data[i]);
         }
       })
-    },
-
-    getAssociationEvents: function(){
-      console.log(currentAssociation.events);
-      return currentAssociation.events;
     },
     //Function for adding a association to the server.
     addAssociation: function(name, description){
@@ -161,7 +141,7 @@ angular.module('assorum.services', [])
 // TODO : hacer metodo para que busque entre los eventos el que desea
 
 //Search service.
-.factory('Search', function($http,SERVER,$state){
+.factory('Search', function($http){
   // Some dummy data for testing
 
   var  user = {
@@ -180,7 +160,7 @@ angular.module('assorum.services', [])
 .factory('Events', function($http, SERVER,$state){
   // Some dummy data for testing
   var events = [];
-  var currentEvent = {current: "", tags: []};
+  var currentEvent = {current: ""};
 
   /*var events = [{
     id:0,
@@ -250,95 +230,20 @@ angular.module('assorum.services', [])
     setCurrentEvent: function(event){
       //for testing
       console.log(event);
-      //currentEvent.current = event;
-      /*$http({
-        method: 'GET',
-        url: SERVER.url + '/events/' + parseInt(event.eid)
-      }).then(function(response){
-        //events = []; //so events are not repeated
-        //console.log(response.data.data.length)
-        //console.log(response.data.data);
-        for(var i=0;i<response.data.data.length;i++){
-          console.log(response.data.data[i]);
-          currentEvent.current = response.data.data[i];
-        }
-      }).catch(function(err){
-        console.log(err);
-
-      });*/
-      var promise =   $http({
-          method: 'GET',
-          url: SERVER.url + '/events/' + parseInt(event.eid)
-        }).then(function(response){
-          console.log("we here to ");
-          console.log(response.data.data);
-          currentEvent.current = response.data.data;
-        }).then(function(asd){
-          $http({
-      method: 'GET',
-      url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
-    }).then(function(response){
-      //events = []; //so events are not repeated
-      //console.log(response.data.data.length)
-      console.log(response.data.data);
-      currentEvent.current.tags = [];
-      for(var i=0;i<response.data.data.length;i++){
-        currentEvent.current.tags.unshift(response.data.data[i]);
-      }
-        }).catch(function(err){
-          console.log(err);
-
-        });
-      });
-
-
-      /*$http({
-  method: 'GET',
-  url: SERVER.url + '/events/' + parseInt(event.eid) + '/tags'
-}).then(function(response){
-  //events = []; //so events are not repeated
-  //console.log(response.data.data.length)
-  console.log(response.data.data);
-  currentEvent.current.tags = [];
-  for(var i=0;i<response.data.data.length;i++){
-    currentEvent.current.tags.unshift(response.data.data[i]);
-  }
-
-}).then(function(cont){
-  console.log("started from the bottom now we here");
-  console.log(currentEvent.current.eid);
-  $http({
-    method: 'GET',
-    url: SERVER.url + '/events/' + parseInt(currentEvent.current.eid)
-  }).then(function(response){
-    console.log("we here to ");
-    console.log(response.data.data);
-    currentEvent.current = response.data.data;
-  }).catch(function(err){
-    console.log(err);
-
-  });*/
-return promise;
-
+      currentEvent.current = event;
     },
 
     //Funtion for getting all events from server
     getEvents: function(){
-      $http({
+     $http({
         method: 'GET',
         url: SERVER.url + '/events'
       }).then(function(response){
-        //events = []; //so events are not repeated
-        //console.log(response.data.data.length)
-        //console.log(response.data.data);
+        console.log(response.data.data.length);
         for(var i=0;i<response.data.data.length;i++){
           events.unshift(response.data.data[i]);
         }
-      }).catch(function(err){
-        console.log(err);
-
-      });
-
+      })
     }
   };
 });

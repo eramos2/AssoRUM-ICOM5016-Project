@@ -2,41 +2,28 @@
     receives input and displays events that match it.
   -->
 
-<ion-view view-title = "Search">
-  <ion-nav-bar class="bar-balanced">
-    <ion-nav-back-button class="button-icon ion-arrow-left-c">
-  </ion-nav-back-button>
-
-  <ion-nav-buttons side="left">
-    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-buttons side="right">
-    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
-    </button>
-  </ion-nav-buttons>
-</ion-nav-bar>
-
+<ion-view>
+  <!--Title-->
+  <ion-nav-title>
+    <div>
+      <!--Logo and text-->
+   <span><img style="position:absolute; left:70px; bottom:-28px" src="img/paw.png" width="100" alt="App logo"/></span>
+       Search
+  </div>
+   </ion-nav-title>
    <!--Ionic list-->
-    <ion-content class = "custom"  has-header="true" padding="true">
+    <ion-content>
 	    <div class="list">
 		    <div class="item item-input-inset">
                 <label class="item-input-wrapper">
                     <!-- Search Bar receives tags, keywords, etc. -->
-                    <input type="search" ng-model="model.term" placeholder= "Search">
+                    <input type="search" ng-model="model.term" placeholder= "Search for an Event">
                 </label>
-
+				<button class="button button-small button-positive" ng-click="search()">Submit</button>
+                <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
+                <button class="button button-small button-positive" ng-click="search()">Suggest Me!</button>
 			</div>
-      <p class = "row">
-      <div padding = "true" has-header = "true">
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="search()">Search event</button>
-  <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="search()">Search association</button>
-
-      <!--Get and show events search-->
-    </div>
-  </p>
+      <!--Get and show events search--> 
 			<div class="item" ng-repeat="result in results">
                 {{result.name}}
             </div>
