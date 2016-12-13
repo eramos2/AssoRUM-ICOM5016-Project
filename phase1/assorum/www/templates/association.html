@@ -1,30 +1,17 @@
 <!--Association page-->
-<ion-view view-title = "Asssociation" hide-tabs>
-  <ion-nav-bar class="bar-balanced">
-    <ion-nav-back-button class="button-icon ion-arrow-left-c">
-      Back
-  </ion-nav-back-button>
-
-  <ion-nav-buttons side="left">
-    <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()" ng-hide = "true">
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-buttons side="right">
-    <button class="button button-icon button-clear ion-gear-a" ng-click="showRightMenu()"ng-hide = "true">
-    </button>
-  </ion-nav-buttons>
-  </ion-nav-bar>
+<ion-view>
   <!--Title-->
-  <!--ion-nav-title>
+  <ion-nav-title>
     <div>
-
+      <!--logo-->
+   <!--<span><img style="position:absolute; left:0px; bottom:-28px; padding:0px;" src="img/paw.png" width="100" alt="App logo"/></span>-->
+    <!--Association text-->
    <span style="padding-left: 20px">Association</span>
     </div>
-  </ion-nav-title-->
-  <!--/div-->
+   </ion-nav-title>
+  </div>
   <!--Association Profile-->
-  <ion-content class = "custom"  has-header="true" padding="true">
+  <ion-content>
     <!--Ionic card template-->
   <div class="list card">
     <div class="col text-right">
@@ -32,7 +19,7 @@
   </div>
   <div>
     <!--Association image-->
-    <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event{{asso.asso_image}}_small.jpeg">
+    <img style=" padding-left: 140px;" ng-src="http://assorum.heroku.com/images/event{{asso.image}}_small.jpeg">
     <!--img style=" padding-left: 140px;" src="http://assorum.heroku.com/images/event/presencias_navidad_edition_large.jpeg"-->
     <h3 class = "event-title"><!--Orquesta de Cuerda UPRM-->{{asso.asso_name}}<br></h3>
 
@@ -41,9 +28,9 @@
   <div class="item item-text-wrap item-icon-left">
     <!--Department and deparment icon-->
    <i class="icon ion-university"></i>
-   <strong>Department: </strong> {{asso.depname}} <!--Music-->
+   <strong>Department: </strong> {{asso.department}} <!--Music->
   </div>
-
+  <!--Association information-->
   <div class="item item-text-wrap item-icon-left">
     <!--Email and email icon-->
    <i class="icon ion-email"></i>
@@ -54,7 +41,6 @@
    <i class="icon ion-clipboard"></i>
    <strong>Description:</strong>
    <p>
-
      {{asso.assodesc}}
      <!--Welcome to Orquesta de Cuerda UPRM home page.
      Stay tuned for new events coming up every month.-->
@@ -64,26 +50,17 @@
   <div class= "item item-divider ion-ios-list-outline" ng-click="toggleEventList()">
   <strong style="padding-left: 20px">Events </strong>
   </div>
-
-  <a  class= "item" ng-repeat="event in assoevents" ng-show="VisibleEvents" ng-click="setCurrentEvent(event)">
-  <!--a class="item" href="#"-->
-    {{event.event_name}}
-
-  </a>
-
-
-  <!--
   <a class= "item" ng-show="VisibleEvents">
+  <!--a class="item" href="#"-->
     Butterfinger
-  </a> -->
-  <div class="buttons">
-    <button class="button button-icon ion-compose" ng-click="modal.show()">
-    </button>
-  </div>
-
+  </a>
+  <a class= "item" ng-show="VisibleEvents">
+  <!--a class="item" href="#"-->
+    Butterfinger
+  </a>
 </div>
   <!--Back button-->
-  <!--a class="button icon-left ion-chevron-left button-clear button-dark" href= '#/tab/home'>Back</a-->
+  <a class="button icon-left ion-chevron-left button-clear button-dark" href= '#/tab/home'>Back</a>
 
 
 </div>
