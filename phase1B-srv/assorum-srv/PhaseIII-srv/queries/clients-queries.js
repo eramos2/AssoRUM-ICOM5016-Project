@@ -80,6 +80,23 @@ function addFavorite(req, res, next) {
     });
 }
 
+function addMembership(req, res, next) {
+  req.body.eid = parseInt(req.body.eid);
+  req.body.cid = parseInt(req.body.cid);
+  db.none('insert into favorited(eid,cid)' +
+      'values(${eid},${cid})', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one favorite event to client'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 
 
 function createClient(req, res, next) {
@@ -147,6 +164,23 @@ function createClient(req, res, next) {
     });
 }
 
+function updatePaymentMethod(req, res, next) {
+  req.body.cardnumber = parseInt(req.body.cardnumber);
+  req.body.cid = parseInt(req.body.cardnumber);
+  db.any('UPDATE paymentmethod SET (typeofcard,cardnumber,address) =' +
+      ' (${typeofcard}, ${cardnumber}, ${address} ) where cid = ${cid};', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'updated paymentmethod of client'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function makePayment(req, res, next) {
   req.body.mbspid = parseInt(req.body.mbspid);
   req.body.paymethodid = parseInt(req.body.paymethodid);
@@ -187,6 +221,8 @@ module.exports = {
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
   addFavorite: addFavorite,
+  updatePaymentMethod: updatePaymentMethod,
+  addMembership: addMembership,
   makePayment: makePayment,
   createClient: createClient,
   removeFavorite: removeFavorite
