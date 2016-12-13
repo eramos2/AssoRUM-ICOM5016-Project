@@ -267,7 +267,6 @@ angular.module('assorum.controllers', [])
       }
   }
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
-      id:'1',
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
@@ -363,13 +362,18 @@ angular.module('assorum.controllers', [])
   };
 
 })
-.controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate){
+.controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate,$ionicModal){
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.toggleRight();
     });
+    $ionicModal.fromTemplateUrl('templates/fillBill.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+      });
 })
 
-.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicModal,$ionicSideMenuDelegate, User, Associations){
+.controller('MembershipCtrl',function($scope,$state,SERVER,$ionicSideMenuDelegate, User, Associations){
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.toggleLeft();
     });

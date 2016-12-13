@@ -17,16 +17,24 @@
    <!--Ionic card template-->
   <ion-content class = "custom"  has-header="true" padding="true">
 <div class="list card">
-  <div class="item item-text-wrap item-icon-left">
-       <i class="icon ion-happy"></i>
-       <strong>Card Name:</strong>
-
-  </div>
+    <div class="item item-text-wrap item-icon-left">
+       <i class="icon ion-card"></i>
+       <strong>Type of card:</strong>
+     </div>
       <!--Get and show user first name-->
       <div class="item item-text-wrap item-icon-left">
-       <i class="icon ion-person"></i>
+       <i class="icon ion-cash"></i>
        <strong>Card Number:</strong>
- </div>
+     </div>
+     <div class="item item-text-wrap item-icon-left">
+       <i class="icon ion-earth"></i>
+       <strong>Address:</strong>
+     </div>
+</div>
+<div class="buttons">
+  <button class="button button-small ion-compose button-balanced" ng-click="modal.show()">
+    Edit Billing Info
+  </button>
 </div>
 </ion-content>
 </ion-view>
