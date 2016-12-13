@@ -6,8 +6,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
-//var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
+//var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
+var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
 var db = pgp(connectionString);
 
 
@@ -130,8 +130,8 @@ function getClientPaymentMethod(req, res, next){
 
 function addFavorite(req, res, next) {
   req.body.eid = parseInt(req.body.eid);
-  req.body.cid = parseInt(req.body.cid);
-  db.none('insert into favorited(eid,cid)' +
+  req.body.cid = parseInt(req.params.cid);
+  db.any('insert into favorited(eid,cid)' +
       'values(${eid},${cid}) returning fav_id', req.body)
     .then(function () {
       res.status(200)
@@ -166,14 +166,14 @@ function addPayment(req, res, next) {
 }
 
 function removeFavorite(req, res, next) {
-  var fav_id = parseInt(req.params.id);
+  var fav_id = parseInt(req.params.fav_id);
   db.result('delete from favorited where fav_id = $1', fav_id)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} from client favorites`
+          message: `Removed favorite from client favorites`
         });
       /* jshint ignore:end */
     })
