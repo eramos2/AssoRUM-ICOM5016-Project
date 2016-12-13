@@ -9,10 +9,13 @@
               <strong class="input-label">Event name:</strong>
               <input type="text" placeholder="Ex. Bebelatas Reunion" ng-model = "newEvent.name">
             </label>
-            <label class="item item-input item-stacked-label">
+            <!--label class="item item-input item-stacked-label">
               <strong class="input-label">Date:</strong>
               <input type="text" placeholder="mm/dd/yyyy (Please follow format)" ng-model = "newEvent.date">
-            </label>
+            </label-->
+            <label class="item item-input item-stacked-label">
+                <strong class="input-label">Date:</strong> <input type="date" ng-model = "newEvent.date">
+                </label>
 
             <label for="repeatSelect" class="item item-input item-select"> <strong>Location:</strong>
         <select name="repeatSelect" id="repeatSelect" ng-model="newEvent.location">
