@@ -9,10 +9,6 @@
               <strong class="input-label">Event name:</strong>
               <input type="text" placeholder="Ex. Bebelatas Reunion" ng-model = "newEvent.name">
             </label>
-            <!--label class="item item-input item-stacked-label">
-              <strong class="input-label">Date:</strong>
-              <input type="text" placeholder="mm/dd/yyyy (Please follow format)" ng-model = "newEvent.date">
-            </label-->
             <label class="item item-input item-stacked-label">
                 <strong class="input-label">Date:</strong> <input type="date" ng-model = "newEvent.date">
                 </label>
@@ -22,14 +18,6 @@
           <option ng-repeat="location in locations" value="{{location.loc_id}}">{{location.locname}}</option>
         </select>
             </label>
-            <!--label class="item item-input item-select">
-              <div class="input-label">
-                <strong>Location:</strong>
-              </div>
-              <select>
-                <option ng-repeat="location in locations" value="location.locname">{{location.locname}}</option>
-              </select>
-            </label-->
             <label class="item item-input item-stacked-label">
               <strong class="input-label">Description:</strong>
               <textarea type="text" placeholder="write your description" ng-model ="newEvent.description" ></textarea>

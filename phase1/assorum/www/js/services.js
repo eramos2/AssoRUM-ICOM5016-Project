@@ -27,7 +27,7 @@ angular.module('assorum.services', [])
       user.firstname = NewUser.firstName;
       user.lastname = NewUser.lastName;
       user.email = NewUser.email;
-      //user.rank = NewUser;
+      user.rank = NewUser.rank;
       //console.log(NewUser);
     },
 
