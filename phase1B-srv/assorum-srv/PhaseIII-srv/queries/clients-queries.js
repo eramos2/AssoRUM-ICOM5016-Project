@@ -61,12 +61,78 @@ function getClientFavorites(req, res, next){
   });
 }
 
+//returns eid, favid, cid, loc_id, event_name, event_desc, eimage, evendata(time),assoid
+function getClientMemberships(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select assoid, mbspid, typeofmembership, price, depid, asso_name, asso_email, assodesc, asso_image from (client natural inner join rank) natural inner join (hasmembership natural inner join membership) natural inner join association where cid = $1', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All memberships of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getClientPayments(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select * from payment natural inner join paymentmethod where cid = $1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getClientPayment(req, res, next){
+  var cid = parseInt(req.params.cid);
+  var paymentid = parseInt(req.params.paymentid);
+  db.one('select * from payment natural inner join paymentmethod where cid = $1 and paymentid = $2;', cid,paymentid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getClientPaymentMethod(req, res, next){
+  var cid = parseInt(req.params.cid);
+  var paymentid = parseInt(req.params.paymentid);
+  db.any('select typeofcard,paymethodid,cardnumber,address from paymentmethod natural inner join client where cid =$1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
 
 function addFavorite(req, res, next) {
   req.body.eid = parseInt(req.body.eid);
-  req.body.cid = parseInt(req.body.cid);
-  db.none('insert into favorited(eid,cid)' +
-      'values(${eid},${cid})', req.body)
+  req.body.cid = parseInt(req.params.cid);
+  db.any('insert into favorited(eid,cid)' +
+      'values(${eid},${cid}) returning fav_id', req.body)
     .then(function () {
       res.status(200)
         .json({
@@ -79,15 +145,35 @@ function addFavorite(req, res, next) {
     });
 }
 
+
+function addPayment(req, res, next) {
+  req.body.mbspid = parseInt(req.body.mbspid);
+  req.body.paymethodid = parseInt(req.body.paymethodid);
+  req.body.amountpaid = parseInt(req.body.amountpaid);
+
+  db.any('insert into payment(mbspid,paymethodid,paymentdate, amountpaid)' +
+      'values(${mbspid},${paymethodid},${paymentdate},${amountpaid}) returning paymentid', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one payment'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function removeFavorite(req, res, next) {
-  var fav_id = parseInt(req.params.id);
+  var fav_id = parseInt(req.params.fav_id);
   db.result('delete from favorited where fav_id = $1', fav_id)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} from client favorites`
+          message: `Removed favorite from client favorites`
         });
       /* jshint ignore:end */
     })
@@ -100,6 +186,11 @@ module.exports = {
   getAllClients: getAllClients,
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
+  getClientMemberships: getClientMemberships,
+  getClientPayments: getClientPayments,
+  getClientPayment: getClientPayment,
+  getClientPaymentMethod: getClientPaymentMethod,
   addFavorite: addFavorite,
+  addPayment: addPayment,
   removeFavorite: removeFavorite
 };
