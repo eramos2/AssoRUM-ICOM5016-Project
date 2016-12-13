@@ -7,17 +7,17 @@
           <div = class = "list card">
             <label class="item item-input">
               <strong class="input-label">Type of card:</strong>
-              <input type="text" placeholder="Ex. Visa, Mastercard, American Express, etc." ng-model = "">
+              <input type="text" placeholder="Ex. Visa, Mastercard, American Express, etc." ng-model = "newInfo.card">
             </label>
             <label class="item item-input">
               <strong class="input-label">Card number:</strong>
-              <input type="text" placeholder="Ex. 1234092811118888" ng-model = "">
+              <input type="text" placeholder="Ex. 1234092811118888" ng-model = "newInfo.cardNumber">
             </label>
             <label class="item item-input">
               <strong class="input-label">Address:</strong>
-              <textarea type="text" placeholder="Ex. Urb. Borinquen Calle Luis Paler CR, PR" ng-model ="newEvent.description" ></textarea>
+              <textarea type="text" placeholder="Ex. Urb. Borinquen Calle Luis Paler CR, PR" ng-model ="newInfo.address" ></textarea>
             </label>
           </div>
-          <button class="button button-block button-balanced">Done</button>
+          <button class="button button-block button-balanced" ng-click = "showNewinfo()">Done</button>
         </ion-content>
       </ion-modal-view>

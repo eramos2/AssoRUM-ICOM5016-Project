@@ -363,9 +363,17 @@ angular.module('assorum.controllers', [])
 
 })
 .controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate,$ionicModal){
+  $scope.information = ['Visa','91919191199191','tu pai'];
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.toggleRight();
     });
+    $scope.newInfo = {};
+    //send to server
+    $scope.showNewinfo = function(){
+      console.log($scope.newInfo);
+      $scope.newInfo={};
+      $scope.modal.hide();
+    }
     $ionicModal.fromTemplateUrl('templates/fillBill.html', {
         scope: $scope
       }).then(function(modal) {
