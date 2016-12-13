@@ -151,7 +151,7 @@ angular.module('assorum.controllers', [])
 
     $scope.setCurrentEvent = function(event){
       Events.setCurrentEvent(event).then(function(response){
-        $state.go('tab.event');
+        $state.go('tab.event3');
       });
     };
 
@@ -337,6 +337,104 @@ angular.module('assorum.controllers', [])
     User.addToMembership(association);
   };
 })
+.controller('AssociationCtrl2', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+  //Associations.addEvent("test", "wowow");
+  //Associations.deleteAssociation(21);
+  $scope.newEvent = {};
+  $scope.asso = Associations.getCurrentAssociation();
+  $scope.assoevents = Associations.getAssociationEvents();
+  $scope.tags = Tags.tags();
+  $scope.locations = Locations.locations();
+  $scope.memberships = Associations.getCurrentAssociationMemberships()
+  console.log($scope.locations);
+
+  $scope.showConfirm = function() {
+  var confirmPopup = $ionicPopup.confirm({
+    title: 'Want to be a member?',
+    template: 'Are you sure you want to get this membership?'
+  });
+  confirmPopup.then(function(res) {
+    if(res) {
+      //if true
+      var alertPopup = $ionicPopup.alert({
+        title: 'Congratulations!',
+        template: 'You are now a member of ...'
+      });
+      alertPopup.then(function(res) {
+        //after pressing ok
+      });
+
+    } else {
+      //if not true
+    }
+  });
+};
+
+  $scope.saveNewEvent = function() {
+      //verify if information was filled
+      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
+          //change state to home page
+          console.log($scope.newEvent);
+          $scope.newEvent={};
+          $scope.modal.hide();
+
+       }else{
+          //information not filled completely
+           alert("Please fill out all fields");
+      }
+  }
+  $ionicModal.fromTemplateUrl('templates/postEvent.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+
+    $scope.setCurrentEvent = function(event){
+      Events.setCurrentEvent(event).then(function(response){
+        $state.go('tab.event4');
+      });
+    };
+/*    $scope.setCurrentEvent = function(event){
+      Events.setCurrentEvent(event);
+    };*/
+
+
+  console.log($scope.assoevents);
+  var initial_state = false;
+  var ms_init_state = false;
+  var editVisible = false;
+  $scope.VisibleEvents = initial_state;
+  $scope.VisibleMemberships = ms_init_state;
+  $scope.editButton = editVisible;
+
+  $scope.isAdminEV = function(){
+      editVisible = true;
+  }
+  $scope.toggleMsList = function(){
+  $scope.ms_init_state = !$scope.ms_init_state;
+}
+
+  $scope.toggleEventList = function(){
+  $scope.VisibleEvents = !$scope.VisibleEvents;
+}
+
+  //Associations.getAssociations();
+  //$scope.associations = Associations.all();
+  $scope.server = SERVER;
+  //Remove association function
+  $scope.remove = function(association) {
+    Associations.remove(association);
+  };
+  //Delete Association
+  $scope.deleteAssociation = function(association){
+    Associations.deleteAssociation(association.id);
+  };
+  //Adding a membership to associations
+  $scope.addMembership = function(association){
+    User.addToMembership(association);
+  };
+})
 
 .controller('AssoCtrl', function($scope,$state, Associations, SERVER, $ionicNavBarDelegate,Events, $ionicSideMenuDelegate,$ionicTabsDelegate){
   $ionicNavBarDelegate.showBackButton(true);
@@ -381,6 +479,7 @@ angular.module('assorum.controllers', [])
   };
 
 })
+
 .controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate,$ionicModal){
   $scope.information = ['Visa','91919191199191','tu pai'];
   $scope.$on('$ionicView.enter', function(){
@@ -445,6 +544,64 @@ angular.module('assorum.controllers', [])
 
 })
 .controller('EventCtrl2',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
+
+  $scope.event = Events.getCurrentEvent()
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    console.log($scope.event.assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
+  };
+  console.log($scope.event);
+  //Function for going back to the home tab
+
+  /*$scope.event = {
+                  event_name: "Workshop Ionic Framework",
+                  eve_desc: "Ionic workshop for those interested in learning the basic and advanced techniques of ionic Framework. ",
+                  location: "Anfiteatro Celis",
+                  date:"28/10/2016",
+                  association:"Hackertrons",
+                  eimage: ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg",
+                  "http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]
+                }*/
+  $scope.goBackHome = function(){
+    $state.go('tab.home');
+  }
+
+})
+//Event page controller
+.controller('EventCtrl3',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate,Tags,Locations){
+  $scope.event = Events.getCurrentEvent()
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    console.log($scope.event.assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      Locations.getLocations().then(function(){
+        Tags.getTags().then(function(){
+          $state.go('tab.association-page2');
+        })
+      });
+    });
+  };
+  console.log($scope.event);
+  //Function for going back to the home tab
+
+  /*$scope.event = {
+                  event_name: "Workshop Ionic Framework",
+                  eve_desc: "Ionic workshop for those interested in learning the basic and advanced techniques of ionic Framework. ",
+                  location: "Anfiteatro Celis",
+                  date:"28/10/2016",
+                  association:"Hackertrons",
+                  eimage: ["http://assorum.heroku.com/images/event/workshop_ionic_framework_small.jpeg",
+                  "http://assorum.heroku.com/images/event/workshop_ionic_framework_large.jpeg"]
+                }*/
+  $scope.goBackHome = function(){
+    $state.go('tab.favorites');
+  }
+
+})
+.controller('EventCtrl4',function(SERVER,$scope,$state,Events, Associations,$ionicTabsDelegate){
 
   $scope.event = Events.getCurrentEvent()
   $scope.setCurrentAssociation = function(assoid){

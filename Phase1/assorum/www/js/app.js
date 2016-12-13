@@ -87,6 +87,20 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
         templateUrl:"templates/event-page2.html",
         controller:'EventCtrl2'
         }}})
+        .state('tab.event3',{
+          url:"/event3",
+          views:{
+            'tab-favorites':{
+          templateUrl:"templates/event-page3.html",
+          controller:'EventCtrl3'
+          }}})
+          .state('tab.event4',{
+            url:"/event4",
+            views:{
+              'tab-favorites':{
+            templateUrl:"templates/event-page4.html",
+            controller:'EventCtrl4'
+            }}})
     //favorite tab state
     .state('tab.favorites', {
     url: '/favorites',
@@ -145,7 +159,15 @@ angular.module('assorum', ['ionic', 'assorum.controllers', 'assorum.services', '
     templateUrl:"templates/association.html",
     controller:"AssociationCtrl"
       }
-    }});
+    }})
+    .state('tab.association-page2',{
+      url:"/association2",
+      views:{
+       'tab-favorites':{
+      templateUrl:"templates/association2.html",
+      controller:"AssociationCtrl2"
+        }
+      }});
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
