@@ -6,8 +6,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-//var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
-var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
+var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
+//var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
 var db = pgp(connectionString);
 
 
@@ -78,16 +78,86 @@ function getClientMemberships(req, res, next){
   });
 }
 
+function getClientPayments(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select * from payment natural inner join paymentmethod where cid = $1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getClientPayment(req, res, next){
+  var cid = parseInt(req.params.cid);
+  var paymentid = parseInt(req.params.paymentid);
+  db.one('select * from payment natural inner join paymentmethod where cid = $1 and paymentid = $2;', cid,paymentid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getClientPaymentMethod(req, res, next){
+  var cid = parseInt(req.params.cid);
+  var paymentid = parseInt(req.params.paymentid);
+  db.any('select typeofcard,paymethodid,cardnumber,address from paymentmethod natural inner join client where cid =$1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved one payment of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
 function addFavorite(req, res, next) {
   req.body.eid = parseInt(req.body.eid);
   req.body.cid = parseInt(req.body.cid);
   db.none('insert into favorited(eid,cid)' +
-      'values(${eid},${cid})', req.body)
+      'values(${eid},${cid}) returning fav_id', req.body)
     .then(function () {
       res.status(200)
         .json({
           status: 'success',
           message: 'Inserted one favorite event to client'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+function addPayment(req, res, next) {
+  req.body.mbspid = parseInt(req.body.mbspid);
+  req.body.paymethodid = parseInt(req.body.paymethodid);
+  req.body.amountpaid = parseInt(req.body.amountpaid);
+
+  db.any('insert into payment(mbspid,paymethodid,paymentdate, amountpaid)' +
+      'values(${mbspid},${paymethodid},${paymentdate},${amountpaid}) returning paymentid', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Inserted one payment'
         });
     })
     .catch(function (err) {
@@ -117,6 +187,10 @@ module.exports = {
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
   getClientMemberships: getClientMemberships,
+  getClientPayments: getClientPayments,
+  getClientPayment: getClientPayment,
+  getClientPaymentMethod: getClientPaymentMethod,
   addFavorite: addFavorite,
+  addPayment: addPayment,
   removeFavorite: removeFavorite
 };
