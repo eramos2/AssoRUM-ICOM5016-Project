@@ -392,6 +392,7 @@ angular.module('assorum.controllers', [])
           console.log($scope.newEvent);
           $scope.newEvent={};
           $scope.modal.hide();
+          console.log($scope.newEvent);
 
        }else{
           //information not filled completely

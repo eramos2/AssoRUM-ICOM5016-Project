@@ -13,48 +13,64 @@
               <strong class="input-label">Date:</strong>
               <input type="text" placeholder="mm/dd/yyyy (Please follow format)" ng-model = "newEvent.date">
             </label>
-            <!--cambiar a select-->
-            <label class="item item-input item-select">
+
+            <label for="repeatSelect" class="item item-input item-select"> <strong>Location:</strong>
+        <select name="repeatSelect" id="repeatSelect" ng-model="newEvent.location">
+          <option ng-repeat="location in locations" value="{{location.loc_id}}">{{location.locname}}</option>
+        </select>
+            </label>
+            <!--label class="item item-input item-select">
               <div class="input-label">
                 <strong>Location:</strong>
               </div>
-              <!--Rank options-->
               <select>
                 <option ng-repeat="location in locations" value="location.locname">{{location.locname}}</option>
               </select>
-            </label>
+            </label-->
             <label class="item item-input item-stacked-label">
               <strong class="input-label">Description:</strong>
               <textarea type="text" placeholder="write your description" ng-model ="newEvent.description" ></textarea>
             </label>
 
-            <label class="item item-input item-select">
+            <label for="repeatSelect" class="item item-input item-select"> <strong>Tag1:</strong>
+        <select name="repeatSelect" id="repeatSelect" ng-model="newEvent.tag1">
+          <option ng-repeat="tag in tags" value="{{tag.tid}}">{{tag.tdescription}}</option>
+        </select>
+            </label>
+            <!--label class="item item-input item-select">
               <div class="input-label">
                 <strong>Tag1:</strong>
               </div>
-              <!--Rank options-->
               <select>
                 <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
+            </label-->
+            <label for="repeatSelect" class="item item-input item-select"> <strong>Tag2:</strong>
+        <select name="repeatSelect" id="repeatSelect" ng-model="newEvent.tag2">
+          <option ng-repeat="tag in tags" value="{{tag.tid}}">{{tag.tdescription}}</option>
+        </select>
             </label>
-            <label class="item item-input item-select">
+            <!--label class="item item-input item-select">
               <div class="input-label">
                 <strong>Tag2:</strong>
               </div>
-              <!--Rank options-->
               <select>
                 <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
+            </label-->
+            <label for="repeatSelect" class="item item-input item-select"> <strong>Tag3:</strong>
+        <select name="repeatSelect" id="repeatSelect" ng-model="newEvent.tag3">
+          <option ng-repeat="tag in tags" value="{{tag.tid}}">{{tag.tdescription}}</option>
+        </select>
             </label>
-            <label class="item item-input item-select">
+            <!--label class="item item-input item-select">
               <div class="input-label">
                 <strong>Tag3:</strong>
               </div>
-              <!--Rank options-->
               <select>
                 <option ng-repeat="tag in tags" value="{{tag}}">{{tag.tdescription}}</option>
               </select>
-            </label>
+            </label-->
 
           </div>
           <button class="button button-full button-balanced" ng-click= "saveNewEvent()">Post</button>
