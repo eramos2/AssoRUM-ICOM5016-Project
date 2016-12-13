@@ -6,8 +6,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-//var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
-var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
+var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
+//var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
 var db = pgp(connectionString);
 
 // add query functions
@@ -72,10 +72,10 @@ function searchEvents(req, res, next) {
 }
 
 function createEvent(req, res, next) {
-  req.body.age = parseInt(req.body.age);
-  db.none('insert into event(name, description, location, date, association, img)' +
-      'values(${name}, ${description}, ${location}, ${date}, ${association}, ${img})',
-    req.body)
+  req.body.loc_id = parseInt(req.body.loc_id);
+  req.body.assoid = parseInt(req.body.assoid);
+  db.any('insert into event(event_name, event_desc, loc_id, eventdata, assoid)' +
+      'values(${event_name}, ${event_desc}, ${loc_id}, ${eventdata}, ${assoid}) returning eid', req.body)
     .then(function () {
       res.status(200)
         .json({
