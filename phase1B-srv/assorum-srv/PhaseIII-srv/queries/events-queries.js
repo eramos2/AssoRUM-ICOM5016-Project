@@ -76,10 +76,11 @@ function createEvent(req, res, next) {
   req.body.assoid = parseInt(req.body.assoid);
   db.any('insert into event(event_name, event_desc, loc_id, eventdata, assoid)' +
       'values(${event_name}, ${event_desc}, ${loc_id}, ${eventdata}, ${assoid}) returning eid', req.body)
-    .then(function () {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'Inserted one event'
         });
     })

@@ -66,12 +66,13 @@ function getClientFavorites(req, res, next){
 function addFavorite(req, res, next) {
   req.body.eid = parseInt(req.body.eid);
   req.body.cid = parseInt(req.body.cid);
-  db.none('insert into favorited(eid,cid)' +
-      'values(${eid},${cid})', req.body)
-    .then(function () {
+  db.none('insert into favorited(eid,cid) ' +
+      'values(${eid} , ${cid}) returning fav_id', req.body)
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'Inserted one favorite event to client'
         });
     })
@@ -81,14 +82,15 @@ function addFavorite(req, res, next) {
 }
 
 function addMembership(req, res, next) {
-  req.body.eid = parseInt(req.body.eid);
+  req.body.mbspid = parseInt(req.body.mbspid);
   req.body.cid = parseInt(req.body.cid);
-  db.none('insert into favorited(eid,cid)' +
-      'values(${eid},${cid})', req.body)
-    .then(function () {
+  db.none('insert into hasmembership(mbspid,cid)' +
+      'values(${mbspid},${cid}) returning hasmbspid', req.body)
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'Inserted one favorite event to client'
         });
     })
@@ -187,10 +189,11 @@ function makePayment(req, res, next) {
   req.body.amountpaid = parseInt(req.body.amountpaid);
   db.any('insert into client(mbspid,paymethodid,paymentid,amountpaid)' +
       'values(${mbspid},${paymethodid},${paymentid},${amountpaid}) returning paymentid', req.body)
-    .then(function () {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'created a client'
         });
     })

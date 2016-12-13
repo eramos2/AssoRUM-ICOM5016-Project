@@ -70,7 +70,7 @@ function searchAssociations(req, res, next) {
       searchString += " " + keyword[i];
     }
   }
-  db.any('select * from association natural inner join department,client where (association.asso_name ILIKE $1 OR association.assodesc ILIKE $1) and client.cid = manages.cid', ['%' + searchString + '%'])
+  db.any('select * from association natural inner join department,client where (association.asso_name ILIKE $1 OR association.assodesc ILIKE $1) and client.cid = association.adminid', ['%' + searchString + '%'])
     .then(function (data) {
       res.status(200)
         .json({
