@@ -256,6 +256,7 @@ angular.module('assorum.controllers', [])
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
   $scope.asso = Associations.getCurrentAssociation();
+  $scope.isAdmin = User.getProfile().cid;
   $scope.assoevents = Associations.getAssociationEvents();
   $scope.tags = Tags.tags();
   $scope.locations = Locations.locations();
@@ -356,6 +357,7 @@ angular.module('assorum.controllers', [])
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents();
   $scope.tags = Tags.tags();
+  $scope.isAdmin = User.getProfile().cid;
   $scope.locations = Locations.locations();
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
@@ -454,6 +456,7 @@ angular.module('assorum.controllers', [])
   $scope.asso = Associations.getCurrentAssociation();
   $scope.assoevents = Associations.getAssociationEvents();
   $scope.tags = Tags.tags();
+  $scope.isAdmin = User.getProfile().cid;
   $scope.locations = Locations.locations();
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
