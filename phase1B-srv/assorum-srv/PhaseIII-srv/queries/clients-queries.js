@@ -1,6 +1,6 @@
 var promise = require('bluebird');
-var helper = require('sendgrid').mail
-var sg = require('sendgrid')('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');
+var helper = require('sendgrid').mail;
+
 var options = {
   // Initialization Options
   promiseLib: promise
@@ -84,17 +84,46 @@ function addFavorite(req, res, next) {
 
 function createClient(req, res, next) {
   req.body.rankid = parseInt(req.body.rankid);
-  req.body.cid = parseInt(req.body.cid);
   db.any('insert into client(clientname,username,password,rankid,c_email)' +
       'values(${clientname},${username},${password},${rankid},${c_email}) returning cid', req.body)
-    .then(function () {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
+          data: data,
           message: 'created a client'
         });
     }).then(function(){
-      from_email = new helper.Email("felix.gonzalez3@upr.edu")
+      var from_email = new helper.Email('no-reply@assorum.com');
+      var to_email = new helper.Email(req.body.c_email);
+      var subject = 'Assorum Account Confirmation';
+      var content = new helper.Content('text/plain', 'Hello, ' +req.body.username+"! Welcome to Assorum! Enter this code to use the app --> 1234");
+      var mail = new helper.Mail(from_email, subject, to_email, content);
+
+      var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+      var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON(),
+      });
+
+      sg.API(request, function(error, response) {
+        if(error) {
+        console.log(error.message);
+        console.log(error.response.statusCode);
+        console.log(error.response.body);
+        console.log(error.response.headers);
+      } else {
+        console.log(response);
+
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+        }
+      });
+      //sendgrid.send(email);
+      //console.log("email was sent");
+      /*from_email = new helper.Email("felix.gonzalez3@upr.edu")
       to_email = new helper.Email("felix.gonzalez3@upr.edu")
       subject = "Sending with SendGrid is Fun"
       content = new helper.Content("text/plain", "and easy to do anywhere, even with Node.js")
@@ -111,7 +140,7 @@ function createClient(req, res, next) {
         console.log(response.statusCode)
         console.log(response.body)
         console.log(response.headers)
-      });
+      });*/
     })
     .catch(function (err) {
       return next(err);
