@@ -1,13 +1,14 @@
 var promise = require('bluebird');
-
+var helper = require('sendgrid').mail
+var sg = require('sendgrid')('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');
 var options = {
   // Initialization Options
   promiseLib: promise
 };
 
 var pgp = require('pg-promise')(options);
-//var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
-var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
+var connectionString = 'postgres://emmanuelramos:emaema.@localhost:5432/assorum';
+//var connectionString = 'postgres://umvqzgtzegopge:Mk7KHzN4igK5H1Ub8IEAbTFugo@ec2-54-243-207-17.compute-1.amazonaws.com:5432/d2t0un16n28uoo';
 var db = pgp(connectionString);
 
 
@@ -79,6 +80,62 @@ function addFavorite(req, res, next) {
     });
 }
 
+
+
+function createClient(req, res, next) {
+  req.body.rankid = parseInt(req.body.rankid);
+  req.body.cid = parseInt(req.body.cid);
+  db.any('insert into client(clientname,username,password,rankid,c_email)' +
+      'values(${clientname},${username},${password},${rankid},${c_email}) returning cid', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'created a client'
+        });
+    }).then(function(){
+      from_email = new helper.Email("felix.gonzalez3@upr.edu")
+      to_email = new helper.Email("felix.gonzalez3@upr.edu")
+      subject = "Sending with SendGrid is Fun"
+      content = new helper.Content("text/plain", "and easy to do anywhere, even with Node.js")
+      mail = new helper.Mail(from_email, subject, to_email, content)
+
+
+      var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON()
+      });
+
+      sg.API(request, function(error, response) {
+        console.log(response.statusCode)
+        console.log(response.body)
+        console.log(response.headers)
+      });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function makePayment(req, res, next) {
+  req.body.mbspid = parseInt(req.body.mbspid);
+  req.body.paymethodid = parseInt(req.body.paymethodid);
+  req.body.amountpaid = parseInt(req.body.amountpaid);
+  db.any('insert into client(mbspid,paymethodid,paymentid,amountpaid)' +
+      'values(${mbspid},${paymethodid},${paymentid},${amountpaid}) returning paymentid', req.body)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'created a client'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 function removeFavorite(req, res, next) {
   var fav_id = parseInt(req.params.id);
   db.result('delete from favorited where fav_id = $1', fav_id)
@@ -101,5 +158,7 @@ module.exports = {
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
   addFavorite: addFavorite,
+  makePayment: makePayment,
+  createClient: createClient,
   removeFavorite: removeFavorite
 };
