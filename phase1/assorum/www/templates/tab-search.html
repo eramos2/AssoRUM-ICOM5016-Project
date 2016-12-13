@@ -47,12 +47,12 @@
     <div class= "item item-divider ion-android-list" ng-show = "showEvent">
     <strong style="padding-left: 20px">Events </strong>
     </div>
-			<div class="item" ng-repeat="result in associations" value="{{result}}" ng-show = "showAsso">
+			<div class="item" ng-repeat="result in associations" value="{{result}}" ng-show = "showAsso" ng-click ="setCurrentAssociation(result)" >
             {{result.asso_name}}
 
             </div>
 
-      <div class="item" ng-repeat="result in events" value = "{{result}}" ng-show = "showEvent">
+      <div class="item" ng-repeat="result in events" value = "{{result}}" ng-show = "showEvent" ng-click = "setCurrentEvent(result)">
             {{result.event_name}}
 
             </div>

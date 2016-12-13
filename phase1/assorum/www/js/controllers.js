@@ -184,7 +184,7 @@ angular.module('assorum.controllers', [])
 
 
 //Search page controller
-.controller('SearchCtrl', function($scope, $window, Events, $http, $ionicSideMenuDelegate,Search, $state){
+.controller('SearchCtrl', function($scope, $window, Events, $http, $ionicSideMenuDelegate,Search, $state,Associations,Locations,Tags){
 
 
   $scope.$on('$ionicView.enter', function(){
@@ -212,6 +212,18 @@ angular.module('assorum.controllers', [])
     $scope.showAsso = false;
     console.log($scope.word.keyword);
   }
+  $scope.setCurrentEvent = function(event){
+    Events.setCurrentEvent(event).then(function(response){
+      $state.go('tab.event5');
+    });
+  };
+  $scope.setCurrentAssociation = function(assoid){
+    console.log(assoid);
+    console.log($scope.event.assoid);
+    Associations.setCurrentAssociation(assoid).then(function(hh){
+      $state.go('tab.association-page');
+    });
+  };
   //get events
   //Events.all();
 
