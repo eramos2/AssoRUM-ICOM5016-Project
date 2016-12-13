@@ -1,4 +1,4 @@
-<ion-view view-title = "Billing Info">
+<ion-view view-title = "Billing Info" ng-controller="BillInfoCtrl">
   <ion-nav-bar class="bar-balanced">
     <ion-nav-back-button class="button-icon ion-arrow-left-c">
       Back
@@ -20,16 +20,16 @@
     <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-card"></i>
        <strong>Type of card: </strong>
-        {{information[0]}}
+        {{information[0].typeofcard}}
      </div>
       <!--Get and show user first name-->
       <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-cash"></i>
-       <strong>Card Number: </strong>{{information[1]}}
+       <strong>Card Number: </strong>{{information[0].cardnumber}}
      </div>
      <div class="item item-text-wrap item-icon-left">
        <i class="icon ion-earth"></i>
-       <strong>Address: </strong>{{information[2]}}
+       <strong>Address: </strong>{{information[0].address}}
      </div>
 </div>
 <div class="buttons">

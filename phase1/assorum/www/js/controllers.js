@@ -590,8 +590,9 @@ angular.module('assorum.controllers', [])
 
 })
 
-.controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate,$ionicModal){
-  $scope.information = ['Visa','91919191199191','tu pai'];
+.controller('BillInfoCtrl',function(SERVER, $scope,$state,$ionicSideMenuDelegate,$ionicModal, User){
+  $scope.information = User.getBillingInfo();
+  console.log($scope.information);
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.toggleRight();
     });

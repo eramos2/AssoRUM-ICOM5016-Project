@@ -16,6 +16,7 @@ angular.module('assorum.services', [])
     rank: '',
     favorites: [],
     memberships: [],
+    billinginfo: [],
     newFavorites: 0,
     isLogged: {value:''}
   };
@@ -67,6 +68,14 @@ angular.module('assorum.services', [])
           }
 
       })
+    }).then(function(pro){
+      $http({
+         method: 'GET',
+        url: SERVER.url + '/clients/' + parseInt(user.cid) + '/paymentmethod'
+      }).then(function(response){
+          console.log(response.data.data);
+          user.billinginfo = response.data.data;
+    })
     })
     return pro;
   })
@@ -75,6 +84,11 @@ angular.module('assorum.services', [])
     return pro;
   });
       return promise;
+    },
+
+    getBillingInfo: function(){
+      console.log(user.billinginfo);
+      return user.billinginfo;
     },
     //function for adding a membership to a user
     addToMemberships: function(association){
