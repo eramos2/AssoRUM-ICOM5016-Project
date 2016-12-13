@@ -57,7 +57,7 @@ angular.module('assorum.controllers', [])
 })
 
 //Signup page controller
-.controller('signupCtrl', function($scope, $state, User ,$ionicSideMenuDelegate,Ranks) {
+.controller('signupCtrl', function($scope, $state, User ,$ionicSideMenuDelegate,Ranks,$ionicPopup) {
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
@@ -79,7 +79,13 @@ angular.module('assorum.controllers', [])
             $state.go('tab.home');
          }else{
             //information not filled completely
-             alert("Please fill out all fields");
+             var alertPopup = $ionicPopup.alert({
+               title: 'Error!',
+               template: 'Please fill out all fields'
+             });
+             alertPopup.then(function(res) {
+               //after pressing ok
+             });
         }
     }
 
