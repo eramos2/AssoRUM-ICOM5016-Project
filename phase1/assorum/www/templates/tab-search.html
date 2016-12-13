@@ -30,9 +30,11 @@
 			</div>
       <p class = "row">
       <div padding = "true" has-header = "true">
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchEvent()">Search event</button>
+
+      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchEvents(word.keyword)">Search events</button>
   <!-- Suggest Me! button suggest events filtered by the current user preferences  -->
-      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchAssociation()">Search association</button>
+      <button class="button button-outline icon-left ion-search button-block button-balanced" ng-click="searchAssociations(word.keyword)">Search associations</button>
+
 
       <!--Get and show events search-->
     </div>
@@ -45,13 +47,13 @@
     <div class= "item item-divider ion-android-list" ng-show = "showEvent">
     <strong style="padding-left: 20px">Events </strong>
     </div>
-			<div class="item" ng-repeat="result in resultAsso" value={{result}} ng-show = "showAsso">
-            {{result}}
+			<div class="item" ng-repeat="result in associations" value="{{result}}" ng-show = "showAsso">
+            {{result.asso_name}}
 
             </div>
-            
-      <div class="item" ng-repeat="result in resultEvent" value = "{{result}}" ng-show = "showEvent">
-            {{result}}
+
+      <div class="item" ng-repeat="result in events" value = "{{result}}" ng-show = "showEvent">
+            {{result.event_name}}
 
             </div>
 

@@ -293,15 +293,40 @@ angular.module('assorum.services', [])
 .factory('Search', function($http,SERVER,$state){
   // Some dummy data for testing
 
-  var  user = {
-    name: "Peter",
-    img: 'img/ben.png'
+  var  events = {events:""};
+  var associations = {associations:""};
 
+  return {
+    getEvents: function(){
+      return events.events;
+    },
+    getAssociations: function(){
+      return associations.associations;
+    },
+    searchEvents:function(even){
+      var promise =  $http({
+        method: 'GET',
+        url: SERVER.url + '/events/search/'+even
+      }).then(function(response){
+        events.events = response.data.data;
+      }).catch(function(err){
+        console.log(err);
+      });
+      return promise;
+    },
+    searchAssociations:function(asso){
+      var promise =  $http({
+        method: 'GET',
+        url: SERVER.url + '/associations/search/'+asso
+      }).then(function(response){
+        associations.associations = response.data.data;
+      }).catch(function(err){
+        console.log(err);
+
+      });
+      return promise;
+    }
   };
-
-  user.get
-
-  return user;
 })
 
 // Events service

@@ -184,9 +184,8 @@ angular.module('assorum.controllers', [])
 
 
 //Search page controller
-.controller('SearchCtrl', function($scope, Events, $http, $ionicSideMenuDelegate){
-  $scope.resultAsso = ['papa','tu','soy','yo'];
-  $scope.resultEvent = ['jjij'];
+.controller('SearchCtrl', function($scope, $window, Events, $http, $ionicSideMenuDelegate,Search, $state){
+
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -194,14 +193,18 @@ angular.module('assorum.controllers', [])
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
     });
+
   $scope.showAsso = false;
   $scope.showEvent = false;
   $scope.word = {};
 
+  $scope.associations = [];
+  $scope.events = [];
+
+
   $scope.searchAssociation= function(){
     $scope.showEvent = false;
     $scope.showAsso = true;
-
     console.log($scope.word.keyword);
   }
   $scope.searchEvent= function(){
@@ -210,12 +213,28 @@ angular.module('assorum.controllers', [])
     console.log($scope.word.keyword);
   }
   //get events
-  Events.all();
-  //search function
-  $scope.search = function() {
-    $scope.results = Events.all();
-  };
+  //Events.all();
 
+  $scope.searchEvents = function(event){
+    console.log("this are the events keyword "+ event);
+    Search.searchEvents(event).then(function(){
+      $scope.events = Search.getEvents();
+      $state.go($state.current, {}, {reload: true});
+      $scope.showEvent = true;
+      $scope.showAsso = false;
+      console.log($scope.events);
+  });
+};
+  $scope.searchAssociations = function(asso){
+    console.log("this are the assoss keyword "+ asso);
+    Search.searchAssociations(asso).then(function(){
+      $scope.associations = Search.getAssociations();
+      $state.go($state.current, {}, {reload: true});
+      $scope.showEvent = false;
+      $scope.showAsso = true;
+      console.log($scope.associations);
+    });
+  }
 })
 
 //Association page controller
