@@ -18,7 +18,7 @@
     <ion-content class = "custom"  has-header="true" padding="true">
         <ion-list>
           <!--Get and show favorites list-->
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="event in favorites" type="item-text-wrap" ng-click="setCurrentEvent(event)">
+      <ion-item class="item item-remove-animate item-avatar item-icon-right" ng-repeat="event in favorites" type="item-text-wrap" ng-click="setCurrentEvent(event)">
                  <img ng-src="http://assorum.heroku.com/images/event{{event.eimage}}_small.jpeg">
                     <!--Show favorite event name-->
                     <h2>{{ event.event_name }}</h2>

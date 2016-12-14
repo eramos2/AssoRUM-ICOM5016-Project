@@ -28,13 +28,14 @@ Sort-name
 
     <ion-list>
 
-      <ion-item ng-repeat="event in events" ng-click="setCurrentEvent(event)">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"  ng-repeat="event in events" ng-click="setCurrentEvent(event)">
 
         <img ng-src="http://assorum2.heroku.com/images/event{{event.eimage}}_small.jpeg">
           {{event.event_name}}
         <ion-option-button class="button-positive" ng-click="addToFavorites(event)">
           Favorite
         </ion-option-button>
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
 
     </ion-list>
