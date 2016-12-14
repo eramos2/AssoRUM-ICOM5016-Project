@@ -442,11 +442,11 @@ angular.module('assorum.services', [])
 
         var promise = $http.post(SERVER.url+"/events",data).then(function(data){
           console.log("success bitches");
+          events.
           console.log(data.data.data);
         })
         .catch(function(err){
             console.log(err);
-
           });
         return promise;
 

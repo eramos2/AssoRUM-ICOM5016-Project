@@ -146,6 +146,7 @@ $scope.showPopup = function() {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
+      $state.go($state.current, {}, {reload: true});
       $ionicHistory.clearHistory();
       $ionicViewService.clearHistory()
     });
@@ -307,7 +308,7 @@ $scope.showPopup = function() {
 
 //Association page controller
 
-.controller('AssociationCtrl', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl', function($scope,$state,$ionicActionSheet, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -318,6 +319,34 @@ $scope.showPopup = function() {
   $scope.locations = Locations.locations();
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
+
+  // Triggered on a button click, or some other target
+$scope.showAS = function(eventClicked) {
+  // Show the action sheet
+  console.log(eventClicked);
+  var hideSheet = $ionicActionSheet.show({
+    buttons: [
+      { text: '<b>Go</b> '},
+      { text: 'Favorite' },
+      { text: 'Delete' }
+    ],
+    titleText: 'Choose Action:',
+    cancelText: 'Cancel',
+    cancel: function() {
+         // add cancel code..
+       },
+    buttonClicked: function(index) {
+      if(index === 0){
+        $scope.setCurrentEvent(eventClicked);
+      }else{
+        if(index === 1){
+          Events.addToFavorites(eventClicked);
+        }
+      }
+      return true;
+    }
+  });
+};
 
   $scope.showConfirm = function() {
   var confirmPopup = $ionicPopup.confirm({
