@@ -106,8 +106,9 @@ function updateEvent(req, res, next) {
 }
 
 function removeEvent(req, res, next) {
-  var eventID = parseInt(req.params.id);
-  db.result('delete from events where id = $1', eventID)
+  var eid = parseInt(req.params.eid);
+  db.result('delete from favorited where eid = $1; ' +
+  'delete from event where eid = $1;', eid)
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
