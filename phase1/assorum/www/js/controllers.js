@@ -279,9 +279,8 @@ $scope.showPopup = function() {
   };
   $scope.setCurrentAssociation = function(assoid){
     console.log(assoid);
-    console.log($scope.event.assoid);
     Associations.setCurrentAssociation(assoid).then(function(hh){
-      $state.go('tab.association-page');
+      $state.go('tab.association-page3');
     });
   };
   //get events
