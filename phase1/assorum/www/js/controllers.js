@@ -370,8 +370,7 @@ $scope.showAS = function(eventClicked) {
       //if true
       console.log(User.hasBillingInfo());
       if(User.hasBillingInfo()){
-        console.log(User.hasBillingInfo());
-        User.addToMembership(msID);
+        User.addToMemberships(msID);
       var alertPopup = $ionicPopup.alert({
         title: 'Congratulations!',
         template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
