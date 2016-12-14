@@ -369,6 +369,7 @@ $scope.showAS = function(eventClicked) {
     if(res) {
       //if true
       if(User.hasBillingInfo()){
+        User.addToMembership(msID);
       var alertPopup = $ionicPopup.alert({
         title: 'Congratulations!',
         template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
@@ -488,7 +489,7 @@ $scope.showAS = function(eventClicked) {
       buttons: [
         { text: '<b>Go</b> '},
         { text: 'Favorite' },
-        { text: 'Delete' }
+        { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
       ],
       titleText: 'Choose Action:',
       cancelText: 'Cancel',
@@ -503,7 +504,11 @@ $scope.showAS = function(eventClicked) {
             User.addToFavorites(eventClicked);
           }else{
             if(index ===2){
-              Events.remove(eventClicked);
+              Events.remove(eventClicked).then(function(){
+                $scope.assoevents = Associations.getAssociationEvents();
+                $state.go($state.current, {}, {reload: true});
+              });
+
             }
           }
         }
@@ -512,28 +517,41 @@ $scope.showAS = function(eventClicked) {
     });
   };
 
+    $scope.showConfirm = function(msID) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Want to be a member?',
+      template: 'Are you sure you want to get this membership?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        //if true
+        if(User.hasBillingInfo()){
+          User.addToMembership(msID);
+        var alertPopup = $ionicPopup.alert({
+          title: 'Congratulations!',
+          template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
+          //method msID
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Please fill billing info'
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
 
-  $scope.showConfirm = function() {
-  var confirmPopup = $ionicPopup.confirm({
-    title: 'Want to be a member?',
-    template: 'Are you sure you want to get this membership?'
-  });
-  confirmPopup.then(function(res) {
-    if(res) {
-      //if true
-      var alertPopup = $ionicPopup.alert({
-        title: 'Congratulations!',
-        template: 'You are now a member of ...'
-      });
-      alertPopup.then(function(res) {
-        //after pressing ok
-      });
+      }
+      } else {
+        //if not true
+      }
+    });
+  };
 
-    } else {
-      //if not true
-    }
-  });
-};
+
 
 $scope.saveNewEvent = function() {
     //verify if information was filled
@@ -630,7 +648,7 @@ $scope.saveNewEvent = function() {
       buttons: [
         { text: '<b>Go</b> '},
         { text: 'Favorite' },
-        { text: 'Delete' }
+        { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
       ],
       titleText: 'Choose Action:',
       cancelText: 'Cancel',
@@ -645,7 +663,11 @@ $scope.saveNewEvent = function() {
             User.addToFavorites(eventClicked);
           }else{
             if(index ===2){
-              Events.remove(eventClicked);
+              Events.remove(eventClicked).then(function(){
+                $scope.assoevents = Associations.getAssociationEvents();
+                $state.go($state.current, {}, {reload: true});
+              });
+
             }
           }
         }
@@ -654,28 +676,41 @@ $scope.saveNewEvent = function() {
     });
   };
 
+    $scope.showConfirm = function(msID) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Want to be a member?',
+      template: 'Are you sure you want to get this membership?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        //if true
+        if(User.hasBillingInfo()){
+          User.addToMembership(msID);
+        var alertPopup = $ionicPopup.alert({
+          title: 'Congratulations!',
+          template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
+          //method msID
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title: 'Error!',
+          template: 'Please fill billing info'
+        });
+        alertPopup.then(function(res) {
+          //after pressing ok
+        });
 
-  $scope.showConfirm = function() {
-  var confirmPopup = $ionicPopup.confirm({
-    title: 'Want to be a member?',
-    template: 'Are you sure you want to get this membership?'
-  });
-  confirmPopup.then(function(res) {
-    if(res) {
-      //if true
-      var alertPopup = $ionicPopup.alert({
-        title: 'Congratulations!',
-        template: 'You are now a member of ...'
-      });
-      alertPopup.then(function(res) {
-        //after pressing ok
-      });
+      }
+      } else {
+        //if not true
+      }
+    });
+  };
 
-    } else {
-      //if not true
-    }
-  });
-};
+
 
 $scope.saveNewEvent = function() {
     //verify if information was filled
