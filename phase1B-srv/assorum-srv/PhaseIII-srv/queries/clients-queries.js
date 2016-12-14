@@ -98,8 +98,8 @@ function getClientFavorites(req, res, next){
 
 
 function addFavorite(req, res, next) {
-  req.body.eid = parseInt(req.body.eid);
-  req.body.cid = parseInt(req.body.cid);
+  req.body.eid = parseInt(req.params.eid);
+  req.body.cid = parseInt(req.params.cid);
   db.none('insert into favorited(eid,cid) ' +
       'values(${eid} , ${cid}) returning fav_id', req.body)
     .then(function (data) {
@@ -116,16 +116,15 @@ function addFavorite(req, res, next) {
 }
 
 function addMembership(req, res, next) {
-  req.body.mbspid = parseInt(req.body.mbspid);
+  req.body.mbspid = parseInt(req.params.mbspid);
   req.body.cid = parseInt(req.params.cid);
-  db.none('insert into hasmembership(mbspid,cid)' +
-      'values(${mbspid},${cid}) returning hasmbspid', req.body)
+  db.any('insert into hasmembership(mbspid,cid) values (${mbspid},${cid}) returning hasmbspid', req.body)
     .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
           data: data,
-          message: 'Inserted one favorite event to client'
+          message: 'Inserted one membership event to client'
         });
     })
     .catch(function (err) {
