@@ -142,7 +142,7 @@ $scope.showPopup = function() {
 
 
 //Home page controller with list of events
-.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory,$ionicViewService) {
+.controller('HomeCtrl', function($scope, $state, User, Events, SERVER, $ionicSideMenuDelegate, $ionicHistory) {
 
   $scope.$on('$ionicView.enter', function(){
       $ionicSideMenuDelegate.canDragContent(false);
@@ -329,7 +329,7 @@ $scope.showAS = function(eventClicked) {
     buttons: [
       { text: '<b>Go</b> '},
       { text: 'Favorite' },
-      { text: 'Delete' }
+      { text: '<a ng-if="Associations.assoid === User.cid">Delete</a>' }
     ],
     titleText: 'Choose Action:',
     cancelText: 'Cancel',
@@ -344,7 +344,9 @@ $scope.showAS = function(eventClicked) {
           User.addToFavorites(eventClicked);
         }else{
           if(index ===2){
+
             Events.remove(eventClicked);
+
           }
         }
       }
@@ -451,7 +453,7 @@ $scope.showAS = function(eventClicked) {
     User.addToMembership(association);
   };
 })
-.controller('AssociationCtrl2', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl2', function($scope,$state, $ionicActionSheet,SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -462,6 +464,38 @@ $scope.showAS = function(eventClicked) {
   $scope.locations = Locations.locations();
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
+
+  $scope.showAS = function(eventClicked) {
+    // Show the action sheet
+    console.log(eventClicked);
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: '<b>Go</b> '},
+        { text: 'Favorite' },
+        { text: 'Delete' }
+      ],
+      titleText: 'Choose Action:',
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+         },
+      buttonClicked: function(index) {
+        if(index === 0){
+          $scope.setCurrentEvent(eventClicked);
+        }else{
+          if(index === 1){
+            User.addToFavorites(eventClicked);
+          }else{
+            if(index ===2){
+              Events.remove(eventClicked);
+            }
+          }
+        }
+        return true;
+      }
+    });
+  };
+
 
   $scope.showConfirm = function() {
   var confirmPopup = $ionicPopup.confirm({
@@ -561,7 +595,7 @@ $scope.saveNewEvent = function() {
     User.addToMembership(association);
   };
 })
-.controller('AssociationCtrl3', function($scope,$state, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
+.controller('AssociationCtrl3', function($scope,$state,$ionicActionSheet, SERVER,$ionicPopup, Associations, User,$ionicModal,$ionicTabsDelegate, Events, $ionicHistory,Ranks,Tags,Locations){
   //Associations.addEvent("test", "wowow");
   //Associations.deleteAssociation(21);
   $scope.newEvent = {};
@@ -572,6 +606,38 @@ $scope.saveNewEvent = function() {
   $scope.locations = Locations.locations();
   $scope.memberships = Associations.getCurrentAssociationMemberships()
   console.log($scope.locations);
+
+  $scope.showAS = function(eventClicked) {
+    // Show the action sheet
+    console.log(eventClicked);
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: '<b>Go</b> '},
+        { text: 'Favorite' },
+        { text: 'Delete' }
+      ],
+      titleText: 'Choose Action:',
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+         },
+      buttonClicked: function(index) {
+        if(index === 0){
+          $scope.setCurrentEvent(eventClicked);
+        }else{
+          if(index === 1){
+            User.addToFavorites(eventClicked);
+          }else{
+            if(index ===2){
+              Events.remove(eventClicked);
+            }
+          }
+        }
+        return true;
+      }
+    });
+  };
+
 
   $scope.showConfirm = function() {
   var confirmPopup = $ionicPopup.confirm({
