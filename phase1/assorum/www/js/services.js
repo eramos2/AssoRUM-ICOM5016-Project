@@ -23,7 +23,8 @@ angular.module('assorum.services', [])
 
   return{
     hasBillingInfo: function(){
-        if(user.billinginfo.typeofcard && user.billinginfo.address && user.billinginfo.cardnumber){
+      console.log(user.billing);
+        if(user.billinginfo[0].typeofcard && user.billinginfo[0].address && user.billinginfo[0].cardnumber){
           return true;
         }else{
           return false;
