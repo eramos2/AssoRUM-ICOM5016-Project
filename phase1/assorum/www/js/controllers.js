@@ -181,7 +181,10 @@ $scope.showPopup = function() {
 
   //function for removing events
   $scope.remove = function(event) {
-    Events.remove(event);
+    Events.remove(event).then(function(){
+      $state.go($state.current, {}, {reload: true});
+    });
+
   };
 
 
@@ -344,8 +347,10 @@ $scope.showAS = function(eventClicked) {
           User.addToFavorites(eventClicked);
         }else{
           if(index ===2){
-
-            Events.remove(eventClicked);
+            Events.remove(eventClicked).then(function(){
+              $scope.assoevents = Associations.getAssociationEvents();
+              $state.go($state.current, {}, {reload: true});
+            });
 
           }
         }

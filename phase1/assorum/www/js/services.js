@@ -22,6 +22,14 @@ angular.module('assorum.services', [])
   };
 
   return{
+    hasBillingInfo: function(){
+        if(user.billinginfo.typeofcard && user.billinginfo.address && user.billinginfo.cardnumber){
+          return true;
+        }else{
+          return false;
+        }
+
+    },
     addUser: function(NewUser){
       user.username = NewUser.username;
       user.firstname = NewUser.firstName;
@@ -123,6 +131,7 @@ angular.module('assorum.services', [])
     },
     //function for adding a membership to a user
     addToMemberships: function(association){
+
       user.memberships.unshift(association);
     },
     //function for getting the memberships of a user
@@ -405,14 +414,16 @@ angular.module('assorum.services', [])
     },
     //Funtion for removing an event
     remove: function(event) {
+
       var promise = $http.delete(SERVER.url+"/events/"+event.eid).then(function(data){
         console.log("success bitches");
-        console.log(data.data.data);
+        events.splice(events.indexOf(event), 1);
+
       })
       .catch(function(err){
           console.log(err);
         });
-      events.splice(events.indexOf(event), 1);
+
       return promise;
 
 
@@ -450,10 +461,12 @@ angular.module('assorum.services', [])
         console.log(data);
         console.log(eventTags);
 
-        var promise = $http.post(SERVER.url+"/events",data).then(function(data){
+        var promise = $http.post(SERVER.url+"/events",data).then(function(res){
           console.log("success bitches");
-          events.
-          console.log(data.data.data);
+          console.log(res);
+          data.eid = res.data.data[0];
+          events.unshift(data);
+          console.log(res.data.data[0]);
         })
         .catch(function(err){
             console.log(err);
