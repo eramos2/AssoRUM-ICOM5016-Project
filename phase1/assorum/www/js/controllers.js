@@ -360,7 +360,7 @@ $scope.showAS = function(eventClicked) {
   });
 };
 
-  $scope.showConfirm = function(msID) {
+  $scope.showConfirm = function(ms) {
   var confirmPopup = $ionicPopup.confirm({
     title: 'Want to be a member?',
     template: 'Are you sure you want to get this membership?'
@@ -370,7 +370,7 @@ $scope.showAS = function(eventClicked) {
       //if true
       console.log(User.hasBillingInfo());
       if(User.hasBillingInfo()){
-        User.addToMemberships(msID);
+        User.addToMemberships(ms);
       var alertPopup = $ionicPopup.alert({
         title: 'Congratulations!',
         template: 'You are now a member of '+ Associations.getCurrentAssociation().asso_name + '!!'
