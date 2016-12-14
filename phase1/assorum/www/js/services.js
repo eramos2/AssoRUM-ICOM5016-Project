@@ -376,7 +376,7 @@ angular.module('assorum.services', [])
 
 // Events service
 
-.factory('Events', function($http, SERVER,$state){
+.factory('Events', function($http, SERVER,$state,Associations){
   // Some dummy data for testing
   var events = [];
   var currentEvent = {current: "", tags: []};
@@ -424,19 +424,26 @@ angular.module('assorum.services', [])
     //o: function(){return eventsTest.favorites;},
 
     //Funtion for adding a new event to server
-     addEvent: function(name, description, location, date, association){
-        var newEvent = {
-          "name": name,
-          "description": description,
-          "location": location,
-          "date": date,
-          "association": association
+     addEvent: function(newEvent){
+        var newEvnt = {
+          "name": newEvent.name,
+          "description": newEvent.description,
+          "location": newEvent.location,
+          "date": newEvent.date,
+          "association": Associations.getCurrentAssociation().assoid
         };
+        var eventTags = {
+          "Tag1":newEvent.tag1,
+          "Tag2":newEvent.tag2,
+          "Tag3":newEvent.tag3
+        }
+        console.log(newEvnt);
+        console.log(eventTags);
 
-        $http.post(SERVER.url + "/events", newEvent)
-        .then(function (res){
-        console.log(res);
-        });
+        //$http.post(SERVER.url + "/events", newEvent)
+        //.then(function (res){
+        //console.log(res);
+        //});
     },
     //Funtion for deleting an event from server
     deleteEvent: function(eventId){

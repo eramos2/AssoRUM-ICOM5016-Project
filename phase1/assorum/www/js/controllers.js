@@ -74,9 +74,12 @@ angular.module('assorum.controllers', [])
         if($scope.signup.firstName && $scope.signup.lastName && $scope.signup.username
          && $scope.signup.email && $scope.signup.password && $scope.signup.confirm){
             //change state to home page
+
+
             console.log($scope.signup);
             User.addUser($scope.signup);
-            $state.go('tab.home');
+            $scope.showPopup();
+            //add this to popup
          }else{
             //information not filled completely
              var alertPopup = $ionicPopup.alert({
@@ -88,6 +91,52 @@ angular.module('assorum.controllers', [])
              });
         }
     }
+    $scope.validationKey = {};
+    // Triggered on a button click, or some other target
+$scope.showPopup = function() {
+  $scope.validationKey = {};
+
+  // An elaborate, custom popup
+  var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="validationKey.key" placeholder= "Enter key">',
+    title: '<strong>Enter key!</strong>',
+    subTitle: 'Please check your email for validation key',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel',
+      //
+      onTap: function() {
+        //delete user
+        return;
+      }
+      //
+     },
+      {
+        text: '<b>Enter</b>',
+        type: 'button-balanced',
+        //
+        onTap: function(e) {
+          if (!$scope.validationKey.key){
+            //don't allow the user to close unless he enters wifi password
+             e.preventDefault();
+          } else {
+            if($scope.validationKey.key ==="1234"){
+            $state.go('tab.home');
+          }else{
+              e.preventDefault();
+          }
+            return  $scope.validationKey.key;
+          }
+        }
+        //
+      }
+    ]
+  });
+
+  myPopup.then(function(res) {
+    console.log('Tapped!', res);
+  });
+ };
 
 })
 
@@ -296,9 +345,20 @@ angular.module('assorum.controllers', [])
       //verify if information was filled
       if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
           //change state to home page
+          if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Error!',
+              template: 'Please select diferent Tags'
+            });
+            alertPopup.then(function(res) {
+              //after pressing ok
+            });
+          }else{
           console.log($scope.newEvent);
+          Events.addEvent($scope.newEvent);
           $scope.newEvent={};
           $scope.modal.hide();
+        }
 
        }else{
           //information not filled completely
