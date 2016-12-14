@@ -23,20 +23,31 @@ angular.module('assorum.services', [])
 
   return{
     addUser: function(NewUser){
-      user.username = '"'+NewUser.username+'"';
-      user.firstname = '"'+NewUser.firstName+'"';
-      user.lastname = '"'+NewUser.lastName+'"';
-      user.email = '"'+NewUser.email+'"';
-      user.rank = '"'+NewUser.rank+'"';
+      user.username = NewUser.username;
+      user.firstname = NewUser.firstName;
+      user.lastname = NewUser.lastName;
+      user.email = NewUser.email;
+      user.rank = NewUser.rank;
 
-      var cname = '"'+user.firstname +'-'+user.lastname+'"';
+      var cname = user.firstname +'-'+user.lastname;
       var data ={
         "username": user.username,
+        "password": NewUser.password,
         "clientname" : cname,
-        "client_email":user.email,
+        "c_email":user.email,
         "rankid":user.rank
       }
-      var promise = $http({
+      console.log(data);
+      var promise = $http.post(SERVER.url+"/clients",data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+      /*var promise = $http({
          method: 'POST',
          data: data,
         url: SERVER.url + '/clients',
@@ -48,7 +59,7 @@ angular.module('assorum.services', [])
       .catch(function(err){
         console.log(err);
       });
-      return promise;
+      return promise;*/
     },
 
     getUser: function(Username,Password){
