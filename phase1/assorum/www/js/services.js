@@ -138,10 +138,10 @@ angular.module('assorum.services', [])
     //function for adding a membership to a user
     addToMemberships: function(membership){
       var data ={
-        "mbspid": membership.mbspid,
+        "mbspid": membership,
         "cid": user.cid,
       }
-      var promise = $http.post(SERVER.url+"/clients/"+user.cid+"/memberships", data).then(function(data){
+      var promise = $http.post(SERVER.url+"/clients/"+parseInt(user.cid)+"/memberships", data).then(function(data){
         console.log("success bitches");
         console.log(data.data.data);
       })
