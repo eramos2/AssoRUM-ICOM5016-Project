@@ -425,20 +425,30 @@ angular.module('assorum.services', [])
 
     //Funtion for adding a new event to server
      addEvent: function(newEvent){
-        var newEvnt = {
-          "name": newEvent.name,
-          "description": newEvent.description,
-          "location": newEvent.location,
-          "date": newEvent.date,
-          "association": Associations.getCurrentAssociation().assoid
-        };
         var eventTags = {
-          "Tag1":newEvent.tag1,
-          "Tag2":newEvent.tag2,
-          "Tag3":newEvent.tag3
-        }
-        console.log(newEvnt);
+          "Tag1": newEvent.tag1,
+          "Tag2": newEvent.tag2,
+          "Tag3": newEvent.tag3
+        };
+        var data ={
+          "event_name": newEvent.name,
+          "event_desc": newEvent.description,
+          "eventdata": newEvent.date,
+          "loc_id":newEvent.location,
+          "assoid": Associations.getCurrentAssociation().assoid
+        };
+        console.log(data);
         console.log(eventTags);
+
+        var promise = $http.post(SERVER.url+"/events",data).then(function(data){
+          console.log("success bitches");
+          console.log(data.data.data);
+        })
+        .catch(function(err){
+            console.log(err);
+
+          });
+        return promise;
 
         //$http.post(SERVER.url + "/events", newEvent)
         //.then(function (res){

@@ -451,20 +451,30 @@ $scope.showPopup = function() {
   });
 };
 
-  $scope.saveNewEvent = function() {
-      //verify if information was filled
-      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
-          //change state to home page
-          console.log($scope.newEvent);
-          $scope.newEvent={};
-          $scope.modal.hide();
-          console.log($scope.newEvent);
-
-       }else{
-          //information not filled completely
-           alert("Please fill out all fields");
+$scope.saveNewEvent = function() {
+    //verify if information was filled
+    if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
+        //change state to home page
+        if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Error!',
+            template: 'Please select diferent Tags'
+          });
+          alertPopup.then(function(res) {
+            //after pressing ok
+          });
+        }else{
+        console.log($scope.newEvent);
+        Events.addEvent($scope.newEvent);
+        $scope.newEvent={};
+        $scope.modal.hide();
       }
-  }
+
+     }else{
+        //information not filled completely
+         alert("Please fill out all fields");
+    }
+}
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       scope: $scope
     }).then(function(modal) {
@@ -551,19 +561,30 @@ $scope.showPopup = function() {
   });
 };
 
-  $scope.saveNewEvent = function() {
-      //verify if information was filled
-      if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
-          //change state to home page
-          console.log($scope.newEvent);
-          $scope.newEvent={};
-          $scope.modal.hide();
-
-       }else{
-          //information not filled completely
-           alert("Please fill out all fields");
+$scope.saveNewEvent = function() {
+    //verify if information was filled
+    if($scope.newEvent.name && $scope.newEvent.description && $scope.newEvent.date){
+        //change state to home page
+        if($scope.newEvent.tag1 === $scope.newEvent.tag2 || $scope.newEvent.tag1 === $scope.newEvent.tag3 || $scope.newEvent.tag2 === $scope.newEvent.tag3 ){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Error!',
+            template: 'Please select diferent Tags'
+          });
+          alertPopup.then(function(res) {
+            //after pressing ok
+          });
+        }else{
+        console.log($scope.newEvent);
+        Events.addEvent($scope.newEvent);
+        $scope.newEvent={};
+        $scope.modal.hide();
       }
-  }
+
+     }else{
+        //information not filled completely
+         alert("Please fill out all fields");
+    }
+}
   $ionicModal.fromTemplateUrl('templates/postEvent.html', {
       scope: $scope
     }).then(function(modal) {
