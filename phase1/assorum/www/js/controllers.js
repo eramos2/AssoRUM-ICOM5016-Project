@@ -148,7 +148,7 @@ $scope.showPopup = function() {
       $ionicSideMenuDelegate.canDragContent(false);
       $state.go($state.current, {}, {reload: true});
       $ionicHistory.clearHistory();
-      $ionicViewService.clearHistory()
+      //$ionicViewService.clearHistory()
     });
   $scope.$on('$ionicView.leave', function(){
       $ionicSideMenuDelegate.canDragContent(false);
