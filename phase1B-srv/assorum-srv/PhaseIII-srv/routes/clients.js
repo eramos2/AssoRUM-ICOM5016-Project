@@ -7,6 +7,8 @@ router.get('/', db.getAllClients);
 router.get('/:username', db.getSingleClient);
 router.get('/:cid/favorites', db.getClientFavorites);
 router.post('/', db.createClient);
+router.get('/:cid/memberships', db.getClientMemberships);
+router.get('/:cid/paymentmethod', db.getPaymentMethod);
 router.put('/:cid/paymentmethod', db.updatePaymentMethod);
 router.post('/:cid/memberships', db.addMembership);
 router.post('/:cid/payments', db.makePayment);

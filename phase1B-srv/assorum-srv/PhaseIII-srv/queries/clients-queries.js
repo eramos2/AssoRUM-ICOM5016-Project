@@ -45,6 +45,40 @@ function getSingleClient(req, res, next) {
     });
 }
 
+
+
+function getClientMemberships(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select * from hasmembership natural inner join membership natural inner join association where cid = $1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All memberships of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
+function getPaymentMethod(req, res, next){
+  var cid = parseInt(req.params.cid);
+  db.any('select * from paymentmethod where cid = $1;', cid)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved All paymentmethod of client'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+}
+
 //returns eid, favid, cid, loc_id, event_name, event_desc, eimage, evendata(time),assoid
 function getClientFavorites(req, res, next){
   var cid = parseInt(req.params.cid);
@@ -83,7 +117,7 @@ function addFavorite(req, res, next) {
 
 function addMembership(req, res, next) {
   req.body.mbspid = parseInt(req.body.mbspid);
-  req.body.cid = parseInt(req.body.cid);
+  req.body.cid = parseInt(req.params.cid);
   db.none('insert into hasmembership(mbspid,cid)' +
       'values(${mbspid},${cid}) returning hasmbspid', req.body)
     .then(function (data) {
@@ -244,7 +278,9 @@ module.exports = {
   getAllClients: getAllClients,
   getSingleClient: getSingleClient,
   getClientFavorites: getClientFavorites,
+  getClientMemberships:getClientMemberships,
   addFavorite: addFavorite,
+  getPaymentMethod: getPaymentMethod,
   updatePaymentMethod: updatePaymentMethod,
   addMembership: addMembership,
   makePayment: makePayment,
