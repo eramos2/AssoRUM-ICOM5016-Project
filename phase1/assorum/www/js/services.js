@@ -130,8 +130,20 @@ angular.module('assorum.services', [])
       return user.billinginfo;
     },
     //function for adding a membership to a user
-    addToMemberships: function(association){
+    addToMemberships: function(membership){
+      var data ={
+        "mbspid": membership.mbspid,
+        "cid": user.cid,
+      }
+      var promise = $http.post(SERVER.url+"/clients/"+user.cid+"/memberships", data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
 
+        });
+      return promise;
       user.memberships.unshift(association);
     },
     //function for getting the memberships of a user
