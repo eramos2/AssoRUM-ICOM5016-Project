@@ -210,7 +210,24 @@ function removeFavorite(req, res, next) {
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} from client favorites`
+          message: `Removed favorited event`
+        });
+      /* jshint ignore:end */
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function deleteClient(req, res, next) {
+  var cid = parseInt(req.params.cid);
+  db.result('delete from client where cid = $1', cid)
+    .then(function (result) {
+      /* jshint ignore:start */
+      res.status(200)
+        .json({
+          status: 'success',
+          message: `Removed client`
         });
       /* jshint ignore:end */
     })
@@ -228,5 +245,6 @@ module.exports = {
   addMembership: addMembership,
   makePayment: makePayment,
   createClient: createClient,
-  removeFavorite: removeFavorite
+  removeFavorite: removeFavorite,
+  deleteClient: deleteClient
 };
