@@ -405,7 +405,17 @@ angular.module('assorum.services', [])
     },
     //Funtion for removing an event
     remove: function(event) {
+      var promise = $http.delete(SERVER.url+"/events/"+event.eid).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
+        });
       events.splice(events.indexOf(event), 1);
+      return promise;
+
+
     },
     //Function for getting an event
     get: function(eventId) {
