@@ -90,14 +90,17 @@ angular.module('assorum.services', [])
       }
       return user.isLogged;
     }).then(function(pro){
+      console.log("memberships get befooouurr" + user.cid);
       $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + parseInt(user.cid) + '/memberships'
       }).then(function(response){
+        console.log("estamos vivos");
         for(var i=0;i<response.data.data.length;i++){
           user.memberships.unshift(response.data.data[i]);
         }
       }).then(function(pro){
+        console.log("hellouuu favorites");
         $http({
            method: 'GET',
           url: SERVER.url + '/clients/' + parseInt(user.cid) + '/favorites'
@@ -108,11 +111,13 @@ angular.module('assorum.services', [])
 
       })
     }).then(function(pro){
+      console.log(user.cid);
       $http({
          method: 'GET',
         url: SERVER.url + '/clients/' + parseInt(user.cid) + '/paymentmethod'
       }).then(function(response){
-          console.log(response.data.data);
+              console.log("hellooooou");
+          console.log(response);
           user.billinginfo = response.data.data;
     })
     })
@@ -120,7 +125,6 @@ angular.module('assorum.services', [])
   })
   .catch(function(err){
     console.log(err);
-    return pro;
   });
       return promise;
     },
