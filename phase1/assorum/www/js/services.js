@@ -157,20 +157,24 @@ angular.module('assorum.services', [])
     },
     //function for adding a membership to a user
     addToMemberships: function(membership){
+      console.log(membership);
       var data ={
         "mbspid": membership,
         "cid": user.cid,
       }
-      var promise = $http.post(SERVER.url+"/clients/"+parseInt(user.cid)+"/memberships", data).then(function(data){
+      console.log(data);
+      console.log(user.cid);
+      var promise = $http.post(SERVER.url+"/clients/"+parseInt(user.cid)+"/memberships/"+membership, data).then(function(data){
         console.log("success bitches");
         console.log(data.data.data);
+        user.memberships.unshift(membership);
       })
       .catch(function(err){
           console.log(err);
 
         });
       return promise;
-      user.memberships.unshift(association);
+
     },
     //function for getting the memberships of a user
     getMemberships: function(cid){
