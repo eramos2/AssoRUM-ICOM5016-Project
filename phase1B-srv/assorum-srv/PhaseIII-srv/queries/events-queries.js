@@ -113,7 +113,7 @@ function removeEvent(req, res, next) {
       res.status(200)
         .json({
           status: 'success',
-          message: `Removed ${result.rowCount} event`
+          message: `Removed event`
         });
       /* jshint ignore:end */
     })

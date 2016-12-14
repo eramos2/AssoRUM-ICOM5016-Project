@@ -1,6 +1,6 @@
 var promise = require('bluebird');
 var helper = require('sendgrid').mail;
-
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 var options = {
   // Initialization Options
   promiseLib: promise
@@ -102,8 +102,9 @@ function addMembership(req, res, next) {
 
 
 function createClient(req, res, next) {
+
   req.body.rankid = parseInt(req.body.rankid);
-  db.any('insert into client(clientname,username,password,rankid,c_email)' +
+  db.any('insert into client(clientname,username,password,rankid,c_email) ' +
       'values(${clientname},${username},${password},${rankid},${c_email}) returning cid', req.body)
     .then(function (data) {
       res.status(200)
@@ -113,13 +114,13 @@ function createClient(req, res, next) {
           message: 'created a client'
         });
     }).then(function(){
-      var from_email = new helper.Email('no-reply@assorum.com');
+      var from_email = new helper.Email("no-reply@assorum.com");
       var to_email = new helper.Email(req.body.c_email);
       var subject = 'Assorum Account Confirmation';
-      var content = new helper.Content('text/plain', 'Hello, ' +req.body.username+"! Welcome to Assorum! Enter this code to use the app --> 1234");
+      var content = new helper.Content('text/plain', 'Hello, +req.body.username+"! Welcome to Assorum! Enter this code to use the app --> 1234');
       var mail = new helper.Mail(from_email, subject, to_email, content);
 
-      var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+
       var request = sg.emptyRequest({
         method: 'POST',
         path: '/v3/mail/send',
@@ -127,19 +128,22 @@ function createClient(req, res, next) {
       });
 
       sg.API(request, function(error, response) {
-        if(error) {
-        console.log(error.message);
-        console.log(error.response.statusCode);
-        console.log(error.response.body);
-        console.log(error.response.headers);
-      } else {
-        console.log(response);
+        //if(error) {
+        //console.log(error.message);
+        //console.log(error.response.statusCode);
+        //console.log(error.response.body);
+        //console.log(error.response.headers);
+      //} else {
+        //console.log(response);
 
-        console.log(response.statusCode);
-        console.log(response.body);
-        console.log(response.headers);
-        }
+        //console.log(response.statusCode);
+        //console.log(response.body);
+        //console.log(response.headers);
+        //}
       });
+    //  var from_email = new helper.Email('no-reply@assorum.com');
+    //  var to_email = new helper.Email(req.body.c_email);
+
       //sendgrid.send(email);
       //console.log("email was sent");
       /*from_email = new helper.Email("felix.gonzalez3@upr.edu")
