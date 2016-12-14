@@ -22,6 +22,26 @@ angular.module('assorum.services', [])
   };
 
   return{
+    newBillInfo: function(newInfo){
+
+      var data ={
+        "cid":User.getUser().cid,
+        "typeofcard":newInfo.card,
+        "cardnumber": newInfo.cardNumber,
+        "address":newInfo.address
+      }
+      console.log(data);
+      var promise = $http.post(SERVER.url+"/paymentmethod",data).then(function(data){
+        console.log("success bitches");
+        console.log(data.data.data);
+      })
+      .catch(function(err){
+          console.log(err);
+
+        });
+      return promise;
+    },
+
     hasBillingInfo: function(){
 
       console.log(user.billing);

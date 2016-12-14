@@ -844,6 +844,7 @@ $scope.saveNewEvent = function() {
     //send to server
     $scope.showNewinfo = function(){
       console.log($scope.newInfo);
+      User.newBillInfo(newInfo);
       $scope.newInfo={};
       $scope.modal.hide();
     }
