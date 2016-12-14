@@ -48,13 +48,13 @@
     <strong style="padding-left: 20px">Events </strong>
     </div>
 			<ion-item class="item item-remove-animate item-avatar item-icon-right" ng-repeat="result in associations" value="{{result}}" ng-show = "showAsso" ng-click ="setCurrentAssociation(result)" >
-          <img ng-src="http://assorum2.heroku.com/images/associations/{{result.asso_image}}_small.jpeg">
+          <img ng-src="http://assorum2.heroku.com/images/associations{{result.asso_image}}_small.jpeg">
             {{result.asso_name}}
             <i class="icon ion-chevron-right icon-accessory"></i>
           </ion-item>
 
       <div class=" item item-remove-animate item-avatar item-icon-right" ng-repeat="result in events" value = "{{result}}" ng-show = "showEvent" ng-click = "setCurrentEvent(result)">
-        <img ng-src="http://assorum2.heroku.com/images/event{{result.eimage}}_small.jpeg">
+        <img ng-src="http://assorum2.heroku.com/images/events{{result.eimage}}_small.jpeg">
             {{result.event_name}}
             <i class="icon ion-chevron-right icon-accessory"></i>
             </div>

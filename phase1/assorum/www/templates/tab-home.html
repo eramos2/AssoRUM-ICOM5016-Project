@@ -30,7 +30,7 @@ Sort-name
 
       <ion-item class="item-remove-animate item-avatar item-icon-right"  ng-repeat="event in events" ng-click="setCurrentEvent(event)">
 
-        <img ng-src="http://assorum2.heroku.com/images/event{{event.eimage}}_small.jpeg">
+        <img ng-src="http://assorum2.heroku.com/images/events{{event.eimage}}_small.jpeg">
           {{event.event_name}}
         <ion-option-button class="button-balanced" ng-click="addToFavorites(event)">
           Favorite
