@@ -321,6 +321,7 @@ $scope.showPopup = function() {
   console.log($scope.locations);
 
   // Triggered on a button click, or some other target
+  // to othor associations
 $scope.showAS = function(eventClicked) {
   // Show the action sheet
   console.log(eventClicked);
@@ -340,7 +341,11 @@ $scope.showAS = function(eventClicked) {
         $scope.setCurrentEvent(eventClicked);
       }else{
         if(index === 1){
-          Events.addToFavorites(eventClicked);
+          User.addToFavorites(eventClicked);
+        }else{
+          if(index ===2){
+            Events.remove(eventClicked);
+          }
         }
       }
       return true;
