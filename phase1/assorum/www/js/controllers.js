@@ -368,7 +368,9 @@ $scope.showAS = function(eventClicked) {
   confirmPopup.then(function(res) {
     if(res) {
       //if true
+      console.log(User.hasBillingInfo());
       if(User.hasBillingInfo()){
+        console.log(User.hasBillingInfo());
         User.addToMembership(msID);
       var alertPopup = $ionicPopup.alert({
         title: 'Congratulations!',
